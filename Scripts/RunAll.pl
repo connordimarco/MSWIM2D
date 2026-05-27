@@ -113,7 +113,7 @@ foreach my $month_string (@months_to_run)
     }
     
     # Select correct data files.
-    my $StereoA = ($year >= 2007 and $year <= 2019);
+    my $StereoA = ($year >= 2007 and $year <= 2025);
     my $StereoB = ($year >= 2007 and $year <= 2014);
     
     # Unzip the data.

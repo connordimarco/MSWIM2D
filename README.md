@@ -3,7 +3,7 @@ portions used with permission.
 
 Michigan Solar Wind Model in 2D
 
-Created by Tim Keebler and Gabor Toth.
+Created by Tim Keebler and Gabor Toth and maintained by Connor DiMarco. 
 
 This document outlines the installation and usage of the Michigan Solar Wind
 Model - 2D (MSWiM2D). It requires BATSRUS in stand-alone mode configured as
