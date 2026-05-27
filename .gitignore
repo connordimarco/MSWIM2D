@@ -15,6 +15,6 @@ Scripts/*
 
 .pylibs/ 
 __pycache__/
-ACTION_ITEMS.md
+TODO.md
 CLAUDE.md
 AGENTS.md

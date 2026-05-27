@@ -115,13 +115,16 @@ foreach my $month_string (@months_to_run)
     # Select correct data files.
     my $StereoA = ($year >= 2007 and $year <= 2025);
     my $StereoB = ($year >= 2007 and $year <= 2014);
+    my $SolarOrbiter = ($year >= 2022 and $year <= 2025);
     
     # Unzip the data.
     qx(gunzip -c data/L1/l1_$year\.dat > $rundir/L1.dat);
     qx(gunzip -c data/STEREOA/STEREOA_$year\.dat > $rundir/STEREOA.dat) 
 	if $StereoA;
-    qx(gunzip -c data/STEREOB/STEREOB_$year\.dat > $rundir/STEREOB.dat) 
+    qx(gunzip -c data/STEREOB/STEREOB_$year\.dat > $rundir/STEREOB.dat)
 	if $StereoB;
+    qx(gunzip -c data/SolarOrbiter/SolarOrbiter_$year\.dat > $rundir/SolarOrbiter.dat)
+	if $SolarOrbiter;
 
     # Update ending simulation time.
     $end_sim_time += 28 if $month == 2 and $year % 4;
@@ -162,6 +165,14 @@ load          NameCommand
 STEREOB.dat   NameFile
 ascii         TypeFile
 " if $StereoB;
+	    print $out "
+
+#LOOKUPTABLE
+SW4           NameTable
+load          NameCommand
+SolarOrbiter.dat   NameFile
+ascii         TypeFile
+" if $SolarOrbiter;
 	}
     }
     close $out;
