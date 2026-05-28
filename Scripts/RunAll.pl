@@ -15,8 +15,8 @@ my $gitclone = './BATSRUS/share/Scripts/gitclone -s';
 my $rundir = './BATSRUS/run';
 my $output = './Output';
 my $input  = './Input';
-my $earliest_date = 200001;
-my $earliest_year = 2000;
+my $earliest_date = 199803;
+my $earliest_year = 1998;
 my $start_year = int(substr($start_date,0,4));
 my $end_year = int(substr($end_date,0,4));
 my $start_month = int(substr($start_date,4,6));
@@ -66,7 +66,7 @@ foreach my $year ($earliest_year..$start_year)
 {
     foreach my $month (1..12)
     {
-	if ($year * 100 + $month < int($start_date))
+	if ($year * 100 + $month >= int($earliest_date) and $year * 100 + $month < int($start_date))
 	{
 	    push(@restart_months, sprintf("%04d%02d\n",$year,$month));
 	}
@@ -113,15 +113,18 @@ foreach my $month_string (@months_to_run)
     }
     
     # Select correct data files.
-    my $StereoA = ($year >= 2007 and $year <= 2019);
+    my $StereoA = ($year >= 2007 and $year <= 2025);
     my $StereoB = ($year >= 2007 and $year <= 2014);
+    my $SolarOrbiter = ($year >= 2022 and $year <= 2025);
     
     # Unzip the data.
     qx(gunzip -c data/L1/l1_$year\.dat > $rundir/L1.dat);
     qx(gunzip -c data/STEREOA/STEREOA_$year\.dat > $rundir/STEREOA.dat) 
 	if $StereoA;
-    qx(gunzip -c data/STEREOB/STEREOB_$year\.dat > $rundir/STEREOB.dat) 
+    qx(gunzip -c data/STEREOB/STEREOB_$year\.dat > $rundir/STEREOB.dat)
 	if $StereoB;
+    qx(gunzip -c data/SolarOrbiter/SolarOrbiter_$year\.dat > $rundir/SolarOrbiter.dat)
+	if $SolarOrbiter;
 
     # Update ending simulation time.
     $end_sim_time += 28 if $month == 2 and $year % 4;
@@ -162,12 +165,22 @@ load          NameCommand
 STEREOB.dat   NameFile
 ascii         TypeFile
 " if $StereoB;
+	    print $out "
+
+#LOOKUPTABLE
+SW4           NameTable
+load          NameCommand
+SolarOrbiter.dat   NameFile
+ascii         TypeFile
+" if $SolarOrbiter;
 	}
     }
     close $out;
     
     # Execute the code.
-    qx(cd $rundir; mpiexec -n 2 ./BATSRUS.exe > runlog);
+    my $tmpdir = "$ENV{PWD}/tmp";
+    qx(mkdir -p $tmpdir);
+    qx(cd $rundir; TMPDIR=$tmpdir mpiexec -n 8 ./BATSRUS.exe > runlog);
 
     # Process the results.
     qx(rm -rf $output/$month_string);

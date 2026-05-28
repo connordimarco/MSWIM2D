@@ -12,3 +12,17 @@ BATSRUS/
 data/
 Output/*
 Scripts/*
+!Scripts/export_website_data.py
+!Scripts/flatten_output.sh
+!Scripts/create_midl_l1.py
+!Scripts/fetch_earth_ephemeris.py
+*.log
+
+tmp/
+.pylibs/
+__pycache__/
+CLAUDE.md
+AGENTS.md
+
+Output_flat/
+Website_data/

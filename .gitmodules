@@ -1,0 +1,3 @@
+[submodule "MSWIM2D-Web"]
+	path = MSWIM2D-Web
+	url = git@github.com:connordimarco/MSWIM2D-Web.git

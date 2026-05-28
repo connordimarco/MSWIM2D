@@ -13,10 +13,12 @@ DOUBLEPREC = -frecord-marker=4 -fdefault-real-8 -fdefault-double-8
 COMPILER = gfortran ${DOUBLEPREC}
 LIBSHARE = ${LIBDIR}/libSHARE.a
 LINK.f90 = ${CUSTOMPATH_MPI}mpif90
+POSTPROCDIR = ${GMDIR}/srcPostProc
+INTERP_SOURCE = ${POSTPROCDIR}/interpolate_output.f90
 
-INTERP_OUTPUT.exe: ${LIBSHARE} interpolate_output.o
-	${LINK.f90} -o INTERP_OUTPUT.exe interpolate_output.o \
-	-L${LIBDIR} -lSHARE ${Lflag}
+INTERP_OUTPUT.exe: ${LIBSHARE} ${INTERP_SOURCE}
+	${MAKE} -C ${POSTPROCDIR} INTERPOLATE
+	cp ${BINDIR}/INTERPOLATE.exe $@
 
 interp:
 	make INTERP_OUTPUT.exe
