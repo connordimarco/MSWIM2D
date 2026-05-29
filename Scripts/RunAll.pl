@@ -190,6 +190,15 @@ ascii         TypeFile
 
     print "complete.\n";
 }
+
+# Build website data products (flatten + split) for the months just run, and
+# print the rsync command to push the local mirror to herot. See AGENTS.md
+# "Website Pipeline". This does NOT push to herot — it only prints the command.
+my @clean_months = map { (my $m = $_) =~ s/\s+//g; $m } @months_to_run;
+if (@clean_months) {
+    print "\nBuilding website data (flatten + split)...\n";
+    system("./Scripts/build_website_data.sh", @clean_months);
+}
 exit 0;
 
 

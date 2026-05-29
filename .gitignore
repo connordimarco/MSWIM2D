@@ -16,6 +16,7 @@ Scripts/*
 !Scripts/flatten_output.sh
 !Scripts/create_midl_l1.py
 !Scripts/fetch_earth_ephemeris.py
+!Scripts/split_outs.py
 *.log
 
 tmp/
@@ -26,3 +27,4 @@ AGENTS.md
 
 Output_flat/
 Website_data/
+website_build/
