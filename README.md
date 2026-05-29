@@ -6,7 +6,7 @@ Michigan Solar Wind Model in 2D
 Created by Tim Keebler and Gabor Toth and maintained by Connor DiMarco. 
 
 This document outlines the installation and usage of the Michigan Solar Wind
-Model - 2D (MSWiM2D). It requires BATSRUS in stand-alone mode configured as
+Model - 2D (MSWIM2D). It requires BATSRUS in stand-alone mode configured as
 the OH component.
 
 ## Obtain BATSRUS
@@ -25,7 +25,7 @@ using the SWMF `gitclone` script; see the
 [GitLab instructions](http://herot.engin.umich.edu/~gtoth/SWMF/doc/GitLab_instructions.pdf).
 
 Note: BATSRUS is a plain clone checked out in place, **not** a git submodule
-of this repository (it is gitignored). MSWiM2D applies a small local patch to
+of this repository (it is gitignored). MSWIM2D applies a small local patch to
 it — see "How this BATSRUS differs from upstream" below.
 
 ## Install and test BATSRUS for stand-alone OH component.
@@ -109,7 +109,7 @@ Doc/USERMANUAL.pdf
 
 # Test the OH component in stand-alone mode
 
-Running this test will properly configure BATSRUS for use with MSWiM2D, as
+Running this test will properly configure BATSRUS for use with MSWIM2D, as
 well as confirming proper function.
 ```
 cd BATSRUS
@@ -122,7 +122,7 @@ A successful test is indicated by creation of an empty `test_outerhelio2d.diff` 
 
 # How this BATSRUS differs from upstream
 
-MSWiM2D drives a stock BATSRUS with one functional change to the OuterHelio2d
+MSWIM2D drives a stock BATSRUS with one functional change to the OuterHelio2d
 user module. A fresh `gitlabclone BATSRUS` does **not** include it, so re-apply
 it after checking out BATSRUS:
 
@@ -140,7 +140,7 @@ build, silently discarding edits made to the generated copy.
 
 # Create data files for running MSWiM2D
 
-MSWiM2D reads hourly solar-wind lookup tables (one gzipped `.dat.gz` per
+MSWIM2D reads hourly solar-wind lookup tables (one gzipped `.dat.gz` per
 satellite per year) from `data/`. They are generated from external archives by
 the scripts in `Scripts/`; see `AGENTS.md` for the full data pipeline,
 dependencies, and coordinate conventions. In brief:
@@ -155,7 +155,7 @@ dependencies, and coordinate conventions. In brief:
 All tables share one format (HGI vectors, hourly cadence, time in seconds since
 1965-01-01); the column layout is documented in `AGENTS.md`.
 
-# Run MSWiM2D
+# Run MSWIM2D
 
 The driver is `Scripts/RunAll.pl`, which runs BATSRUS month by month over a
 date range. Despite the `-s=YYYY` help text, it takes `YYYYMM` strings:
