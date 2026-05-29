@@ -1,4 +1,4 @@
-Copyright (C) YYYY Regents of the University of Michigan,
+Copyright (C) 2025 Regents of the University of Michigan,
 portions used with permission.
 
 Michigan Solar Wind Model in 2D
@@ -11,15 +11,22 @@ the OH component.
 
 ## Obtain BATSRUS
 
-Read the [instructions](http://herot.engin.umich.edu/~gtoth/SWMF/doc/GitLab_instructions.pdf)
-about registering, passwordless access, amil notifications, and defining
-the "gitlabclone (or gitclone) alias/function.
-
-Check out the BATSRUS distribution in the main MSWIM2D repository.
-'''
+BATSRUS is open source on GitHub. Clone it into the top of this repository:
+```
 cd MSWIM2D
-gitlabclone BATSRUS
-'''
+git clone https://github.com/SWMFsoftware/BATSRUS
+```
+The supporting repositories (`share`, `util`, `srcBATL`, ...) are pulled in
+automatically during installation (`Config.pl -install`, see below).
+
+Registered University of Michigan users may alternatively obtain the full
+distribution from UM GitLab (`git@gitlab.umich.edu:swmf_software/BATSRUS`)
+using the SWMF `gitclone` script; see the
+[GitLab instructions](http://herot.engin.umich.edu/~gtoth/SWMF/doc/GitLab_instructions.pdf).
+
+Note: BATSRUS is a plain clone checked out in place, **not** a git submodule
+of this repository (it is gitignored). MSWiM2D applies a small local patch to
+it — see "How this BATSRUS differs from upstream" below.
 
 ## Install and test BATSRUS for stand-alone OH component.
 
@@ -69,7 +76,7 @@ make PDF
 cd util/CRASH/doc/Tex; make PDF
 ```
 in the BATSRUS directory. The manuals will be in the `Doc/` and
-`util/CRASH/doc/`` directories, and can be accessed by opening
+`util/CRASH/doc/` directories, and can be accessed by opening
 `Doc/index.html` and `util/CRASH/doc/index.html`.
 
 The input parameters of BATSRUS/CRASH are described in the `PARAM.XML`
@@ -104,15 +111,89 @@ Doc/USERMANUAL.pdf
 
 Running this test will properly configure BATSRUS for use with MSWiM2D, as
 well as confirming proper function.
-'''
+```
 cd BATSRUS
 make -j test_outerhelio2d
-'''
-The '-j' flag allows parallel compilation.
-This requires a machine where 'mpiexec' is available.
+```
+The `-j` flag allows parallel compilation.
+This requires a machine where `mpiexec` is available.
 The test runs with 2 MPI processors and 2 threads by default.
-A successful test is indicated by creation of an empty test_outerhelio2d.diff file.
+A successful test is indicated by creation of an empty `test_outerhelio2d.diff` file.
 
+# How this BATSRUS differs from upstream
 
-## Create data files for running MSWiM2D
+MSWiM2D drives a stock BATSRUS with one functional change to the OuterHelio2d
+user module. A fresh `gitlabclone BATSRUS` does **not** include it, so re-apply
+it after checking out BATSRUS:
 
+- `srcUserExtra/ModUserOuterHelio2d.f90`: `MaxNumLookupTables = 4` (upstream
+  ships `3`), with the companion arrays `TimeFirst_I`/`TimeLast_I` dimensioned
+  from that constant. The four solar-wind inputs occupy fixed slots
+  (SW1=L1, SW2=STEREO-A, SW3=STEREO-B, SW4=Solar Orbiter); because STEREO-B
+  data ends in 2014, 2022–2025 runs use SW1, SW2, SW4 with a gap at SW3, and
+  the boundary loop must allow 4 tables to reach the Solar Orbiter slot.
+
+Edit the **source** module (`srcUserExtra/ModUserOuterHelio2d.f90`), not the
+generated `src/ModUser.f90` — `Config.pl -u=OuterHelio2d` (run by
+`Scripts/RunAll.pl`) regenerates `src/ModUser.f90` from the source on every
+build, silently discarding edits made to the generated copy.
+
+# Create data files for running MSWiM2D
+
+MSWiM2D reads hourly solar-wind lookup tables (one gzipped `.dat.gz` per
+satellite per year) from `data/`. They are generated from external archives by
+the scripts in `Scripts/`; see `AGENTS.md` for the full data pipeline,
+dependencies, and coordinate conventions. In brief:
+
+- **L1 (MIDL):** `fetch_earth_ephemeris.py` then `create_midl_l1.py` →
+  `data/L1/l1_<year>.dat.gz`.
+- **STEREO-A / STEREO-B (CDAWeb COHO):** `create_imf.py` →
+  `data/STEREOA/`, `data/STEREOB/`.
+- **Solar Orbiter (NASA SPDF COHO):** `create_solo.py` → `propagate_solo.py` →
+  `create_solo.py --write-lookup-table` → `data/SolarOrbiter/`.
+
+All tables share one format (HGI vectors, hourly cadence, time in seconds since
+1965-01-01); the column layout is documented in `AGENTS.md`.
+
+# Run MSWiM2D
+
+The driver is `Scripts/RunAll.pl`, which runs BATSRUS month by month over a
+date range. Despite the `-s=YYYY` help text, it takes `YYYYMM` strings:
+
+```
+cd MSWIM2D
+module load mpi/openmpi-x86_64       # or your platform's MPI module
+Scripts/RunAll.pl -s=199803 -e=202512
+```
+
+For each month it reconfigures and rebuilds BATSRUS, writes `BATSRUS/run/PARAM.in`
+from the templates in `Input/` (`PARAM.in` for the first month, `PARAM.in.restart`
+otherwise), unzips that year's lookup tables into `BATSRUS/run/`, adds a
+`#LOOKUPTABLE` block for each satellite whose data covers the year, runs
+`mpiexec -n 8 ./BATSRUS.exe`, and collects results into `Output/<YYYYMM>/` via
+`PostProc.pl`. Months after the first restart from the previous month's output.
+
+This is a shared resource — check the load (`uptime`, `nproc`) and consider a
+smaller rank count before launching long production runs. See `AGENTS.md` for
+smoke-test recipes, post-processing details, and known-good output.
+
+# Build the website data products
+
+The public website lives in the `MSWIM2D-Web/` git submodule. Initialize it
+with:
+
+```
+git submodule update --init
+```
+
+This repository produces the two data products the site consumes (both
+gitignored):
+
+```
+Scripts/export_website_data.py   # data/*.dat.gz -> Website_data/*.csv (in-situ inputs)
+Scripts/flatten_output.sh        # Output/<YYYYMM>/OH/*.outs -> Output_flat/<YYYYMM>.outs
+```
+
+Inside `MSWIM2D-Web/`, those are staged under `MSWIM2D_Data_New/` and
+pre-chunked for the browser by `chunk_satellite_data.py` and `split_outs.py`.
+See `AGENTS.md` ("Website Pipeline") for the full flow.
