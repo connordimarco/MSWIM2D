@@ -48,7 +48,7 @@ foreach my $year ($start_year..$end_year)
 # Compile BATSRUS and PIDL; make run directory
 # add if statement to download BATSRUS if missing
 print "Updating BATSRUS Config.pl...\n";
-qx(cd ./BATSRUS; ./Config.pl -noopenmp -u=OuterHelio2d -e=Mhd -f -g=10,10,2);
+qx(cd ./BATSRUS; ./Config.pl -noopenmp -u=OuterHelio2d -e=OuterHelio -f -g=10,10,2 -ng=2);
 print "Making BATSRUS and PIDL...\n";
 qx(cd ./BATSRUS; make -j BATSRUS);
 qx(cd ./BATSRUS; make PIDL);
@@ -180,7 +180,7 @@ ascii         TypeFile
     # Execute the code.
     my $tmpdir = "$ENV{PWD}/tmp";
     qx(mkdir -p $tmpdir);
-    qx(cd $rundir; TMPDIR=$tmpdir mpiexec -n 8 ./BATSRUS.exe > runlog);
+    qx(cd $rundir; TMPDIR=$tmpdir mpiexec -n 6 ./BATSRUS.exe > runlog);
 
     # Process the results.
     qx(rm -rf $output/$month_string);

@@ -1,4 +1,11 @@
- Config.pl -e=Mhd -u=OuterHelio2d -f -g=10,10,2 -debug
+ Config.pl -e=OuterHelio -u=OuterHelio2d -f -g=10,10,2 -ng=2
+
+! Month-1 (cold-start) template. Session 1 relaxes the whole 1-75 AU domain to
+! a steady state (local time-stepping, neutrals on) so the outer heliosphere is
+! spun up immediately; session 2 then runs time-accurate from the start date
+! driven by the L1 lookup table. Mirrors Tim's run01_steadystate2 -> run04_ta
+! and Param/OUTERHELIO/PARAM.in.2D. RunAll.pl fills YYYY/MM/DDD and injects
+! SW2/SW3/SW4 lookup blocks after the SW1 'ascii ... TypeFile' line.
 
 #TEST
 CON_axes::init_axes		TestString
@@ -25,7 +32,7 @@ L1.dat			NameFile
 ascii			TypeFile
 
 #TIMEACCURATE
-T			IsTimeAccurate
+F			IsTimeAccurate (session 1: steady-state spin-up)
 
 #GRAVITY
 F			UseGravity (rest of parameters read if true)
@@ -34,8 +41,16 @@ F			UseGravity (rest of parameters read if true)
 #BODY
 T			UseBody (rest of parameters read if true)
 1.0			rBody (normalized units)
-0.01			BodyNDim [/cc] number density for inner boundary
-1.09E5			BodyTDim [K] temperature for inner boundary
+0.01			BodyNDim(1) [/cc] solar wind ion density at inner boundary
+1.09E5			BodyTDim(1) [K] solar wind ion temperature at inner boundary
+0.18			BodyNDim(2)
+6519.0			BodyTDim(2)
+7.E-5			BodyNDim(3)
+6519.0			BodyTDim(3)
+7.8E-3			BodyNDim(4)
+1.609E3			BodyTDim(4)
+0.18			BodyNDim(5)
+6519.0			BodyTDim(5)
 
 #NORMALIZATION
 OUTERHELIO		TypeNormalization
@@ -47,9 +62,9 @@ one			StringRestartOutFile
 year			NameMaxTimeUnit
 
 #GRID
-10			nRootBlock1 (radial direction)
+30			nRootBlock1 (radial direction)
 10			nRootBlock2 (longitude direction)
-2			nRootBlock3 (latitude direction)
+1			nRootBlock3 (latitude direction)
 -100.0			xMin The box defined by xMin..ZMax should be larger than the radius of the spherical domain
 100.0			xMax
 -100.0			yMin
@@ -71,14 +86,37 @@ spherical_lnr		TypeGeometry
 
 #OUTERBOUNDARY
 none			TypeBc1
-outflow			TypeBc2
+user			TypeBc2 (interstellar neutrals flow inward)
 periodic		TypeBc3 lonmin
 periodic		TypeBc4 lonmax
-float			TypeBc5
-float			TypeBc6
+periodic		TypeBc5 latmin
+periodic		TypeBc6 latmax
 
 #INNERBOUNDARY
 user			TypeBcBody
+
+#OHBOUNDARY
+T
+0.05			RhoNeuFactor
+1.0			uNeuFactor
+1.E-2			RhoNe2Factor
+1.0			uNe2Factor
+1.E-2			RhoNe3Factor
+1.0			uNe3Factor
+1.0e-3			RhoNe4Factor
+0.9			uNe4Factor
+
+#OHNEUTRALS
+0.06			RhoNeutralsISW [amu/cc]
+7000.0			TNeutralsISW   [K]
+15.0			UxNeutralsISW  [km/s]
+0.0			UyNeutralsISW  [km/s]
+0.0			UzNeutralsISW  [km/s]
+1			mNeutral       [amu]
+
+#NEUTRALFLUID
+T			DoConserveNeutrals
+Linde			TypeFluxNeutral
 
 #SCHEME
 2			nOrder
@@ -93,21 +131,17 @@ mc3			TypeLimiter ! Only read for Order>1 and flux not Simple
 #NONCONSERVATIVE
 F			UseNonConservative
 
-SAVERESTART
-F			DoSaveRestart
-100			DnSaveRestart
--1.0			DtSaveRestart
-
-SAVELOGFILE
-T			DoSaveLogfile
-step date RAW		StringLogfile
-10			DnSaveLogfile
--1.			DtSaveLogfile
-
 #USERSWITCH
-+ic +init		StringSwitch
++ic +init +update +source		StringSwitch
 
 #USERINPUTBEGIN -----------------------------------
+
+#SOURCES
+T			UseIonSource
+T			UseNeuSource
+F			UseNe2Source
+F			UseNe3Source
+T			UseNe4Source
 
 #SOLARWINDH		! slow solar wind
 5.0			SWH_rho_dim [n/cc]
@@ -119,7 +153,7 @@ step date RAW		StringLogfile
 0.0			SWH_By_dim [nT]
 0.0			SWH_Bz_dim [nT]
 
-#VLISW			! fast solar wind
+#VLISW			! interstellar medium
 0.06			VLISW_rho_dim [n/cc]
 6519.0			VLISW_T_dim
 26.3			VLISW_Ux_dim
@@ -129,16 +163,31 @@ step date RAW		StringLogfile
 -0.0748			VLISW_By_dim
 -0.1296			VLISW_Bz_dim
 
+#NEUTRAL4
+0.075			RhoNe4Dim (n/cc)
+27.0			UxNe4Dim
+0.0			UyNe4Dim
+0.0			UzNe4Dim
+7.25e-14		pNe4Dim (dyne/cm^2) T = 7000 K
+
+#REGIONS
+6.0e5			TempPop1LimitDim
+100.0			uPop1LimitDim
+0.9			MachPop2Limit
+1.5			MachPop3Limit
+50.0			rPop3Limit
+1.0			MachPop4Limit
+
 #USERINPUTEND -------------------------------------
 
-STOP
-500			MaxIteration
--1.0			tSimulationMax
+#STOP
+10000			MaxIteration (session 1: steady-state relaxation)
+-1			tSimulationMax
 
-RUN ##########################################################################
+#RUN ##########################################################################
 
 #TIMEACCURATE
-T			DoTimeAccurate
+T			IsTimeAccurate (session 2: time-accurate from start date)
 
 #SAVEPLOTNAME
 F			UsePlotNameStep
