@@ -27,6 +27,7 @@ tmp/
 __pycache__/
 CLAUDE.md
 AGENTS.md
+STATUS.md
 
 website_data/
 v1_comparison/
