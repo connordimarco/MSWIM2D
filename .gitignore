@@ -11,13 +11,16 @@
 BATSRUS/
 data/
 Output/*
+logs/
+
 Scripts/*
 !Scripts/export_website_data.py
 !Scripts/flatten_output.sh
 !Scripts/create_midl_l1.py
 !Scripts/fetch_earth_ephemeris.py
 !Scripts/split_outs.py
-*.log
+!Scripts/RunAll_Step1.pl
+!Scripts/RunAll_Step2.pl
 
 tmp/
 .pylibs/
@@ -25,11 +28,5 @@ __pycache__/
 CLAUDE.md
 AGENTS.md
 
-Output_flat/
 website_data/
-
 v1_comparison/
-
-
-!Scripts/Scripts/RunAll_Step1.pl
-!Scripts/Scripts/RunAll_Step2.pl
