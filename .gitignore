@@ -26,7 +26,10 @@ CLAUDE.md
 AGENTS.md
 
 Output_flat/
-Website_data/
-website_build/
+website_data/
 
 v1_comparison/
+
+
+!Scripts/Scripts/RunAll_Step1.pl
+!Scripts/Scripts/RunAll_Step2.pl

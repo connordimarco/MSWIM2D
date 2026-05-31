@@ -1,4 +1,18 @@
 #!/usr/bin/perl -s
+#
+# RunAll_Step2.pl -- STEP 2 of the two-step production run.
+#
+# Step 1 (RunAll_Step1.pl) cold-starts at 1996-01 and runs time-accurate with
+# Tim's OMNI input (data/L1-old) through Dec 2003, producing a fully spun-up
+# restart in Output/200312/RESTART/OH/. Step 2 picks up from that restart at the
+# official seam 2004-01 and continues with the MIDL input (data/L1), the
+# operational forward driver. MIDL plasma-dropout gaps are handled by the
+# per-variable interpolation in create_midl_l1.py (keeps real B/V). earliest_date
+# stays 199601 so the simulation clock is continuous across the handoff.
+#
+# Run with:  RunAll_Step2.pl -s=200401 -e=202512
+# Requires:  Output/200312/RESTART/OH/{restart.H,octree.rst,data.rst} from Step 1.
+# Note: there is a small OMNI->MIDL boundary-source step at the 199803 seam.
 
 my $start_date = ($s or $start or "200001");
 my $end_date = ($e or $end or "200002");
@@ -12,11 +26,21 @@ use strict;
 &print_help if $Help;
 
 my $gitclone = './BATSRUS/share/Scripts/gitclone -s';
-my $rundir = './BATSRUS/run';
-my $output = './Output';
+# Run in node-local scratch. On Great Lakes /tmp is a private, auto-cleaned
+# per-job tmpfs namespace on fast local XFS, so the ~6700 small per-PE plot
+# pieces/month and PostProc's merge avoid /nfs/turbo's NFS small-file latency
+# (which was ~2/3 of each month's wall time). Output/ stays on the shared FS.
+my $local_scratch = $ENV{SLURM_JOB_ID} ? "/tmp" : "/tmp/mswim_$$";
+my $rundir = "$local_scratch/run";
+my $localout = "$local_scratch/Output";   # node-local PostProc target (same FS as $rundir)
+my $output = './Output';                  # relative label (messages, cleanup from PWD)
+my $outroot = "$ENV{PWD}/Output";         # absolute shared-FS Output (final destination)
 my $input  = './Input';
-my $earliest_date = 199803;
-my $earliest_year = 1998;
+my $earliest_date = 199601;
+my $earliest_year = 1996;
+# MPI rank count: follow the SLURM allocation when run under sbatch/salloc,
+# else default to 8 (interactive / shared-machine smoke).
+my $np = $ENV{SLURM_NTASKS} || 8;
 my $start_year = int(substr($start_date,0,4));
 my $end_year = int(substr($end_date,0,4));
 my $start_month = int(substr($start_date,4,6));
@@ -56,7 +80,7 @@ if (-e $rundir and -d $rundir){
     print "Run directory already exists.\n";
 }else{
     print "Creating OH run directory...\n";
-    qx(cd ./BATSRUS; make rundir COMPONENT=OH);
+    qx(cd ./BATSRUS; make rundir RUNDIR=$rundir COMPONENT=OH);
 }
 
 # Calculate simulation time from start of interval.
@@ -93,9 +117,14 @@ foreach my $restart_month (@restart_months)
 my $restart_date = 0;
 foreach my $month_string (@months_to_run)
 {
+    chomp($month_string);   # built with a trailing "\n"; strip it before use in paths
     my $year = int(substr($month_string,0,4));
     my $month = int(substr($month_string,4,6));
     print "Running $year-$month...   ";
+
+    # Clean stale run-directory state from any previous (possibly crashed) month
+    # so PostProc never bundles leftover plot frames and restarts are not mixed.
+    qx(rm -f $rundir/OH/IO2/* $rundir/OH/restartIN/* $rundir/OH/restartOUT/*);
 
     # Copy restart files.
     if ($month_string != $earliest_date){
@@ -107,9 +136,9 @@ foreach my $month_string (@months_to_run)
 	{
 	    $restart_date = sprintf("%04d%02d", $year-1, 12);
 	}
-	qx(cp $output/$restart_date/RESTART/OH/restart.H $rundir/restartIN/);
-	qx(cp $output/$restart_date/RESTART/OH/octree.rst $rundir/restartIN/);
-	qx(cp $output/$restart_date/RESTART/OH/data.rst $rundir/restartIN/);
+	qx(cp $outroot/$restart_date/RESTART/OH/restart.H $rundir/restartIN/);
+	qx(cp $outroot/$restart_date/RESTART/OH/octree.rst $rundir/restartIN/);
+	qx(cp $outroot/$restart_date/RESTART/OH/data.rst $rundir/restartIN/);
     }
     
     # Select correct data files.
@@ -117,7 +146,8 @@ foreach my $month_string (@months_to_run)
     my $StereoB = ($year >= 2007 and $year <= 2014);
     my $SolarOrbiter = ($year >= 2022 and $year <= 2025);
     
-    # Unzip the data.
+    # Unzip the data. Step 2 drives with MIDL (data/L1, 1998-2025), continuing
+    # from the OMNI-built restart produced by RunAll_Step1.pl (end of Feb 1998).
     qx(gunzip -c data/L1/l1_$year\.dat > $rundir/L1.dat);
     qx(gunzip -c data/STEREOA/STEREOA_$year\.dat > $rundir/STEREOA.dat) 
 	if $StereoA;
@@ -178,13 +208,22 @@ ascii         TypeFile
     close $out;
     
     # Execute the code.
-    my $tmpdir = "$ENV{PWD}/tmp";
+    my $tmpdir = "$local_scratch/tmp";
     qx(mkdir -p $tmpdir);
-    qx(cd $rundir; TMPDIR=$tmpdir mpiexec -n 6 ./BATSRUS.exe > runlog);
+    qx(cd $rundir; TMPDIR=$tmpdir nice -n 10 mpiexec -n $np ./BATSRUS.exe > runlog);
 
-    # Process the results.
-    qx(rm -rf $output/$month_string);
-    qx(cd $rundir; ./PostProc.pl -M ../../$output/$month_string);
+    # Process the results. PostProc's -M *renames* OH/IO2 into the target, which
+    # only works within one filesystem -- so collect into the node-local Output
+    # (same FS as $rundir), then copy the finished product to the shared FS.
+    # (A direct -M to /nfs/turbo fails with "could not rename OH/IO2": cross-
+    # device EXDEV.) The copy is one big sequential .outs + a tiny restart, so
+    # it's bandwidth-bound and keeps the node-local I/O win.
+    qx(mkdir -p $localout);
+    qx(rm -rf $localout/$month_string);
+    qx(cd $rundir; ./PostProc.pl -M $localout/$month_string);
+    qx(rm -rf $outroot/$month_string);
+    qx(cp -r $localout/$month_string $outroot/$month_string);
+    qx(rm -rf $localout/$month_string);   # free node-local scratch
 
     # things will be removed by make clean and make cleanall
 

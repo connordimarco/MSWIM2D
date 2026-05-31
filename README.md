@@ -134,9 +134,9 @@ it after checking out BATSRUS:
   the boundary loop must allow 4 tables to reach the Solar Orbiter slot.
 
 Edit the **source** module (`srcUserExtra/ModUserOuterHelio2d.f90`), not the
-generated `src/ModUser.f90` — `Config.pl -u=OuterHelio2d` (run by
-`Scripts/RunAll.pl`) regenerates `src/ModUser.f90` from the source on every
-build, silently discarding edits made to the generated copy.
+generated `src/ModUser.f90` — `Config.pl -u=OuterHelio2d` (run by the
+`Scripts/RunAll_Step*.pl` drivers) regenerates `src/ModUser.f90` from the source
+on every build, silently discarding edits made to the generated copy.
 
 # Create data files for running MSWiM2D
 
@@ -157,21 +157,39 @@ All tables share one format (HGI vectors, hourly cadence, time in seconds since
 
 # Run MSWIM2D
 
-The driver is `Scripts/RunAll.pl`, which runs BATSRUS month by month over a
-date range. Despite the `-s=YYYY` help text, it takes `YYYYMM` strings:
+The driver runs BATSRUS month by month over a date range. Despite the `-s=YYYY`
+help text, it takes `YYYYMM` strings. The production run is two steps:
+
+- **Step 1** (`Scripts/RunAll_Step1.pl`): cold-start at 1996-01, time-accurate
+  with Tim's OMNI input (`data/L1-old`) through Dec 2003 (OMNI drives the
+  Tim-reproduction era and rides through solar max cleanly). Validates against
+  Tim's published run (Mars/Pluto, 1996–1998) and builds a spun-up restart in
+  `Output/200312/RESTART/`.
+- **Step 2** (`Scripts/RunAll_Step2.pl`): continue from that restart with the
+  operational MIDL input (`data/L1`) from 2004-01 to the present. The 2004-01
+  OMNI→MIDL seam is chosen because MIDL is multi-source and gap-robust by then;
+  earlier MIDL plasma-data gaps could crash the inner shock (see AGENTS.md).
 
 ```
 cd MSWIM2D
 module load mpi/openmpi-x86_64       # or your platform's MPI module
-Scripts/RunAll.pl -s=199803 -e=202512
+Scripts/RunAll_Step1.pl -s=199601 -e=200312     # OMNI spin-up + validation
+Scripts/RunAll_Step2.pl -s=200401 -e=202512     # MIDL continuation
 ```
 
 For each month it reconfigures and rebuilds BATSRUS, writes `BATSRUS/run/PARAM.in`
 from the templates in `Input/` (`PARAM.in` for the first month, `PARAM.in.restart`
 otherwise), unzips that year's lookup tables into `BATSRUS/run/`, adds a
 `#LOOKUPTABLE` block for each satellite whose data covers the year, runs
-`mpiexec -n 8 ./BATSRUS.exe`, and collects results into `Output/<YYYYMM>/` via
-`PostProc.pl`. Months after the first restart from the previous month's output.
+`nice -n 10 mpiexec -n 8 ./BATSRUS.exe`, and collects results into
+`Output/<YYYYMM>/` via `PostProc.pl`. Months after the first restart from the
+previous month's output.
+
+The current production templates follow Tim Keebler's old OuterHelio2D
+multifluid setup: 300 x 100 z=0 grid, `zMin/zMax=-20/20`, conserved neutrals,
+fixed `1200 sec` timesteps, and `z=0 VAR idl_real4` plot output containing the
+plasma and neutral variables. Use `export OMP_NUM_THREADS=1` before long MPI
+runs on the shared machine.
 
 This is a shared resource — check the load (`uptime`, `nproc`) and consider a
 smaller rank count before launching long production runs. See `AGENTS.md` for

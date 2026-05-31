@@ -95,8 +95,21 @@ def create_lookup_table(year):
     # Hourly averaging
     print(f'  Hourly averaging {len(df)} 1-min records...')
     hourly = df[['Bx', 'By', 'Bz', 'Ux', 'Uy', 'Uz', 'rho', 'T']].resample('1h').mean()
-    hourly = hourly.dropna(subset=['Bx', 'Ux', 'rho', 'T'])
-    print(f'  {len(hourly)} valid hourly records.')
+    # Linearly interpolate gaps *per variable* rather than dropping any hour that is
+    # missing one. Critical for plasma-moment dropouts: rho/T (ACE SWEPAM) go missing
+    # while B and V (ACE MAG + velocity) are still present -- e.g. the 102 h late-Jan-2011
+    # hole and many other multi-day "gaps". The old dropna(['Bx','Ux','rho','T']) discarded
+    # those hours' real B+V entirely, forcing BATSRUS to interpolate a fake velocity ramp
+    # across the gap that crashed the inner shock (negative pressure). Per-variable
+    # interpolation keeps the real field and velocity and only fills rho/T.
+    #
+    # limit_area='inside' fills only gaps bracketed by real samples; it never extrapolates
+    # past the first/last valid point, so we never fabricate data where there genuinely is
+    # none (no invented edges, and we do not create gaps where there aren't any).
+    hourly = hourly.interpolate(method='linear', limit_area='inside')
+    # Drop only the leading/trailing rows still NaN (outside the real data coverage).
+    hourly = hourly.dropna(subset=['Bx', 'By', 'Bz', 'Ux', 'Uy', 'Uz', 'rho', 'T'])
+    print(f'  {len(hourly)} hourly records after per-variable gap interpolation.')
 
     if len(hourly) == 0:
         print(f'  WARNING: no valid data for year {year}')

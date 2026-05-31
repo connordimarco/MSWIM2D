@@ -3,8 +3,11 @@
 
 set -euo pipefail
 
-SRCDIR="/data/tuija/cdimarco/MSWIM2D/Output"
-DESTDIR="/data/tuija/cdimarco/MSWIM2D/Output_flat"
+# Project root derived from this script's location, so it is portable across
+# machines (e.g. Great Lakes). Override with MSWIM2D_ROOT if needed.
+ROOT="${MSWIM2D_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+SRCDIR="$ROOT/Output"
+DESTDIR="$ROOT/Output_flat"
 
 mkdir -p "$DESTDIR"
 
