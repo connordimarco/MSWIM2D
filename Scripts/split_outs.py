@@ -20,8 +20,18 @@ trajectory interpolation is done server-side by INTERPOLATE.exe; the coarse grid
 exists only to render the lightweight field-movie in the browser. Because the
 full-res `.bin` files no longer have a consumer, `--coarse-only` skips them
 entirely (the website build uses this).
+
+The coarse grid keeps only the first `COARSE_NVAR` (plasma) variables. The
+browser field movie renders just rho/ux/uy/uz/bx/by/bz/p (T is derived from p
+and rho); the trailing neutral-fluid variables are never read client-side, so
+dropping them more than halves the coarse payload with no visual change. The
+full-res `.bin` (when written) still carries every variable.
 """
 import struct, os, sys, json, math, re
+
+# Plasma variables kept in the coarse grid (rho, ux, uy, uz, bx, by, bz, p),
+# in .outs order. The neutral-fluid variables that follow are dropped.
+COARSE_NVAR = 8
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 # Data root may be set via the MSWIM2D_DATA_NEW env var so this script can live
@@ -77,12 +87,16 @@ def _decimate(var_recs, n1, n2, nVar, factor):
         return bytes(out), n1c, n2c
 
 
-def _coarsen_grid(grid, n1c, n2c, factor):
+def _coarsen_grid(grid, n1c, n2c, factor, nvar):
     """Coarse grid metadata. Bounds come from the actually-sampled nodes; because
     the log-radius and phi grids are uniformly spaced, striding keeps them
-    uniform so the client's linear index->coord mapping stays exact at nodes."""
+    uniform so the client's linear index->coord mapping stays exact at nodes.
+    `nvar` trims nVar/varNames to the plasma vars actually written to the coarse
+    .bin so the client's per-variable stride (nVar * n1 * n2) stays correct."""
     cg = dict(grid)
     cg['n1'], cg['n2'] = n1c, n2c
+    cg['nVar'] = nvar
+    cg['varNames'] = grid['varNames'][:nvar]
     cg['coarseFactor'] = factor
     # radMin/phiMin are at index 0 (unchanged); radMax/phiMax shift to the last
     # sampled node = first + (count-1)*step*factor.
@@ -169,11 +183,12 @@ def process_file(path, out_dir, coarse_factor=None, coarse_out_dir=None,
                         out.write(r)
 
             if coarse_factor:
-                cbytes, n1c, n2c = _decimate(var_recs, n1, n2, nVar, coarse_factor)
+                nvc = min(COARSE_NVAR, nVar)
+                cbytes, n1c, n2c = _decimate(var_recs[:nvc], n1, n2, nvc, coarse_factor)
                 with open(os.path.join(coarse_month_dir, '%04d.bin' % idx), 'wb') as out:
                     out.write(cbytes)
                 if coarse_grid is None:
-                    coarse_grid = _coarsen_grid(grid, n1c, n2c, coarse_factor)
+                    coarse_grid = _coarsen_grid(grid, n1c, n2c, coarse_factor, nvc)
 
             timestamps.append(ts)
             idx += 1
