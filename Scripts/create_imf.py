@@ -264,10 +264,11 @@ def get_stereo_lookup_table(start_date,end_date,**kwargs):
     import shutil
     import gzip
     import numpy as np
+    import numpy as _np
     import datetime as dt
     import urllib.request
     from dateutil import rrule
-    from spacepy import pycdf
+    import cdflib
 
     # Select STEREO-A or STEREO-B
     spacecraft = 'A'
@@ -324,10 +325,21 @@ def get_stereo_lookup_table(start_date,end_date,**kwargs):
         else:
             data_filename = '{0}/stb_coho1hr_merged_mag_plasma_{0}{1:02d}01_v01.cdf'.format(date.year,date.month)
         urllib.request.urlretrieve(data_url+data_filename,'stereo.cdf')
-        stereo_cdf = pycdf.CDF('stereo.cdf')
+        # Read with cdflib (pure-python) instead of spacepy.pycdf: Great Lakes has no
+        # CDF C library, which pycdf requires. cdflib.varget(key) returns a numpy array;
+        # Epoch comes back as raw CDF_EPOCH numbers, so convert it to datetimes here
+        # (pycdf did that implicitly). The COHO fill value is also surfaced as the
+        # CDF FILLVAL (~ -1e31), which the existing < -1e28 -> NaN pass below catches.
+        stereo_cdf = cdflib.CDF('stereo.cdf')
         for key in stereo_keys:
-            stereo_data[key].extend(stereo_cdf[key])
-        stereo_cdf.close()
+            arr = stereo_cdf.varget(key)
+            if key == 'Epoch':
+                arr = cdflib.cdfepoch.to_datetime(arr)
+                # numpy datetime64[ns] -> python datetime (matches old pycdf behavior)
+                arr = [_np.datetime64(t, 'us').astype(dt.datetime) for t in arr]
+            else:
+                arr = list(arr)
+            stereo_data[key].extend(arr)
         os.remove('stereo.cdf')
     print('STEREO-{} data successfully retrieved.'.format(spacecraft))
 
@@ -338,6 +350,32 @@ def get_stereo_lookup_table(start_date,end_date,**kwargs):
             if entry < -1e28:
                 stereo_data[key][i] = np.nan
 
+    # Per-variable linear interpolation of INTERIOR gaps (bracketed by real data),
+    # rather than dropping the whole hour when any single variable is missing.
+    # Mirrors the MIDL (create_midl_l1.py) and SolO (propagate_solo.py) gap fix:
+    # the original code did `if np.any(np.isnan([...])): continue`, which discarded
+    # an hour even when e.g. only the plasma moments (n/T) dropped out while B and
+    # speed were fine -- turning short single-variable dropouts into multi-hour
+    # boundary gaps that BATSRUS then ramps across. Data on the COHO product is
+    # regular hourly, so we interpolate over sample index; interior-only (no edge
+    # extrapolation), so true leading/trailing outages stay NaN and are skipped at
+    # write time. This is Tim's bug (create_imf.py), low-impact for STEREO-A
+    # (<1.5% recoverable) but fixed here for correctness. See STATUS.md.
+    def _interp_interior(vals):
+        a = np.asarray(vals, dtype=float)
+        good = np.isfinite(a)
+        if good.sum() < 2:
+            return a
+        idx = np.arange(a.size)
+        first, last = idx[good][0], idx[good][-1]
+        interior = (idx >= first) & (idx <= last) & ~good
+        a[interior] = np.interp(idx[interior], idx[good], a[good])
+        return a
+
+    for key in ['heliographicLongitude', 'BR', 'BT', 'BN',
+                'plasmaSpeed', 'lat', 'lon', 'plasmaDensity', 'plasmaTemp']:
+        stereo_data[key] = list(_interp_interior(stereo_data[key]))
+
     for i, timestamp in enumerate(stereo_data['Epoch']):
         phi  = stereo_data['heliographicLongitude'][i]
         br   = stereo_data['BR'][i]
@@ -346,6 +384,7 @@ def get_stereo_lookup_table(start_date,end_date,**kwargs):
         speed = stereo_data['plasmaSpeed'][i]
         dens = stereo_data['plasmaDensity'][i]
         temp = stereo_data['plasmaTemp'][i]
+        # Skip only rows still NaN after interior interpolation (true edge outages).
         if np.any(np.isnan([phi, br, bt, bn, speed, dens, temp])):
             continue
         # Assume radial flow when velocity direction angles are unavailable

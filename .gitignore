@@ -13,14 +13,9 @@ data/
 Output/*
 logs/
 
-Scripts/*
-!Scripts/export_website_data.py
-!Scripts/flatten_output.sh
-!Scripts/create_midl_l1.py
-!Scripts/fetch_earth_ephemeris.py
-!Scripts/split_outs.py
-!Scripts/RunAll_Step1.pl
-!Scripts/RunAll_Step2.pl
+# Scripts/ is tracked, except for personal/infra-specific files:
+*.sbatch
+Scripts/build_website_data.sh
 
 tmp/
 .pylibs/

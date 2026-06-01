@@ -160,6 +160,15 @@ def solo_ballistic_propagation(raw_data):
     result = df.reindex(combined).interpolate(
         method='index', limit=2).reindex(grid)
 
+    # Per-variable linear fill of interior gaps (bracketed by real data) so a
+    # dropout in one variable -- e.g. a B-component missing while speed and
+    # density are fine -- no longer blanks the whole hour. This mirrors the MIDL
+    # plasma-gap fix (create_midl_l1.py). limit_area='inside' fills only between
+    # real samples; it never extrapolates past the first/last valid point, so we
+    # never fabricate edges. Rows still NaN after this (true outages / leading /
+    # trailing) are skipped at lookup-table write time.
+    result = result.interpolate(method='index', limit_area='inside')
+
     return result
 
 

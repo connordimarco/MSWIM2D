@@ -161,12 +161,12 @@ The driver runs BATSRUS month by month over a date range. Despite the `-s=YYYY`
 help text, it takes `YYYYMM` strings. The production run is two steps:
 
 - **Step 1** (`Scripts/RunAll_Step1.pl`): cold-start at 1996-01, time-accurate
-  with Tim's OMNI input (`data/L1-old`) through Dec 2003 (OMNI drives the
+  with Tim's OMNI input (`data/L1-old`) through Jun 2004 (OMNI drives the
   Tim-reproduction era and rides through solar max cleanly). Validates against
   Tim's published run (Mars/Pluto, 1996–1998) and builds a spun-up restart in
-  `Output/200312/RESTART/`.
+  `Output/200406/RESTART/`.
 - **Step 2** (`Scripts/RunAll_Step2.pl`): continue from that restart with the
-  operational MIDL input (`data/L1`) from 2004-01 to the present. The 2004-01
+  operational MIDL input (`data/L1`) from 2004-07 to the present. The 2004-07
   OMNI→MIDL seam is chosen because MIDL is multi-source and gap-robust by then;
   earlier MIDL plasma-data gaps could crash the inner shock (see AGENTS.md).
 
