@@ -12,6 +12,7 @@ BATSRUS/
 data/
 Output/*
 logs/
+*.log
 
 # Scripts/ is tracked, except for personal/infra-specific files:
 *.sbatch
@@ -23,6 +24,7 @@ __pycache__/
 CLAUDE.md
 AGENTS.md
 STATUS.md
+TODO.md
 
 website_data/
 v1_comparison/
