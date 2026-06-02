@@ -209,8 +209,12 @@ gitignored):
 
 ```
 Scripts/export_website_data.py   # data/*.dat.gz -> Website_data/*.csv (in-situ inputs)
-Scripts/flatten_output.sh        # Output/<YYYYMM>/OH/*.outs -> Output_flat/<YYYYMM>.outs
+Scripts/build_website_data.sh    # Output/<YYYYMM>/OH/*.outs -> website_data/MSWIM2D_Data_New/ + coarse split
 ```
+
+The deployed model-output dataset is **198501–202512**: Tim Keebler's reference
+run for months before 200407 and our own runs from 200407 on. See `AGENTS.md`
+("Operational Tim seam").
 
 Inside `MSWIM2D-Web/`, those are staged under `MSWIM2D_Data_New/` and
 pre-chunked for the browser by `chunk_satellite_data.py` and `split_outs.py`.

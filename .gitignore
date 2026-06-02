@@ -29,3 +29,6 @@ TODO.md
 website_data/
 v1_comparison/
 MSWIM2D-Web/
+
+spice/chunks
+spice/SpiceKernels
