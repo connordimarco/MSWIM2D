@@ -1,7 +1,0 @@
-\begindata
-KERNELS_TO_LOAD=(
-'./SpiceKernels/Planets/pck00010.tpc',
-'./SpiceKernels/Planets/RSSD0002_swmf.TF',
-'./SpiceKernels/Planets/naif0012.tls',
-'./SpiceKernels/Planets/de430.bsp')
-\begintext
