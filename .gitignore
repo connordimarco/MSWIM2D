@@ -7,28 +7,20 @@
 *.in
 *.exe
 *.o
+.env
 
 BATSRUS/
 data/
-Output/*
+Output_*/
 logs/
-*.log
-
-# Scripts/ is tracked, except for personal/infra-specific files:
-*.sbatch
-Scripts/build_website_data.sh
 
 tmp/
 .pylibs/
 __pycache__/
 CLAUDE.md
-AGENTS.md
-STATUS.md
-TODO.md
 
 website_data/
-v1_comparison/
 MSWIM2D-Web/
-
-spice/chunks
-spice/SpiceKernels
+analysis/
+spice/
+!spice/*.py

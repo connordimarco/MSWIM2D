@@ -1,221 +1,242 @@
 Copyright (C) 2026 Regents of the University of Michigan,
 portions used with permission.
 
-Michigan Solar Wind Model in 2D
+# MSWIM2D: Michigan Solar Wind Model in 2D
 
-Created by Tim Keebler and Gabor Toth and maintained by Connor DiMarco. 
+Created by Tim Keebler and Gabor Toth, maintained by Connor DiMarco.
 
-This document outlines the installation and usage of the Michigan Solar Wind
-Model - 2D (MSWIM2D). It requires BATSRUS in stand-alone mode configured as
-the OH component.
+MSWIM2D is a 2-D MHD model of the solar wind in the heliospheric **ecliptic
+plane**. It drives [BATSRUS](https://github.com/SWMFsoftware/BATSRUS) (the SWMF
+Outer Heliosphere component) on a 2-D spherical grid from **1 AU out to ~75 AU**,
+with the inner boundary at 1 AU set by real spacecraft observations (OMNI/MIDL at
+L1, STEREO-A, STEREO-B, Solar Orbiter). The result is a continuous, hourly,
+self-consistent picture of plasma + field across every longitude and every
+planet/spacecraft orbit, 1996 to the present (with a forecast tail).
 
-## Obtain BATSRUS
+This README takes you from a fresh checkout to **running the whole system end to
+end**. For the deepest internals (file formats, coordinate conventions,
+debugging recipes) see `AGENTS.md`/`CLAUDE.md`.
 
-BATSRUS is open source on GitHub. Clone it into the top of this repository:
-```
-cd MSWIM2D
-git clone https://github.com/SWMFsoftware/BATSRUS
-```
-The supporting repositories (`share`, `util`, `srcBATL`, ...) are pulled in
-automatically during installation (`Config.pl -install`, see below).
+---
 
-Registered University of Michigan users may alternatively obtain the full
-distribution from UM GitLab (`git@gitlab.umich.edu:swmf_software/BATSRUS`)
-using the SWMF `gitclone` script; see the
-[GitLab instructions](http://herot.engin.umich.edu/~gtoth/SWMF/doc/GitLab_instructions.pdf).
+## 1. The big picture
 
-Note: BATSRUS is a plain clone checked out in place, **not** a git submodule
-of this repository (it is gitignored). MSWIM2D applies a small local patch to
-it — see "How this BATSRUS differs from upstream" below.
+One continuous BATSRUS simulation, fed by observations, split into **three
+confidence tiers**, then turned into web + Python data products:
 
-## Install and test BATSRUS for stand-alone OH component.
-
-Many machines used by UofM are already recognized by the
-`share/Scripts/Config.pl`.
-For these platform/compiler combinations installation is very simple:
 ```
-Config.pl -install
-```
-On other platforms the Fortran (and C) compilers should be explicitly given.
-To see available choices, type
-```
-Config.pl -compiler
-```
-Then install the code with the selected Fortran (and default C) compiler, e.g.
-```
-Config.pl -install -compiler=gfortran
-```
-A non-default C compiler can be added after a comma, e.g.
-```
-Config.pl -install -compiler=mpxlf90,mpxlc
-```
-For machines with no MPI library, use
-```
-Config.pl -install -nompi -compiler=....
-```
-This will only allow serial execution, of course.
-
-The ifort compiler (and possibly others too) use the stack for temporary arrays,
-so the stack size should be large. For csh/tcsh add the following to `.cshrc`:
-```
-unlimit stacksize
-```
-For bash/ksh add the following to `.bashrc` or equivalent initialization file:
-```
-ulimit -s unlimited
-```
-# Create the manuals
-
-Please note that creating the PDF manuals requires
-that LaTex (available through the command line) and ps2pdf
-be installed on your system.
-
-To create the PDF manuals for BATSRUS and CRASH type
-```
-make PDF
-cd util/CRASH/doc/Tex; make PDF
-```
-in the BATSRUS directory. The manuals will be in the `Doc/` and
-`util/CRASH/doc/` directories, and can be accessed by opening
-`Doc/index.html` and `util/CRASH/doc/index.html`.
-
-The input parameters of BATSRUS/CRASH are described in the `PARAM.XML`
-in the main directory. This is the best source of information when
-constructing the input parameter file and it is used to generate the
-"Input Parameters" section of the manual.
-
-## Cleaning the documentation
-```
-cd doc/Tex
-make clean
-```
-To remove all the created documentation type
-```
-cd doc/Tex
-make cleanpdf
+  EXTERNAL ARCHIVES (OMNI/MIDL, CDAWeb COHO, NASA SPDF)
+        │   data_download/update_satellite_data.sh
+        ▼
+  data/<source>/<source>_<year>.dat.gz   +   data/DATA_MANIFEST.txt
+        │                                       │  (the two seam dates:
+        │                                       │   DATA_SAFE, LAST_POSSIBLE)
+        ▼                                       ▼
+  BATSRUS run drivers (Production_Scripts/RunAll_*.pl)   ← months derived from
+        │     manifest via manifest_dates.sh                the manifest
+        ▼
+  ┌─────────────── three output trees, one unbroken clock ───────────────┐
+  │  Output_final/        1996-01 → DATA_SAFE        all sources present  │
+  │  Output_preliminary/  DATA_SAFE+1 → LAST_POSSIBLE  thinner data       │
+  │  Output_prediction/   LAST_POSSIBLE+1 → +12 mo   persistence forecast │
+  └──────────────────────────────────────────────────────────────────────┘
+        │  website_build/build_website_data.sh        │ website_build/
+        ▼  (flatten + coarse grid + products.json)         ▼ make_traj + precompute
+  website_data/MSWIM2D_Data_New/                      spice/  (trajectory traces)
+        │                                                   │
+        └──────────────── rsync / symlink to herot ─────────┘
+                                  │
+                    ┌─────────────┴──────────────┐
+                    ▼                             ▼
+        MSWIM2D-Web/ (public website)     CSEM-MSWIM2D/ (pip: mswim2d)
+        server-side interpolation,        xarray client over the same
+        field movie, tier-aware Data page static products
 ```
 
-# Read the manuals
+**The two seam dates are never hard-coded.** `update_satellite_data.sh` writes
+`data/DATA_MANIFEST.txt`, whose `DATA_SAFE` (last hour *all* active sources
+report) ends the **final** tier and `LAST_POSSIBLE` (furthest *any* source
+reaches) ends the **preliminary** tier. Everything downstream reads those two
+records, so the tier boundaries **march forward automatically** as new data
+lands. See `Production_Scripts/run_model/manifest_dates.sh`.
 
-All manuals can be accessed by opening the top index file
+---
+
+## 2. Repository layout
+
+| Path | What it is |
+|------|------------|
+| `refresh.sh` | **The one-command monthly update** (root). data → model → trajectories → website → rsync. Prints a plan by default; `--run` executes. See §5. |
+| `BATSRUS/` | The MHD solver, cloned in place (gitignored, **not** a submodule). One local patch; see §4. |
+| `Input/` | `PARAM.in` / `PARAM.in.restart` templates the run drivers stamp per month. |
+| `data/` | Satellite input lookup tables `<source>/<source>_<year>.dat.gz` (gitignored), `L1-old/` (Tim's OMNI), `earth_ephemeris/`, and **`DATA_MANIFEST.txt`**. |
+| `data_prediction/` | Persistence-forecast input tables for the prediction tier (built by `make_prediction_tables.py`). |
+| `Output_final/`, `Output_preliminary/`, `Output_prediction/` | The three model-output tiers. Per month: `<YYYYMM>/OH/*.outs` + `PARAM.in` + `RESTART/` + `runlog`. (Legacy single `Output/` predates the tier split.) |
+| `Production_Scripts/` | **The operational pipeline**, in three stage folders: `data_download/` (satellite refresh + manifest), `run_model/` (the `RunAll_*.pl` tier drivers + `manifest_dates.sh`), `website_build/` (products + trajectory precompute + the map generator). `refresh.sh` drives them in order. |
+| `Scripts/` | Untracked scratch / superseded one-offs (gitignored). Not operational. |
+| `spice/` | Trajectory data tree: `trajectories/` (per-body `.dat`), `interp_out/` (raw precompute), `chunks/` (stitched per-body/year), `SpiceKernels/`. |
+| `website_data/MSWIM2D_Data_New/` | What the website serves: `Output_flat/` (all tiers' raw `.outs`, hard-linked), `snapshots_coarse/` (decimated field-movie grid), `products.json` (tier index), `Satellite_Data/`. |
+| `MSWIM2D-Web/` | The public website (separate git repo, gitignored here). Static pages + `interpolate.php` server-side interpolation. |
+| `CSEM-MSWIM2D/` | The Python client (`pip install mswim2d`), a git **submodule**. |
+| `Tim_MSWIM2D_1hr/` | Tim Keebler's reference run, rsynced (months before the operational seam). |
+
+---
+
+## 3. One-time setup
+
 ```
-open Doc/index.html
-```
-You may also read the PDF files directly with a PDF reader.
-The most important document is the user manual in
-```
-Doc/USERMANUAL.pdf
+git clone <this repo> MSWIM2D && cd MSWIM2D
+git submodule update --init                 # pulls CSEM-MSWIM2D
+git clone https://github.com/SWMFsoftware/BATSRUS    # solver, in place
 ```
 
-# Test the OH component in stand-alone mode
+The public website lives in its own repo; clone it into `MSWIM2D-Web/` if you
+are working on the site.
 
-Running this test will properly configure BATSRUS for use with MSWIM2D, as
-well as confirming proper function.
+**Python toolchains** (the satellite refresh uses two, by design):
+- `python3.8` (anaconda): Solar Orbiter + STEREO + Earth ephemeris (needs
+  `spiceypy`, `spacepy`).
+- `python3.12` (`/usr/bin/python3.12`): L1/MIDL builder.
+Override with `PY38=... PY312=...` if your interpreters live elsewhere.
+
+Then build + patch BATSRUS (see §4).
+
+---
+
+## 4. BATSRUS: install, patch, test
+
+**Install** (most UM machines are auto-recognized):
 ```
 cd BATSRUS
-make -j test_outerhelio2d
+Config.pl -install                      # or: -install -compiler=gfortran
+ulimit -s unlimited                     # large stack for temporary arrays
 ```
-The `-j` flag allows parallel compilation.
-This requires a machine where `mpiexec` is available.
-The test runs with 2 MPI processors and 2 threads by default.
-A successful test is indicated by creation of an empty `test_outerhelio2d.diff` file.
+The supporting repos (`share`, `util`, `srcBATL`, …) are pulled in during
+install. Create manuals with `make PDF` (`Doc/USERMANUAL.pdf` is the key one).
 
-# How this BATSRUS differs from upstream
+**The one required patch.** MSWIM2D needs four solar-wind lookup-table slots, not
+the three upstream ships. Re-apply after any fresh BATSRUS checkout:
 
-MSWIM2D drives a stock BATSRUS with one functional change to the OuterHelio2d
-user module. A fresh `gitlabclone BATSRUS` does **not** include it, so re-apply
-it after checking out BATSRUS:
+- `srcUserExtra/ModUserOuterHelio2d.f90`: set `MaxNumLookupTables = 4` (upstream
+  `3`), with companion arrays `TimeFirst_I`/`TimeLast_I` dimensioned from it. The
+  four inputs occupy fixed slots (SW1=L1, SW2=STEREO-A, SW3=STEREO-B,
+  SW4=Solar Orbiter). STEREO-B data ends in 2014, so recent runs use SW1/SW2/SW4
+  with a gap at SW3 and the boundary loop must reach 4 tables.
 
-- `srcUserExtra/ModUserOuterHelio2d.f90`: `MaxNumLookupTables = 4` (upstream
-  ships `3`), with the companion arrays `TimeFirst_I`/`TimeLast_I` dimensioned
-  from that constant. The four solar-wind inputs occupy fixed slots
-  (SW1=L1, SW2=STEREO-A, SW3=STEREO-B, SW4=Solar Orbiter); because STEREO-B
-  data ends in 2014, 2022–2025 runs use SW1, SW2, SW4 with a gap at SW3, and
-  the boundary loop must allow 4 tables to reach the Solar Orbiter slot.
+Edit the **source** module, not the generated `src/ModUser.f90` ; every build
+runs `Config.pl -u=OuterHelio2d` and regenerates the generated copy, silently
+discarding edits to it.
 
-Edit the **source** module (`srcUserExtra/ModUserOuterHelio2d.f90`), not the
-generated `src/ModUser.f90` — `Config.pl -u=OuterHelio2d` (run by the
-`Scripts/RunAll_Step*.pl` drivers) regenerates `src/ModUser.f90` from the source
-on every build, silently discarding edits made to the generated copy.
-
-# Create data files for running MSWiM2D
-
-MSWIM2D reads hourly solar-wind lookup tables (one gzipped `.dat.gz` per
-satellite per year) from `data/`. They are generated from external archives by
-the scripts in `Scripts/`; see `AGENTS.md` for the full data pipeline,
-dependencies, and coordinate conventions. In brief:
-
-- **L1 (MIDL):** `fetch_earth_ephemeris.py` then `create_midl_l1.py` →
-  `data/L1/l1_<year>.dat.gz`.
-- **STEREO-A / STEREO-B (CDAWeb COHO):** `create_imf.py` →
-  `data/STEREOA/`, `data/STEREOB/`.
-- **Solar Orbiter (NASA SPDF COHO):** `create_solo.py` → `propagate_solo.py` →
-  `create_solo.py --write-lookup-table` → `data/SolarOrbiter/`.
-
-All tables share one format (HGI vectors, hourly cadence, time in seconds since
-1965-01-01); the column layout is documented in `AGENTS.md`.
-
-# Run MSWIM2D
-
-The driver runs BATSRUS month by month over a date range. Despite the `-s=YYYY`
-help text, it takes `YYYYMM` strings. The production run is two steps:
-
-- **Step 1** (`Scripts/RunAll_Step1.pl`): cold-start at 1996-01, time-accurate
-  with Tim's OMNI input (`data/L1-old`) through Jun 2004 (OMNI drives the
-  Tim-reproduction era and rides through solar max cleanly). Validates against
-  Tim's published run (Mars/Pluto, 1996–1998) and builds a spun-up restart in
-  `Output/200406/RESTART/`.
-- **Step 2** (`Scripts/RunAll_Step2.pl`): continue from that restart with the
-  operational MIDL input (`data/L1`) from 2004-07 to the present. The 2004-07
-  OMNI→MIDL seam is chosen because MIDL is multi-source and gap-robust by then;
-  earlier MIDL plasma-data gaps could crash the inner shock (see AGENTS.md).
-
+**Test** the OH stand-alone configuration (also configures it for MSWIM2D):
 ```
-cd MSWIM2D
-module load mpi/openmpi-x86_64       # or your platform's MPI module
-Scripts/RunAll_Step1.pl -s=199601 -e=200312     # OMNI spin-up + validation
-Scripts/RunAll_Step2.pl -s=200401 -e=202512     # MIDL continuation
+cd BATSRUS && make -j test_outerhelio2d      # empty *.diff file = pass
 ```
 
-For each month it reconfigures and rebuilds BATSRUS, writes `BATSRUS/run/PARAM.in`
-from the templates in `Input/` (`PARAM.in` for the first month, `PARAM.in.restart`
-otherwise), unzips that year's lookup tables into `BATSRUS/run/`, adds a
-`#LOOKUPTABLE` block for each satellite whose data covers the year, runs
-`nice -n 10 mpiexec -n 8 ./BATSRUS.exe`, and collects results into
-`Output/<YYYYMM>/` via `PostProc.pl`. Months after the first restart from the
-previous month's output.
+---
 
-The current production templates follow Tim Keebler's old OuterHelio2D
-multifluid setup: 300 x 100 z=0 grid, `zMin/zMax=-20/20`, conserved neutrals,
-fixed `1200 sec` timesteps, and `z=0 VAR idl_real4` plot output containing the
-plasma and neutral variables. Use `export OMP_NUM_THREADS=1` before long MPI
-runs on the shared machine.
+## 5. The operational pipeline: the monthly update, end to end
 
-This is a shared resource — check the load (`uptime`, `nproc`) and consider a
-smaller rank count before launching long production runs. See `AGENTS.md` for
-smoke-test recipes, post-processing details, and known-good output.
-
-# Build the website data products
-
-The public website lives in the `MSWIM2D-Web/` git submodule. Initialize it
-with:
+The whole monthly update is **one command** at the repo root:
 
 ```
-git submodule update --init
+./refresh.sh            # PLAN: print exactly what it would run, change nothing
+./refresh.sh --run      # execute the plan
 ```
 
-This repository produces the two data products the site consumes (both
-gitignored):
+It is **safe by default**: with no flags it only prints the plan (every command,
+with the month ranges it computed from the manifest and what is on disk), because
+the model stage is hours of MPI and rebuilds the provisional tiers. Always look at
+the plan first. Useful flags: `--force` (rebuild preliminary+prediction even if the
+frontiers did not move), `--skip-data` (reuse `data/`), `MPI_RANKS=N` (bare-metal
+rank count, default 6; no SLURM here), `PRED_HORIZON=N` (forecast months).
 
-```
-Scripts/export_website_data.py   # data/*.dat.gz -> Website_data/*.csv (in-situ inputs)
-Scripts/build_website_data.sh    # Output/<YYYYMM>/OH/*.outs -> website_data/MSWIM2D_Data_New/ + coarse split
-```
+`refresh.sh` runs five stages in order; each is a thin wrapper over the scripts in
+`Production_Scripts/<stage>/`, which you can also run by hand.
 
-The deployed model-output dataset is **198501–202512**: Tim Keebler's reference
-run for months before 200407 and our own runs from 200407 on. See `AGENTS.md`
-("Operational Tim seam").
+**Stage 1: satellite data → manifest** (`data_download/update_satellite_data.sh`).
+Per source/year, re-pulls and rebuilds only what is missing/short/non-finite (up
+to today − 3 days), then writes **`data/DATA_MANIFEST.txt`**. Two records drive
+everything: `DATA_SAFE` (all active sources present → end of final) and
+`LAST_POSSIBLE` (furthest any source reaches → end of preliminary).
+`run_model/manifest_dates.sh` turns those into the run months.
 
-Inside `MSWIM2D-Web/`, those are staged under `MSWIM2D_Data_New/` and
-pre-chunked for the browser by `chunk_satellite_data.py` and `split_outs.py`.
-See `AGENTS.md` ("Website Pipeline") for the full flow.
+**Stage 2: model (the smart part).** Let `S`=DATA_SAFE month, `L`=LAST_POSSIBLE
+month, `F`/`P`=last final/preliminary month *with output* on disk. `refresh.sh`
+reruns only what each frontier invalidates:
+
+| Tier | Runs when | Range | Driver (`run_model/`) |
+|------|-----------|-------|------------------------|
+| Final | `S > F` | `F+1 .. S` | `RunAll_Step2_final.pl` (settled; never rebuilt over existing months) |
+| Preliminary | final reran → wipe + full re-run; else `L` moved → extend/trim | `S+1 .. L` | `RunAll_Preliminary.pl` (seeds from `Output_final/S`) |
+| Prediction | final or preliminary changed | `L+1 .. L+horizon` | `RunAll_Prediction.pl` (rebuilds `data_prediction/` via `make_prediction_tables.py`, seeds from `Output_preliminary/L`) |
+
+So `DATA_SAFE` and `LAST_POSSIBLE` moving independently each trigger only the
+work they invalidate. When final advances, the months it now covers are dropped
+from `Output_preliminary/` (the "remove promoted months" step) and the whole
+provisional tail re-runs from the new seed. Each driver is isolated (prediction
+reads `data_prediction/`, writes `Output_prediction/`, never touches the others).
+
+> One-time only (not done by `refresh.sh`): the cold-start spin-up that creates
+> `Output_final/` from scratch:
+> `perl Production_Scripts/run_model/RunAll_Step1.pl -s=199601 -e=200312` then
+> `RunAll_Step2_final.pl -s=200407 -e=<DATA_SAFE>`. `refresh.sh` refuses to run if
+> `Output_final/` is empty and points you here.
+
+**Stage 3: trajectory precompute** (`website_build/`). `make_traj.py` regenerates
+per-body trajectories out to the forecast horizon; **`make_maps.py`** rebuilds
+`month_outs.map` + `body_months.map` for this box (the committed maps had Great
+Lakes paths); then `run_month.sh` runs the Fortran `INTERP_OUTPUT.exe` once per
+month (fanned out with `xargs -P`, since there is no SLURM/GNU-parallel here) and
+`stitch.py` concatenates into `spice/chunks/`. This stage **skips with a notice if
+`INTERP_OUTPUT.exe` is absent** (set `INTERP_OUTPUT_EXE=...` or build it); the maps
+are still refreshed. `precompute.sbatch` is the SLURM equivalent for Great Lakes.
+
+**Stage 4: website products** (`website_build/build_website_data.sh all`).
+Flattens every tier's `.outs` into one `Output_flat/` (so `interpolate.php` never
+needs tier logic), builds the coarse field-movie grid (`split_outs.py`), writes
+**`products.json`** (`build_products_manifest.py`, the tier index the Data page
+reads), and refreshes the in-situ overlay CSVs (`export_website_data.py` +
+`chunk_satellite_data.py`).
+
+**Stage 5: deploy.** `rsync` of `website_data/MSWIM2D_Data_New/` (and the
+trajectory chunks) to herot, using `HEROT_AUTH` / `HEROT_DIR` from **`.env`** over
+the existing ssh key. On herot the docroot reaches it via one symlink, so nothing
+else is copied.
+
+---
+
+## 6. What the products feed
+
+- **Website (`MSWIM2D-Web/`).** Static pages plus `interpolate.php`, which runs
+  the Fortran `INTERPOLATE.exe` server-side on the raw monthly `.outs` to sample
+  any trajectory. The **Data** page is tier-aware (a timeline showing which of
+  final/preliminary/prediction your date window pulls from, with a warning before
+  fetching provisional/forecast data); **Model Info** describes the three
+  products; **Prediction** explains the persistence-forecast skill horizon.
+- **Python client (`CSEM-MSWIM2D/`, `pip install mswim2d`).** Pulls the same
+  static products and returns them as cached xarray Datasets:
+  ```python
+  import mswim2d
+  data = mswim2d.get_trajectory("Earth", "2015-01-01", "2015-02-01")
+  ```
+
+---
+
+## 7. Input data format (reference)
+
+All satellite lookup tables share one format: HGI vectors, hourly cadence, time
+in **seconds since 1965-01-01**, 4 header lines then whitespace rows. The
+manifest's `last_utc` is the last hour carrying non-fill plasma (the usable model
+input), which can be earlier than a record's raw span (e.g. mid-2025 STEREO-A:
+PLASTIC plasma ends 2025-06-30 while MAG keeps reporting). Full column layout and
+coordinate conventions are in `AGENTS.md`.
+
+---
+
+## 8. Going deeper
+
+- `AGENTS.md` / `CLAUDE.md` : file formats, coordinate conventions, the OMNI→MIDL
+  seam history, smoke-test recipes, and known-good output.
+- `Production_Scripts/run_model/manifest_dates.sh` : how run months are derived from the
+  manifest (regenerate the manifest to advance the runs).
+- Each script's header docstring documents its own usage and assumptions.
