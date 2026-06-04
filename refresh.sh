@@ -105,6 +105,13 @@ F=$(last_month Output_final); P=$(last_month Output_preliminary); D=$(last_month
 echo "manifest : DATA_SAFE=$S   LAST_POSSIBLE=$L"
 echo "on disk  : final<=${F:-none}   preliminary<=${P:-none}   prediction<=${D:-none}   (MPI ranks=$MPI_RANKS)"
 
+# Incremental floor for the website products (stages 3-4): only (re)trace and
+# (re)decimate months >= DATA_SAFE-1. Everything below is settled (final/Tim) and
+# already built in interp_out + snapshots_coarse, so it is reused as-is. This is the
+# moving window: one final-overlap month plus all of preliminary + prediction.
+MINMONTH=$(m_add "$S" -1)
+echo "products : MIN_MONTH=$MINMONTH (rebuild >= DATA_SAFE-1; reuse settled history below)"
+
 # ============================================================================
 log "STAGE 2  model"
 final_ran=0; prelim_ran=0
@@ -183,7 +190,9 @@ else
     do_ "export EXE=\"$INTERP_EXE\" TRAJDIR=\"$ROOT/spice/trajectories\" RESULTS=\"$ROOT/spice/interp_out\" OUTSMAP=\"$WB/month_outs.map\" BODYMAP=\"$WB/body_months.map\" WORKROOT=\"/tmp/traj_\$\$\""
     do_ "mkdir -p \"$ROOT/spice/interp_out\""
     # No SLURM / GNU parallel here -> fan months out with xargs -P (run_month.sh is env-driven).
-    do_ "cut -f1 \"$WB/month_outs.map\" | xargs -P \"$MPI_RANKS\" -I{} bash \"$WB/run_month.sh\" {}"
+    # Incremental: only (re)trace months >= MINMONTH (DATA_SAFE-1). Settled history keeps its
+    # existing interp_out/<body>/<YYYYMM>.dat, which stitch.py globs in regardless.
+    do_ "cut -f1 \"$WB/month_outs.map\" | awk -v m=\"$MINMONTH\" '\$1 >= m' | xargs -P \"$MPI_RANKS\" -I{} bash \"$WB/run_month.sh\" {}"
     do_ "\"$PY\" \"$WB/stitch.py\" --interp-out \"$ROOT/spice/interp_out\" --outs-map \"$WB/month_outs.map\" --out \"$ROOT/spice/chunks\""
   else
     echo "!! make_traj failed -> skipping precompute (would trace stale trajectories). Stages 4-5 still run."
@@ -192,7 +201,7 @@ fi
 
 # ============================================================================
 log "STAGE 4  website data products"
-do_ "SKIP_SATELLITE_DOWNLOAD=1 PYTHON=\"$PY\" \"$WB/build_website_data.sh\" all"   # flatten + coarse grid + products.json
+do_ "SKIP_SATELLITE_DOWNLOAD=1 MIN_MONTH=$MINMONTH PYTHON=\"$PY\" \"$WB/build_website_data.sh\" all"   # flatten + coarse grid + products.json (incremental: only >= DATA_SAFE-1; settled history reused, merged into the coarse manifest)
 # Overlay data: export the source CSVs and chunk them, BOTH pointed at the same
 # Satellite_Data/ inside the rsync'd tree, so fresh data flows export -> chunk ->
 # HEROT_DIR/Satellite_Data/chunks via the one main rsync below.
@@ -211,6 +220,11 @@ if [ -n "$HEROT_AUTH" ] && [ -n "$HEROT_DIR" ]; then
   # --delete above). Override the dest with HEROT_TRAJ_DIR if needed.
   TRAJ_DEST="${HEROT_TRAJ_DIR:-$(dirname "$HEROT_DIR")/precomputed_trajectories}"
   if [ -d "$ROOT/spice/chunks" ]; then
+    # stitch.py writes these with no other-read/exec; apache on herot is not in our
+    # group, so without this the Data page can't fetch the chunks and falls back to
+    # live server-side interpolation. Mirror Stage 4's o+rX on MSWIM2D_Data_New here
+    # (rsync -a preserves perms, so fixing the source ships readable perms).
+    do_ "chmod -R o+rX \"$ROOT/spice/chunks\""
     do_ "rsync -az --delete \"$ROOT/spice/chunks/\" \"$HEROT_AUTH:$TRAJ_DEST/chunks/\""
   fi
 else
