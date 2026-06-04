@@ -25,6 +25,9 @@ ROOT="${MSWIM2D_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SPLIT=$HERE/split_outs.py
 PRODUCTS=$HERE/build_products_manifest.py
+# Python for split_outs (numpy) + build_products_manifest. refresh.sh passes the
+# mswim2d_env interpreter via PYTHON; falls back to python3 for standalone use.
+PYBIN="${PYTHON:-python3}"
 # Everything the website needs lives under one dir; herot makes ONE symlink to it.
 DATA=$ROOT/website_data/MSWIM2D_Data_New
 
@@ -120,7 +123,7 @@ if [ "${PRUNE_STALE:-0}" = "1" ] && [ "$1" = "all" ]; then
   if [ "${#pruned[@]}" -gt 0 ]; then
     echo "Pruned ${#pruned[@]} stale month(s): ${pruned[*]}"
     # Drop the pruned months from the coarse manifest so the browser never fetches them.
-    MSWIM2D_PRUNED="${pruned[*]}" python3 - "$DATA/snapshots_coarse/manifest.json" <<'PY'
+    MSWIM2D_PRUNED="${pruned[*]}" "$PYBIN" - "$DATA/snapshots_coarse/manifest.json" <<'PY'
 import json, os, sys
 p = sys.argv[1]
 gone = set(os.environ.get('MSWIM2D_PRUNED', '').split())
@@ -155,13 +158,13 @@ if [ "${#built[@]}" -eq 0 ]; then
 fi
 
 echo "Flattened ${#built[@]} month(s). Building coarse grid..."
-MSWIM2D_DATA_NEW="$DATA" python3 "$SPLIT" --coarse-only "${built[@]}"
+MSWIM2D_DATA_NEW="$DATA" "$PYBIN" "$SPLIT" --coarse-only "${built[@]}"
 
 # Regenerate products.json - the confidence-tier index (final/preliminary/prediction
 # ranges + the two seam dates from data/DATA_MANIFEST.txt) the Data page reads. Written
 # before the chmod below so apache picks up the right perms. Non-fatal.
 echo "Writing products.json (output confidence tiers)..."
-python3 "$PRODUCTS" --root "$ROOT" --data-new "$DATA" \
+"$PYBIN" "$PRODUCTS" --root "$ROOT" --data-new "$DATA" \
   || echo "WARN: products.json generation failed; tier cards may be stale."
 
 # Model output is mode 0770; herot's apache reads/serves it over NFS so it needs

@@ -92,11 +92,20 @@ git clone https://github.com/SWMFsoftware/BATSRUS    # solver, in place
 The public website lives in its own repo; clone it into `MSWIM2D-Web/` if you
 are working on the site.
 
-**Python toolchains** (the satellite refresh uses two, by design):
-- `python3.8` (anaconda): Solar Orbiter + STEREO + Earth ephemeris (needs
-  `spiceypy`, `spacepy`).
-- `python3.12` (`/usr/bin/python3.12`): L1/MIDL builder.
-Override with `PY38=... PY312=...` if your interpreters live elsewhere.
+**Python toolchains.** Three, by design:
+- **`mswim2d_env/`** — the processing venv for the **website build + trajectory
+  precompute** (numpy, pandas, spiceypy). `refresh.sh` uses it for everything in
+  `website_build/`. Create it once (this box's SSL certs are broken for pip, and
+  spiceypy's sdist tries to fetch CSPICE, hence the flags):
+  ```
+  python3 -m venv mswim2d_env
+  mswim2d_env/bin/pip install --prefer-binary --only-binary=:all: \
+      --trusted-host pypi.org --trusted-host files.pythonhosted.org -r requirements.txt
+  ```
+  It's gitignored; deps are pinned in `requirements.txt`. Override with `MSWIM2D_PY=...`.
+- `python3.8` (anaconda) + `python3.12` (`/usr/bin/python3.12`) — used **only by the
+  satellite refresh** (`data_download/`): SolO/STEREO/ephemeris on 3.8 (spacepy),
+  L1/MIDL on 3.12. Override with `PY38=... PY312=...`.
 
 Then build + patch BATSRUS (see §4).
 

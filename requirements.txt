@@ -1,0 +1,12 @@
+# MSWIM2D processing environment (mswim2d_env) — trajectory precompute + website build.
+# This box has SSL-cert issues and spiceypy's sdist tries to fetch CSPICE, so install
+# from prebuilt wheels with the PyPI hosts trusted:
+#
+#   python3 -m venv mswim2d_env
+#   mswim2d_env/bin/pip install --prefer-binary --only-binary=:all: \
+#       --trusted-host pypi.org --trusted-host files.pythonhosted.org -r requirements.txt
+#
+# (data_download/ keeps its own interpreters: python3.8 anaconda + /usr/bin/python3.12.)
+numpy==1.24.4      # split_outs.py, stitch.py
+pandas==2.0.3      # export_website_data.py
+spiceypy==6.0.0    # make_traj.py / spice_traj.py  (manylinux wheel bundles CSPICE)

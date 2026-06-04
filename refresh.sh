@@ -47,6 +47,11 @@ DD="$PS/data_download"; RM="$PS/run_model"; WB="$PS/website_build"
 export MPI_RANKS="${MPI_RANKS:-6}"         # bare-metal MPI ranks; RunAll_*.pl read $MPI_RANKS
 PRED_HORIZON="${PRED_HORIZON:-12}"         # prediction-tier length in months
 INTERP_EXE="${INTERP_OUTPUT_EXE:-$ROOT/INTERP_OUTPUT.exe}"
+# Python for the website_build stage (needs numpy/pandas/spiceypy). The processing
+# venv mswim2d_env has them; fall back to python3 if it's missing. data_download/
+# keeps its own interpreters (python3.8 anaconda + /usr/bin/python3.12).
+PY="${MSWIM2D_PY:-$ROOT/mswim2d_env/bin/python}"
+[ -x "$PY" ] || PY=python3
 
 RUN=0; FORCE=0; SKIP_DATA=0
 for a in "$@"; do case "$a" in
@@ -64,6 +69,9 @@ log(){ printf '\n========== %s ==========\n' "$*"; }
 # the model/table stages, where building the website from a failed run is wrong.
 do_(){ echo "+ $*"; [ "$RUN" = 1 ] && { eval "$*" || echo "!! WARN (continuing): $*" >&2; }; return 0; }
 do_strict(){ echo "+ $*"; if [ "$RUN" = 1 ]; then eval "$*" || { echo "!! FAILED, aborting refresh: $*" >&2; exit 1; }; fi; }
+# Like do_ but RETURNS the command's exit status (0 in plan mode), so the caller
+# can branch on success — used to gate the precompute on make_traj succeeding.
+do_check(){ echo "+ $*"; if [ "$RUN" = 1 ]; then eval "$*"; return $?; fi; return 0; }
 
 # ---- helpers ----
 # last YYYYMM under $1 that actually has an OH/*.outs (an empty/restart-only dir
@@ -160,30 +168,37 @@ fi
 
 # ============================================================================
 log "STAGE 3  trajectory precompute"
-# Trajectories extend to cover the whole horizon; maps + traces regenerated for
-# this box (the committed map had Great Lakes paths).
+# Needs spiceypy (make_traj) + INTERP_OUTPUT.exe (the trace). If either is missing,
+# skip the WHOLE stage cleanly so the website build + deploy (stages 4-5) still run.
 traj_end=$(m_add "$(m_add "$L" "$PRED_HORIZON")" 1)         # first-of month after the last predicted month
-do_ "python3 \"$WB/make_traj.py\" --kernel-root \"$ROOT/spice\" --out \"$ROOT/spice/trajectories\" --model-end ${traj_end:0:4}-${traj_end:4:2}-01"
-do_ "python3 \"$WB/make_maps.py\""                          # rebuild month_outs.map + body_months.map
-if [ -x "$INTERP_EXE" ]; then
-  do_ "export EXE=\"$INTERP_EXE\" TRAJDIR=\"$ROOT/spice/trajectories\" RESULTS=\"$ROOT/spice/interp_out\" OUTSMAP=\"$WB/month_outs.map\" BODYMAP=\"$WB/body_months.map\" WORKROOT=\"/tmp/traj_\$\$\""
-  do_ "mkdir -p \"$ROOT/spice/interp_out\""
-  # No SLURM / GNU parallel here -> fan months out with xargs -P (run_month.sh is env-driven).
-  do_ "cut -f1 \"$WB/month_outs.map\" | xargs -P \"$MPI_RANKS\" -I{} bash \"$WB/run_month.sh\" {}"
-  do_ "python3 \"$WB/stitch.py\" --interp-out \"$ROOT/spice/interp_out\" --outs-map \"$WB/month_outs.map\" --out \"$ROOT/spice/chunks\""
+if ! "$PY" -c "import spiceypy" 2>/dev/null; then
+  echo "SKIP trajectory stage: $PY lacks spiceypy (build mswim2d_env from requirements.txt). Stages 4-5 still run."
+elif [ ! -x "$INTERP_EXE" ]; then
+  echo "SKIP trajectory stage: INTERP_OUTPUT.exe not at $INTERP_EXE (build it via the root Makefile). Stages 4-5 still run."
 else
-  echo "SKIP tracing: INTERP_OUTPUT.exe not at $INTERP_EXE (build/place it or set INTERP_OUTPUT_EXE). Maps were regenerated."
+  # make_traj MUST succeed (it extends trajectories to the new horizon); only then
+  # do we precompute, so we never trace against stale/short trajectories.
+  if do_check "\"$PY\" \"$WB/make_traj.py\" --kernel-root \"$ROOT/spice\" --out \"$ROOT/spice/trajectories\" --model-end ${traj_end:0:4}-${traj_end:4:2}-01"; then
+    do_ "\"$PY\" \"$WB/make_maps.py\""                       # rebuild month_outs.map + body_months.map
+    do_ "export EXE=\"$INTERP_EXE\" TRAJDIR=\"$ROOT/spice/trajectories\" RESULTS=\"$ROOT/spice/interp_out\" OUTSMAP=\"$WB/month_outs.map\" BODYMAP=\"$WB/body_months.map\" WORKROOT=\"/tmp/traj_\$\$\""
+    do_ "mkdir -p \"$ROOT/spice/interp_out\""
+    # No SLURM / GNU parallel here -> fan months out with xargs -P (run_month.sh is env-driven).
+    do_ "cut -f1 \"$WB/month_outs.map\" | xargs -P \"$MPI_RANKS\" -I{} bash \"$WB/run_month.sh\" {}"
+    do_ "\"$PY\" \"$WB/stitch.py\" --interp-out \"$ROOT/spice/interp_out\" --outs-map \"$WB/month_outs.map\" --out \"$ROOT/spice/chunks\""
+  else
+    echo "!! make_traj failed -> skipping precompute (would trace stale trajectories). Stages 4-5 still run."
+  fi
 fi
 
 # ============================================================================
 log "STAGE 4  website data products"
-do_ "SKIP_SATELLITE_DOWNLOAD=1 \"$WB/build_website_data.sh\" all"   # flatten + coarse grid + products.json
+do_ "SKIP_SATELLITE_DOWNLOAD=1 PYTHON=\"$PY\" \"$WB/build_website_data.sh\" all"   # flatten + coarse grid + products.json
 # Overlay data: export the source CSVs and chunk them, BOTH pointed at the same
 # Satellite_Data/ inside the rsync'd tree, so fresh data flows export -> chunk ->
 # HEROT_DIR/Satellite_Data/chunks via the one main rsync below.
 SATDIR="$ROOT/website_data/MSWIM2D_Data_New/Satellite_Data"
-do_ "python3 \"$WB/export_website_data.py\" --out-dir \"$SATDIR\""
-do_ "python3 \"$WB/chunk_satellite_data.py\" --data-new \"$ROOT/website_data/MSWIM2D_Data_New\""
+do_ "\"$PY\" \"$WB/export_website_data.py\" --out-dir \"$SATDIR\""
+do_ "\"$PY\" \"$WB/chunk_satellite_data.py\" --data-new \"$ROOT/website_data/MSWIM2D_Data_New\""
 
 # ============================================================================
 log "STAGE 5  rsync -> herot"

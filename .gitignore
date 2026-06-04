@@ -3,11 +3,11 @@
 *.out
 *.outs
 *.dat
-*.txt
 *.in
 *.exe
 *.o
 .env
+*.log
 
 BATSRUS/
 data/
@@ -24,3 +24,6 @@ MSWIM2D-Web/
 analysis/
 spice/
 !spice/*.py
+
+# Python processing venv (deps pinned in requirements.txt)
+mswim2d_env/
