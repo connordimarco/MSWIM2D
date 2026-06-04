@@ -21,6 +21,7 @@ CLAUDE.md
 
 website_data/
 MSWIM2D-Web/
+MIDL-Web/
 analysis/
 spice/
 !spice/*.py
