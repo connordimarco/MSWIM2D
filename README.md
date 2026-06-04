@@ -224,7 +224,8 @@ and merged into the existing coarse manifest (force a deeper rebuild with
 and the trajectory chunks (`spice/chunks/`) → the sibling
 `/homedata/MSWIM2D/precomputed_trajectories/chunks/`, using `HEROT_AUTH` /
 `HEROT_DIR` from **`.env`** over the existing ssh key. The served site is
-`/homedata/MSWIM2D` (public URL `https://csem.engin.umich.edu/MSWIM2D.dev/`);
+`/homedata/MSWIM2D` (public URL `https://csem.engin.umich.edu/MSWIM2D/`; the
+legacy V1 site now lives at `https://csem.engin.umich.edu/MSWIM2D.V1/`);
 `MSWIM2D_Data_New` is served straight off `/data` over NFS via a symlink.
 **Everything served must be `o+rX`** — apache is not in the `cdimarco` group, so
 group-only files 403 and the Data page falls back to live interpolation; Stage 5
