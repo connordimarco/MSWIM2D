@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use MSWIM2D, please cite the model paper below."
+title: "MSWIM2D: Michigan Solar Wind Model in 2D"
+type: software
+authors:
+  - family-names: Keebler
+    given-names: Timothy B.
+    affiliation: University of Michigan
+  - family-names: "Tóth"
+    given-names: "Gábor"
+    affiliation: University of Michigan
+  - family-names: DiMarco
+    given-names: Connor C.
+    orcid: https://orcid.org/0000-0003-0706-4309
+    affiliation: University of Michigan
+url: "https://csem.engin.umich.edu/MSWIM2D/"
+repository-code: https://github.com/connordimarco/MSWIM2D
+license: MIT
+preferred-citation:
+  type: article
+  title: "MSWIM2D: Two-Dimensional Outer Heliosphere Solar Wind Modeling"
+  authors:
+    - family-names: Keebler
+      given-names: Timothy B.
+    - family-names: "Tóth"
+      given-names: "Gábor"
+    - family-names: Zieger
+      given-names: Bertalan
+    - family-names: Opher
+      given-names: Merav
+  year: 2022
+  journal: "The Astrophysical Journal Supplement Series"
+  volume: 260
+  notes: "Update doi/url with the published MSWIM2D reference before release."

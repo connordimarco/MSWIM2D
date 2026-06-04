@@ -16,6 +16,12 @@ planet/spacecraft orbit, 1996 to the present (with a forecast tail).
 This README takes you from a fresh checkout to **running the whole system end to
 end**.
 
+**Links:** [Website & interactive tool](https://csem.engin.umich.edu/MSWIM2D/) ·
+Python client [`mswim2d`](https://github.com/connordimarco/CSEM-MSWIM2D)
+(`pip install mswim2d`) · L1 input dataset
+[MIDL](https://csem.engin.umich.edu/MIDL/)
+([code](https://github.com/connordimarco/MIDL-Pipeline))
+
 ---
 
 ## 1. The big picture
