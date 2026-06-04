@@ -14,8 +14,7 @@ self-consistent picture of plasma + field across every longitude and every
 planet/spacecraft orbit, 1996 to the present (with a forecast tail).
 
 This README takes you from a fresh checkout to **running the whole system end to
-end**. For the deepest internals (file formats, coordinate conventions,
-debugging recipes) see `AGENTS.md`/`CLAUDE.md`.
+end**.
 
 ---
 
@@ -221,22 +220,3 @@ else is copied.
   ```
 
 ---
-
-## 7. Input data format (reference)
-
-All satellite lookup tables share one format: HGI vectors, hourly cadence, time
-in **seconds since 1965-01-01**, 4 header lines then whitespace rows. The
-manifest's `last_utc` is the last hour carrying non-fill plasma (the usable model
-input), which can be earlier than a record's raw span (e.g. mid-2025 STEREO-A:
-PLASTIC plasma ends 2025-06-30 while MAG keeps reporting). Full column layout and
-coordinate conventions are in `AGENTS.md`.
-
----
-
-## 8. Going deeper
-
-- `AGENTS.md` / `CLAUDE.md` : file formats, coordinate conventions, the OMNI→MIDL
-  seam history, smoke-test recipes, and known-good output.
-- `Production_Scripts/run_model/manifest_dates.sh` : how run months are derived from the
-  manifest (regenerate the manifest to advance the runs).
-- Each script's header docstring documents its own usage and assumptions.
