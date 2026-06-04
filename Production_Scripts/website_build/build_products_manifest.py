@@ -175,12 +175,12 @@ def build(data_new, manifest_path, root):
             'start': ms[0] if ms else None,
             'end':   ms[-1] if ms else None,
             'months': len(ms),
-            'limited_by': limited_by[t],
+            'limited_by': limited_by[t] if ms else None,   # no constraint to report on an empty tier
             'note': TIER_NOTE[t],
         }
 
     return {
-        'generated': dt.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
+        'generated': dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
         'mode': mode,
         'boundaries': {'data_safe': safe_iso, 'last_possible': last_iso},
         'tiers': tiers,

@@ -85,8 +85,9 @@ def convert_row(row, propagated):
 def main():
     import argparse
     ap = argparse.ArgumentParser(description='Chunk in-situ satellite CSVs into per-year files for the website.')
-    ap.add_argument('--data-new', default=os.path.join(BASE, 'MSWIM2D_Data_New'),
-                    help='MSWIM2D_Data_New dir holding Satellite_Data/ (default: beside this script)')
+    ap.add_argument('--data-new',
+                    default=os.path.join(os.path.dirname(os.path.dirname(BASE)), 'website_data', 'MSWIM2D_Data_New'),
+                    help='MSWIM2D_Data_New dir holding Satellite_Data/ (default: <repo>/website_data/MSWIM2D_Data_New)')
     a = ap.parse_args()
     global SRC_DIR, OUT_DIR
     SRC_DIR = os.path.join(a.data_new, 'Satellite_Data')

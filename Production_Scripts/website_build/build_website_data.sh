@@ -96,6 +96,43 @@ fi
 
 mkdir -p "$DATA/Output_flat" "$DATA/snapshots_coarse"
 
+# Opt-in prune of stale months (PRUNE_STALE=1, only on `all`): remove Output_flat
+# .outs and snapshots_coarse dirs for months no longer owned by any source tree
+# (or Tim's pre-MIN_MONTH reference set). Kept OPT-IN and `all`-only on purpose:
+# during a partial rsync of the tier trees, the "valid" set is incomplete, and an
+# automatic prune would delete the only copy of months whose tree hasn't landed yet.
+if [ "${PRUNE_STALE:-0}" = "1" ] && [ "$1" = "all" ]; then
+  declare -A valid
+  for ym in "${!path_of[@]}"; do valid[$ym]=1; done            # tier-tree months
+  for f in "$ROOT"/Tim_MSWIM2D_1hr/*.outs; do                   # Tim reference (< MIN_MONTH)
+    [ -e "$f" ] || continue
+    m=$(basename "$f"); m=${m##*_}; m=${m%.outs}
+    [[ "$m" =~ ^[0-9]{6}$ ]] && [ "$m" -lt "$MIN_MONTH" ] && valid[$m]=1
+  done
+  pruned=()
+  for f in "$DATA"/Output_flat/*.outs; do
+    [ -e "$f" ] || continue
+    if [[ "$(basename "$f")" =~ _e([0-9]{4})([0-9]{2}) ]]; then
+      m="${BASH_REMATCH[1]}${BASH_REMATCH[2]}"
+      if [ -z "${valid[$m]:-}" ]; then rm -f "$f"; rm -rf "$DATA/snapshots_coarse/$m"; pruned+=("$m"); fi
+    fi
+  done
+  if [ "${#pruned[@]}" -gt 0 ]; then
+    echo "Pruned ${#pruned[@]} stale month(s): ${pruned[*]}"
+    # Drop the pruned months from the coarse manifest so the browser never fetches them.
+    MSWIM2D_PRUNED="${pruned[*]}" python3 - "$DATA/snapshots_coarse/manifest.json" <<'PY'
+import json, os, sys
+p = sys.argv[1]
+gone = set(os.environ.get('MSWIM2D_PRUNED', '').split())
+if os.path.exists(p):
+    d = json.load(open(p))
+    for m in gone:
+        d.get('months', {}).pop(m, None)
+    json.dump(d, open(p, 'w'))
+PY
+  fi
+fi
+
 built=()
 for ym in "${months[@]}"; do
   if [[ "$ym" =~ ^[0-9]{6}$ ]] && [ "$ym" -lt "$MIN_MONTH" ]; then
@@ -143,4 +180,10 @@ Everything the website needs is under: $DATA
 herot serves it all via ONE symlink (no data copied - read over NFS):
   ln -sfn /nfs/tuija/cdimarco/MSWIM2D/website_data/MSWIM2D_Data_New \\
           /homedata/MSWIM2D/MSWIM2D_Data_New
+
+The precomputed trajectory traces (the Data page's TRAJ_BASE='precomputed_trajectories/chunks/')
+are served from a SIBLING dir, deployed by refresh.sh stage 5. It also needs a one-time
+docroot symlink on herot, e.g.:
+  ln -sfn /homedata/MSWIM2D/precomputed_trajectories \\
+          /var/www/html/MSWIM2D/precomputed_trajectories
 EOF

@@ -93,9 +93,10 @@ def export_solo():
 def main():
     import argparse
     ap = argparse.ArgumentParser(description='Export in-situ satellite .dat.gz tables to per-source CSVs.')
-    ap.add_argument('--out-dir', default=OUT_DIR,
-                    help='where to write l1.csv etc. (default: <repo>/Website_data). '
-                         'Point at MSWIM2D_Data_New/Satellite_Data so chunk_satellite_data.py reads them.')
+    ap.add_argument('--out-dir',
+                    default=os.path.join(MSWIM2D_DIR, 'website_data', 'MSWIM2D_Data_New', 'Satellite_Data'),
+                    help='where to write l1.csv etc. (default: <repo>/website_data/MSWIM2D_Data_New/Satellite_Data, '
+                         'the dir chunk_satellite_data.py reads).')
     a = ap.parse_args()
     global OUT_DIR
     OUT_DIR = a.out_dir

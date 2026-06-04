@@ -172,7 +172,7 @@ foreach my $month_string (@months_to_run)
     # Select correct data files.
     my $StereoA = ($year >= 2007 and $year <= 2025);
     my $StereoB = ($year >= 2007 and $year <= 2014);
-    my $SolarOrbiter = ($year >= 2020 and $year <= 2025);
+    my $SolarOrbiter = ($year >= 2020 and $year <= 2025);   # 2026 SolO is ~1 day only -> not assimilated (intentional)
     
     # Unzip the data. Step 2 drives with MIDL (data/L1, 1998-2025), continuing
     # from the OMNI-built restart produced by RunAll_Step1.pl (end of Feb 1998).

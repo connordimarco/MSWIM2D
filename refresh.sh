@@ -59,8 +59,11 @@ esac; done
 
 log(){ printf '\n========== %s ==========\n' "$*"; }
 # Echo every command; execute only under --run. eval runs in this shell, so
-# `export`s in one do_ persist into later ones.
-do_(){ echo "+ $*"; [ "$RUN" = 1 ] && eval "$*"; return 0; }
+# `export`s in one do_ persist into later ones. do_ is non-fatal (failures are
+# logged but the pipeline continues); do_strict ABORTS on failure and is used for
+# the model/table stages, where building the website from a failed run is wrong.
+do_(){ echo "+ $*"; [ "$RUN" = 1 ] && { eval "$*" || echo "!! WARN (continuing): $*" >&2; }; return 0; }
+do_strict(){ echo "+ $*"; if [ "$RUN" = 1 ]; then eval "$*" || { echo "!! FAILED, aborting refresh: $*" >&2; exit 1; }; fi; }
 
 # ---- helpers ----
 # last YYYYMM under $1 that actually has an OH/*.outs (an empty/restart-only dir
@@ -106,7 +109,7 @@ if [ -z "$F" ]; then
   echo "   Aborting (run those once, then re-run refresh.sh)."
   exit 1
 elif [[ "$S" > "$F" ]]; then
-  do_ "perl \"$RM/RunAll_Step2_final.pl\" -s=$(m_add "$F" 1) -e=$S"
+  do_strict "perl \"$RM/RunAll_Step2_final.pl\" -s=$(m_add "$F" 1) -e=$S"
   final_ran=1
 else
   echo "final       : current (frontier $F, DATA_SAFE $S)"
@@ -117,7 +120,7 @@ if [ "$final_ran" = 1 ] || [ "$FORCE" = 1 ]; then
   if [[ "$L" > "$S" ]]; then
     echo "preliminary : final frontier moved -> full re-run S+1..L (drops promoted months)"
     do_ "rm -rf Output_preliminary/[0-9][0-9][0-9][0-9][0-9][0-9]"
-    do_ "perl \"$RM/RunAll_Preliminary.pl\" -s=$AS -e=$L"
+    do_strict "perl \"$RM/RunAll_Preliminary.pl\" -s=$AS -e=$L"
     prelim_ran=1
   else
     echo "preliminary : empty range (LAST_POSSIBLE $L <= DATA_SAFE $S); clearing"
@@ -125,11 +128,11 @@ if [ "$final_ran" = 1 ] || [ "$FORCE" = 1 ]; then
   fi
 elif [ -z "$P" ] && [[ "$L" > "$S" ]]; then
   echo "preliminary : none on disk -> build S+1..L"
-  do_ "perl \"$RM/RunAll_Preliminary.pl\" -s=$AS -e=$L"
+  do_strict "perl \"$RM/RunAll_Preliminary.pl\" -s=$AS -e=$L"
   prelim_ran=1
 elif [ -n "$P" ] && [[ "$L" > "$P" ]]; then
   echo "preliminary : extend $(m_add "$P" 1)..L"
-  do_ "perl \"$RM/RunAll_Preliminary.pl\" -s=$(m_add "$P" 1) -e=$L"
+  do_strict "perl \"$RM/RunAll_Preliminary.pl\" -s=$(m_add "$P" 1) -e=$L"
   prelim_ran=1
 elif [ -n "$P" ] && [[ "$P" > "$L" ]]; then
   echo "preliminary : frontier retreated -> trim months past $L"
@@ -140,12 +143,17 @@ else
 fi
 
 # ---- PREDICTION (anchored at the frontier; seeds from the preliminary restart) ----
-if [ "$final_ran" = 1 ] || [ "$prelim_ran" = 1 ] || [ "$FORCE" = 1 ] || [ -z "$D" ]; then
+# Prediction seeds month L read-only from Output_preliminary/L, so it can only run
+# when a preliminary tier exists, i.e. L > S. If L <= S there is no provisional tail
+# to seed from and we skip (rather than die on a missing/wiped seed restart).
+if ! [[ "$L" > "$S" ]]; then
+  echo "prediction  : skipped (no provisional tier to seed from; LAST_POSSIBLE $L <= DATA_SAFE $S)"
+elif [ "$final_ran" = 1 ] || [ "$prelim_ran" = 1 ] || [ "$FORCE" = 1 ] || [ -z "$D" ]; then
   ps=$(m_add "$L" 1); pe=$(m_add "$L" "$PRED_HORIZON")
   echo "prediction  : rebuild $ps..$pe (horizon ${PRED_HORIZON}mo)"
-  do_ "python3 \"$RM/make_prediction_tables.py\" --out-dir data_prediction --months $PRED_HORIZON"   # -> data_prediction/ (anchored at L)
+  do_strict "python3 \"$RM/make_prediction_tables.py\" --out-dir data_prediction --months $PRED_HORIZON"   # -> data_prediction/ (anchored at L)
   do_ "rm -rf Output_prediction/[0-9][0-9][0-9][0-9][0-9][0-9]"
-  do_ "perl \"$RM/RunAll_Prediction.pl\" -s=$ps -e=$pe"
+  do_strict "perl \"$RM/RunAll_Prediction.pl\" -s=$ps -e=$pe"
 else
   echo "prediction  : current"
 fi
