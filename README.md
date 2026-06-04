@@ -158,6 +158,13 @@ the plan first. Useful flags: `--force` (rebuild preliminary+prediction even if 
 frontiers did not move), `--skip-data` (reuse `data/`), `MPI_RANKS=N` (bare-metal
 rank count, default 6; no SLURM here), `PRED_HORIZON=N` (forecast months).
 
+**Automation + email.** In production this refresh is run for you by the
+workspace-level orchestrator `../monthly_refresh.sh` (cron, 1st of month 00:01),
+which calls `./refresh.sh --run` and then MIDL's refresh, emailing a stats summary
+after each (MSWIM2D's email renders the `products.json` tier table). `refresh.sh`
+itself sends no email; running it by hand notifies no one. See the workspace root
+`../CLAUDE.md` for the orchestrator + shared notifier (`../notify/`, `../.env`).
+
 `refresh.sh` runs five stages in order; each is a thin wrapper over the scripts in
 `Production_Scripts/<stage>/`, which you can also run by hand.
 
@@ -195,21 +202,33 @@ per-body trajectories out to the forecast horizon; **`make_maps.py`** rebuilds
 `month_outs.map` + `body_months.map` for this box (the committed maps had Great
 Lakes paths); then `run_month.sh` runs the Fortran `INTERP_OUTPUT.exe` once per
 month (fanned out with `xargs -P`, since there is no SLURM/GNU-parallel here) and
-`stitch.py` concatenates into `spice/chunks/`. This stage **skips with a notice if
-`INTERP_OUTPUT.exe` is absent** (set `INTERP_OUTPUT_EXE=...` or build it); the maps
-are still refreshed. `precompute.sbatch` is the SLURM equivalent for Great Lakes.
+`stitch.py` concatenates into `spice/chunks/`. **Incremental:** `refresh.sh` only
+feeds months `>= MIN_MONTH` (= `DATA_SAFE - 1`) to the precompute, so a routine
+update re-traces just the moving window (~23 months: final-overlap + preliminary +
+prediction) and `stitch.py` reuses the settled `interp_out` history — ~20 min vs
+~hours for all 507. This stage **skips with a notice if `INTERP_OUTPUT.exe` is
+absent** (set `INTERP_OUTPUT_EXE=...` or build it); the maps are still refreshed.
+`precompute.sbatch` is the SLURM equivalent for Great Lakes.
 
 **Stage 4: website products** (`website_build/build_website_data.sh all`).
 Flattens every tier's `.outs` into one `Output_flat/` (so `interpolate.php` never
 needs tier logic), builds the coarse field-movie grid (`split_outs.py`), writes
 **`products.json`** (`build_products_manifest.py`, the tier index the Data page
 reads), and refreshes the in-situ overlay CSVs (`export_website_data.py` +
-`chunk_satellite_data.py`).
+`chunk_satellite_data.py`). Also incremental: `refresh.sh` passes the same
+`MIN_MONTH=DATA_SAFE-1`, so only the moving window is re-flattened/re-decimated
+and merged into the existing coarse manifest (force a deeper rebuild with
+`MIN_MONTH=0`; required if you change the coarse grid — see "Website Pipeline").
 
-**Stage 5: deploy.** `rsync` of `website_data/MSWIM2D_Data_New/` (and the
-trajectory chunks) to herot, using `HEROT_AUTH` / `HEROT_DIR` from **`.env`** over
-the existing ssh key. On herot the docroot reaches it via one symlink, so nothing
-else is copied.
+**Stage 5: deploy.** `rsync` of `website_data/MSWIM2D_Data_New/` → `$HEROT_DIR`
+and the trajectory chunks (`spice/chunks/`) → the sibling
+`/homedata/MSWIM2D/precomputed_trajectories/chunks/`, using `HEROT_AUTH` /
+`HEROT_DIR` from **`.env`** over the existing ssh key. The served site is
+`/homedata/MSWIM2D` (public URL `https://csem.engin.umich.edu/MSWIM2D.dev/`);
+`MSWIM2D_Data_New` is served straight off `/data` over NFS via a symlink.
+**Everything served must be `o+rX`** — apache is not in the `cdimarco` group, so
+group-only files 403 and the Data page falls back to live interpolation; Stage 5
+`chmod -R o+rX`s the chunks before rsync (the website tree is handled in Stage 4).
 
 ---
 
