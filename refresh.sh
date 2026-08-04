@@ -45,6 +45,16 @@ DD="$PS/data_download"; RM="$PS/run_model"; WB="$PS/website_build"
 
 # ---- config ----
 export MPI_RANKS="${MPI_RANKS:-6}"         # bare-metal MPI ranks; RunAll_*.pl read $MPI_RANKS
+# The model stage calls a bare `mpiexec`, but the drivers don't check it exists —
+# a missing MPI module "completes" each month with no output. Self-provision the
+# system OpenMPI (same paths monthly_refresh.sh exports for cron) and hard-fail
+# if mpiexec still can't be found.
+if ! command -v mpiexec >/dev/null 2>&1; then
+  export PATH="/usr/lib64/openmpi/bin:$PATH"
+  export LD_LIBRARY_PATH="/usr/lib64/openmpi/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+fi
+command -v mpiexec >/dev/null 2>&1 \
+  || { echo "!! mpiexec not found (module load mpi/openmpi-x86_64); aborting before the model stage can half-run." >&2; exit 1; }
 PRED_HORIZON="${PRED_HORIZON:-12}"         # prediction-tier length in months
 INTERP_EXE="${INTERP_OUTPUT_EXE:-$ROOT/INTERP_OUTPUT.exe}"
 # Python for the website_build stage (needs numpy/pandas/spiceypy). The processing

@@ -78,7 +78,6 @@ lands. See `Production_Scripts/run_model/manifest_dates.sh`.
 | `data_prediction/` | Persistence-forecast input tables for the prediction tier (built by `make_prediction_tables.py`). |
 | `Output_final/`, `Output_preliminary/`, `Output_prediction/` | The three model-output tiers. Per month: `<YYYYMM>/OH/*.outs` + `PARAM.in` + `RESTART/` + `runlog`. (Legacy single `Output/` predates the tier split.) |
 | `Production_Scripts/` | **The operational pipeline**, in three stage folders: `data_download/` (satellite refresh + manifest), `run_model/` (the `RunAll_*.pl` tier drivers + `manifest_dates.sh`), `website_build/` (products + trajectory precompute + the map generator). `refresh.sh` drives them in order. |
-| `Scripts/` | Untracked scratch / superseded one-offs (gitignored). Not operational. |
 | `spice/` | Trajectory data tree: `trajectories/` (per-body `.dat`), `interp_out/` (raw precompute), `chunks/` (stitched per-body/year), `SpiceKernels/`. |
 | `website_data/MSWIM2D_Data_New/` | What the website serves: `Output_flat/` (all tiers' raw `.outs`, hard-linked), `snapshots_coarse/` (decimated field-movie grid), `products.json` (tier index), `Satellite_Data/`. |
 | `MSWIM2D-Web/` | The public website (separate git repo, gitignored here). Static pages + `interpolate.php` server-side interpolation. |

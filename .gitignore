@@ -23,8 +23,20 @@ website_data/
 MSWIM2D-Web/
 MIDL-Web/
 analysis/
+MSWIM2D-Paper
 spice/
 !spice/*.py
+poster/
+
+# generated monthly by make_prediction_tables.py
+data_prediction/
+
+# poster theme donor (binary asset)
+midl_poster_portrait.pptx
 
 # Python processing venv (deps pinned in requirements.txt)
 mswim2d_env/
+
+# generated each refresh by make_maps.py (Stage 3) from the Output trees
+Production_Scripts/website_build/month_outs.map
+Production_Scripts/website_build/body_months.map

@@ -51,12 +51,16 @@ def source_config(frontier_year):
     """Sources to try, gated by the satellite windows at the frontier year. A
     source with no real data in the block window is dropped by the coverage check."""
     cfg = [("L1", l1_dir(frontier_year), "l1")]
-    if 2007 <= frontier_year <= 2025:
-        cfg.append(("STEREOA", "data/STEREOA", "STEREOA"))
-    if 2007 <= frontier_year <= 2014:
-        cfg.append(("STEREOB", "data/STEREOB", "STEREOB"))
-    if 2022 <= frontier_year <= 2026:
-        cfg.append(("SolarOrbiter", "data/SolarOrbiter", "SolarOrbiter"))
+    for name, sub, prefix in (("STEREOA", "data/STEREOA", "STEREOA"),
+                              ("STEREOB", "data/STEREOB", "STEREOB"),
+                              ("SolarOrbiter", "data/SolarOrbiter",
+                               "SolarOrbiter")):
+        # gate on lookup-table existence (the satellite refresh only writes
+        # years with usable plasma), like the RunAll drivers — hard-coded
+        # year caps here silently emptied the 2026+ prediction tables
+        if any(os.path.exists(os.path.join(REPO, sub, f"{prefix}_{y}.dat.gz"))
+               for y in (frontier_year, frontier_year - 1)):
+            cfg.append((name, sub, prefix))
     return cfg
 
 
@@ -72,9 +76,8 @@ def recurrence_block(subdir, prefix, frontier_sec, block_hours):
     where merged maps hour-index 0..block_hours-1 -> split row; start is the time of
     index 0 and (start + block_hours*3600) == frontier_sec + 3600."""
     frontier_excl = frontier_sec + SEC_PER_HR          # one hour past the last data hour
-    start = frontier_excl - block_hours * SEC_PER_HR
     fyear = (EPOCH1965 + dt.timedelta(seconds=frontier_sec)).year
-    head, merged = None, {}
+    head, allrows = None, {}
     for yy in (fyear - 1, fyear):
         p = os.path.join(REPO, subdir, f"{prefix}_{yy}.dat.gz")
         if not os.path.exists(p):
@@ -83,8 +86,18 @@ def recurrence_block(subdir, prefix, frontier_sec, block_hours):
         head = head or h
         for r in rows:
             t = float(r.split()[0])
-            if start <= t < frontier_excl:
-                merged[int(round((t - start) / SEC_PER_HR))] = r.split()
+            if t < frontier_excl:
+                allrows[t] = r.split()
+    if not allrows:
+        return None, {}, 0
+    # Anchor at this source's own last data hour, not the global frontier: a
+    # source whose data ends earlier (e.g. L1 ending 03-28 at an 04-30
+    # STEREO-A frontier) still yields a valid persistence block, with its
+    # real-time corotation phase preserved by the (t - start) % block tiling.
+    anchor_excl = min(frontier_excl, max(allrows) + SEC_PER_HR)
+    start = anchor_excl - block_hours * SEC_PER_HR
+    merged = {int(round((t - start) / SEC_PER_HR)): row
+              for t, row in allrows.items() if start <= t}
     return head, merged, start
 
 
@@ -166,16 +179,19 @@ def build_source(name, subdir, prefix, frontier_sec, year, block_hours,
     out_rows = [" ".join(f) for f in fields]
     src_lbl = ("OMNI" if subdir.endswith("L1-old") else
                "MIDL" if subdir.endswith("/L1") else name)
-    fiso = (EPOCH1965 + dt.timedelta(seconds=frontier_sec)).isoformat()
+    anchor_excl = start + block_hours * SEC_PER_HR
+    lag_h = (frontier_sec + SEC_PER_HR - anchor_excl) / SEC_PER_HR
+    aiso = (EPOCH1965 + dt.timedelta(seconds=anchor_excl - SEC_PER_HR)).isoformat()
     desc = (f"{name} ({src_lbl}) PERSISTENCE prediction Y={year}: last {block_hours} h "
-            f"ending {fiso} (~{block_hours/24:.2f} d) repeated, satphi=tile, "
-            f"seam-smooth={smooth_hours}h")
+            f"ending {aiso} (~{block_hours/24:.2f} d) repeated, satphi=tile, "
+            f"seam-smooth={smooth_hours}h, anchor-lag={lag_h:.0f}h behind frontier")
     os.makedirs(os.path.join(outdir, name), exist_ok=True)
     out = os.path.join(outdir, name, f"{prefix}_{year}.dat.gz")
     with gzip.open(out, "wt") as f:
         f.write("\n".join([desc, head[1], str(len(out_rows)), head[3]]) + "\n")
         f.write("\n".join(out_rows) + "\n")
-    print(f"  {name:13s}: {src_lbl:4s} -> {out}  rows={len(out_rows)} seams={n_seams}{gapnote}")
+    lagnote = f" anchor-lag={lag_h/24:.1f}d" if lag_h > SEC_PER_HR / 3600 else ""
+    print(f"  {name:13s}: {src_lbl:4s} -> {out}  rows={len(out_rows)} seams={n_seams}{gapnote}{lagnote}")
     return True
 
 

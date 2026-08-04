@@ -38,7 +38,7 @@ ROOT="${MSWIM2D_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT"
 
-PY38="${PY38:-python3.8}"             # SolO + STEREO (anaconda)
+PY38="${PY38:-/opt/anaconda3/bin/python3.8}" # SolO + STEREO (anaconda; absolute so cron's minimal PATH can't pick the numpy-less /usr/bin/python3.8)
 PY312="${PY312:-/usr/bin/python3.12}" # L1 / midl
 STATUS="$HERE/satellite_data_status.py"
 

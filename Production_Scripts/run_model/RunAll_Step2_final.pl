@@ -42,7 +42,7 @@ my $gitclone = './BATSRUS/share/Scripts/gitclone -s';
 # per-job tmpfs namespace on fast local XFS, so the ~6700 small per-PE plot
 # pieces/month and PostProc's merge avoid /nfs/turbo's NFS small-file latency
 # (which was ~2/3 of each month's wall time). Output/ stays on the shared FS.
-my $local_scratch = $ENV{SLURM_JOB_ID} ? "/tmp" : "/tmp/mswim_$$";
+my $local_scratch = $ENV{SLURM_JOB_ID} ? "/tmp" : "/data/tuija/cdimarco/tmp/mswim_$$";
 my $rundir = "$local_scratch/run";
 my $localout = "$local_scratch/Output";   # node-local PostProc target (same FS as $rundir)
 my $output = "./$out_subdir";             # relative label (messages, cleanup from PWD)
@@ -153,10 +153,12 @@ foreach my $month_string (@months_to_run)
 	qx(cp $outroot/$restart_date/RESTART/OH/data.rst $rundir/restartIN/);
     }
     
-    # Select correct data files.
-    my $StereoA = ($year >= 2007 and $year <= 2025);
-    my $StereoB = ($year >= 2007 and $year <= 2014);
-    my $SolarOrbiter = ($year >= 2020 and $year <= 2025);   # 2026 SolO is ~1 day only -> not assimilated (intentional)
+    # Select data files by existence, like RunAll_Prediction.pl: the satellite
+    # refresh only writes a year's lookup table when it has usable plasma, and
+    # manifest_dates.sh advances the tier ranges on the same files.
+    my $StereoA = (-e "data/STEREOA/STEREOA_$year.dat.gz");
+    my $StereoB = (-e "data/STEREOB/STEREOB_$year.dat.gz");
+    my $SolarOrbiter = (-e "data/SolarOrbiter/SolarOrbiter_$year.dat.gz");
     
     # Unzip the data. Step 2 drives with MIDL (data/L1, 1998-2025), continuing
     # from the OMNI-built restart produced by RunAll_Step1.pl (end of Feb 1998).
@@ -223,6 +225,8 @@ ascii         TypeFile
     my $tmpdir = "$local_scratch/tmp";
     qx(mkdir -p $tmpdir);
     qx(cd $rundir; TMPDIR=$tmpdir nice -n 10 mpiexec -n $np ./BATSRUS.exe > runlog);
+    die "BATSRUS did not finish cleanly for month $month_string -- aborting instead of collecting a partial month (see $rundir/runlog)\n"
+	unless qx(tail -5 $rundir/runlog) =~ /Error report: no errors/;
 
     # Process the results. PostProc's -M *renames* OH/IO2 into the target, which
     # only works within one filesystem -- so collect into the node-local Output
@@ -245,6 +249,10 @@ ascii         TypeFile
 # This is the run machine: it only produces Output/<YYYYMM>/. Website data
 # products (flatten + split) and all post-run analysis are built on the
 # analysis machine (solsticedisk), not here.
+# Remove the per-invocation scratch tree (guarded: only our mswim_* dirs,
+# never the bare /tmp used under SLURM).
+qx(rm -rf $local_scratch) if $local_scratch =~ m{/mswim_};
+
 exit 0;
 
 

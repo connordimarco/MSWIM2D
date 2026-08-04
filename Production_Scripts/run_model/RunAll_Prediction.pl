@@ -32,7 +32,7 @@ use strict;
 &print_help if $Help;
 
 # Node-local scratch (same fast-I/O pattern as the production drivers).
-my $local_scratch = $ENV{SLURM_JOB_ID} ? "/tmp" : "/tmp/mswim_pred_$$";
+my $local_scratch = $ENV{SLURM_JOB_ID} ? "/tmp" : "/data/tuija/cdimarco/tmp/mswim_pred_$$";
 my $rundir = "$local_scratch/run";
 my $localout = "$local_scratch/Output";
 my $output  = "./Output_prediction";
@@ -208,6 +208,8 @@ ascii         TypeFile
     my $tmpdir = "$local_scratch/tmp";
     qx(mkdir -p $tmpdir);
     qx(cd $rundir; TMPDIR=$tmpdir nice -n 10 mpiexec -n $np ./BATSRUS.exe > runlog);
+    die "BATSRUS did not finish cleanly for month $month_string -- aborting instead of collecting a partial month (see $rundir/runlog)\n"
+	unless qx(tail -5 $rundir/runlog) =~ /Error report: no errors/;
 
     # Process the results into the ISOLATED output root.
     qx(mkdir -p $localout);
@@ -219,6 +221,10 @@ ascii         TypeFile
 
     print "complete.\n";
 }
+
+# Remove the per-invocation scratch tree (guarded: only our mswim_* dirs,
+# never the bare /tmp used under SLURM).
+qx(rm -rf $local_scratch) if $local_scratch =~ m{/mswim_};
 
 exit 0;
 
