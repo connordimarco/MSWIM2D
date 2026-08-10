@@ -1,734 +1,0 @@
-nohup: ignoring input
-Flattened 360 month(s). Building coarse grid...
-Processing z=0_var_1_e19960101-000000-000_19960201-000000-000.outs...
-  199601: 100 snapshots  199601: 200 snapshots  199601: 300 snapshots  199601: 400 snapshots  199601: 500 snapshots  199601: 600 snapshots  199601: 700 snapshots  199601: 745 snapshots
-Processing z=0_var_1_e19960201-010000-000_19960301-000000-000.outs...
-  199602: 100 snapshots  199602: 200 snapshots  199602: 300 snapshots  199602: 400 snapshots  199602: 500 snapshots  199602: 600 snapshots  199602: 696 snapshots
-Processing z=0_var_1_e19960301-010000-000_19960401-000000-000.outs...
-  199603: 100 snapshots  199603: 200 snapshots  199603: 300 snapshots  199603: 400 snapshots  199603: 500 snapshots  199603: 600 snapshots  199603: 700 snapshots  199603: 744 snapshots
-Processing z=0_var_1_e19960401-010000-000_19960501-000000-000.outs...
-  199604: 100 snapshots  199604: 200 snapshots  199604: 300 snapshots  199604: 400 snapshots  199604: 500 snapshots  199604: 600 snapshots  199604: 700 snapshots  199604: 720 snapshots
-Processing z=0_var_1_e19960501-010000-000_19960601-000000-000.outs...
-  199605: 100 snapshots  199605: 200 snapshots  199605: 300 snapshots  199605: 400 snapshots  199605: 500 snapshots  199605: 600 snapshots  199605: 700 snapshots  199605: 744 snapshots
-Processing z=0_var_1_e19960601-010000-000_19960701-000000-000.outs...
-  199606: 100 snapshots  199606: 200 snapshots  199606: 300 snapshots  199606: 400 snapshots  199606: 500 snapshots  199606: 600 snapshots  199606: 700 snapshots  199606: 720 snapshots
-Processing z=0_var_1_e19960701-010000-000_19960801-000000-000.outs...
-  199607: 100 snapshots  199607: 200 snapshots  199607: 300 snapshots  199607: 400 snapshots  199607: 500 snapshots  199607: 600 snapshots  199607: 700 snapshots  199607: 744 snapshots
-Processing z=0_var_1_e19960801-010000-000_19960901-000000-000.outs...
-  199608: 100 snapshots  199608: 200 snapshots  199608: 300 snapshots  199608: 400 snapshots  199608: 500 snapshots  199608: 600 snapshots  199608: 700 snapshots  199608: 744 snapshots
-Processing z=0_var_1_e19960901-010000-000_19961001-000000-000.outs...
-  199609: 100 snapshots  199609: 200 snapshots  199609: 300 snapshots  199609: 400 snapshots  199609: 500 snapshots  199609: 600 snapshots  199609: 700 snapshots  199609: 720 snapshots
-Processing z=0_var_1_e19961001-010000-000_19961101-000000-000.outs...
-  199610: 100 snapshots  199610: 200 snapshots  199610: 300 snapshots  199610: 400 snapshots  199610: 500 snapshots  199610: 600 snapshots  199610: 700 snapshots  199610: 744 snapshots
-Processing z=0_var_1_e19961101-010000-000_19961201-000000-000.outs...
-  199611: 100 snapshots  199611: 200 snapshots  199611: 300 snapshots  199611: 400 snapshots  199611: 500 snapshots  199611: 600 snapshots  199611: 700 snapshots  199611: 720 snapshots
-Processing z=0_var_1_e19961201-010000-000_19970101-000000-000.outs...
-  199612: 100 snapshots  199612: 200 snapshots  199612: 300 snapshots  199612: 400 snapshots  199612: 500 snapshots  199612: 600 snapshots  199612: 700 snapshots  199612: 744 snapshots
-Processing z=0_var_1_e19970101-010000-000_19970201-000000-000.outs...
-  199701: 100 snapshots  199701: 200 snapshots  199701: 300 snapshots  199701: 400 snapshots  199701: 500 snapshots  199701: 600 snapshots  199701: 700 snapshots  199701: 744 snapshots
-Processing z=0_var_1_e19970201-010000-000_19970301-000000-000.outs...
-  199702: 100 snapshots  199702: 200 snapshots  199702: 300 snapshots  199702: 400 snapshots  199702: 500 snapshots  199702: 600 snapshots  199702: 672 snapshots
-Processing z=0_var_1_e19970301-010000-000_19970401-000000-000.outs...
-  199703: 100 snapshots  199703: 200 snapshots  199703: 300 snapshots  199703: 400 snapshots  199703: 500 snapshots  199703: 600 snapshots  199703: 700 snapshots  199703: 744 snapshots
-Processing z=0_var_1_e19970401-010000-000_19970501-000000-000.outs...
-  199704: 100 snapshots  199704: 200 snapshots  199704: 300 snapshots  199704: 400 snapshots  199704: 500 snapshots  199704: 600 snapshots  199704: 700 snapshots  199704: 720 snapshots
-Processing z=0_var_1_e19970501-010000-000_19970601-000000-000.outs...
-  199705: 100 snapshots  199705: 200 snapshots  199705: 300 snapshots  199705: 400 snapshots  199705: 500 snapshots  199705: 600 snapshots  199705: 700 snapshots  199705: 744 snapshots
-Processing z=0_var_1_e19970601-010000-000_19970701-000000-000.outs...
-  199706: 100 snapshots  199706: 200 snapshots  199706: 300 snapshots  199706: 400 snapshots  199706: 500 snapshots  199706: 600 snapshots  199706: 700 snapshots  199706: 720 snapshots
-Processing z=0_var_1_e19970701-010000-000_19970801-000000-000.outs...
-  199707: 100 snapshots  199707: 200 snapshots  199707: 300 snapshots  199707: 400 snapshots  199707: 500 snapshots  199707: 600 snapshots  199707: 700 snapshots  199707: 744 snapshots
-Processing z=0_var_1_e19970801-010000-000_19970901-000000-000.outs...
-  199708: 100 snapshots  199708: 200 snapshots  199708: 300 snapshots  199708: 400 snapshots  199708: 500 snapshots  199708: 600 snapshots  199708: 700 snapshots  199708: 744 snapshots
-Processing z=0_var_1_e19970901-010000-000_19971001-000000-000.outs...
-  199709: 100 snapshots  199709: 200 snapshots  199709: 300 snapshots  199709: 400 snapshots  199709: 500 snapshots  199709: 600 snapshots  199709: 700 snapshots  199709: 720 snapshots
-Processing z=0_var_1_e19971001-010000-000_19971101-000000-000.outs...
-  199710: 100 snapshots  199710: 200 snapshots  199710: 300 snapshots  199710: 400 snapshots  199710: 500 snapshots  199710: 600 snapshots  199710: 700 snapshots  199710: 744 snapshots
-Processing z=0_var_1_e19971101-010000-000_19971201-000000-000.outs...
-  199711: 100 snapshots  199711: 200 snapshots  199711: 300 snapshots  199711: 400 snapshots  199711: 500 snapshots  199711: 600 snapshots  199711: 700 snapshots  199711: 720 snapshots
-Processing z=0_var_1_e19971201-010000-000_19980101-000000-000.outs...
-  199712: 100 snapshots  199712: 200 snapshots  199712: 300 snapshots  199712: 400 snapshots  199712: 500 snapshots  199712: 600 snapshots  199712: 700 snapshots  199712: 744 snapshots
-Processing z=0_var_1_e19980101-010000-000_19980201-000000-000.outs...
-  199801: 100 snapshots  199801: 200 snapshots  199801: 300 snapshots  199801: 400 snapshots  199801: 500 snapshots  199801: 600 snapshots  199801: 700 snapshots  199801: 744 snapshots
-Processing z=0_var_1_e19980201-010000-000_19980301-000000-000.outs...
-  199802: 100 snapshots  199802: 200 snapshots  199802: 300 snapshots  199802: 400 snapshots  199802: 500 snapshots  199802: 600 snapshots  199802: 672 snapshots
-Processing z=0_var_1_e19980301-010000-000_19980401-000000-000.outs...
-  199803: 100 snapshots  199803: 200 snapshots  199803: 300 snapshots  199803: 400 snapshots  199803: 500 snapshots  199803: 600 snapshots  199803: 700 snapshots  199803: 744 snapshots
-Processing z=0_var_1_e19980401-010000-000_19980501-000000-000.outs...
-  199804: 100 snapshots  199804: 200 snapshots  199804: 300 snapshots  199804: 400 snapshots  199804: 500 snapshots  199804: 600 snapshots  199804: 700 snapshots  199804: 720 snapshots
-Processing z=0_var_1_e19980501-010000-000_19980601-000000-000.outs...
-  199805: 100 snapshots  199805: 200 snapshots  199805: 300 snapshots  199805: 400 snapshots  199805: 500 snapshots  199805: 600 snapshots  199805: 700 snapshots  199805: 744 snapshots
-Processing z=0_var_1_e19980601-010000-000_19980701-000000-000.outs...
-  199806: 100 snapshots  199806: 200 snapshots  199806: 300 snapshots  199806: 400 snapshots  199806: 500 snapshots  199806: 600 snapshots  199806: 700 snapshots  199806: 720 snapshots
-Processing z=0_var_1_e19980701-010000-000_19980801-000000-000.outs...
-  199807: 100 snapshots  199807: 200 snapshots  199807: 300 snapshots  199807: 400 snapshots  199807: 500 snapshots  199807: 600 snapshots  199807: 700 snapshots  199807: 744 snapshots
-Processing z=0_var_1_e19980801-010000-000_19980901-000000-000.outs...
-  199808: 100 snapshots  199808: 200 snapshots  199808: 300 snapshots  199808: 400 snapshots  199808: 500 snapshots  199808: 600 snapshots  199808: 700 snapshots  199808: 744 snapshots
-Processing z=0_var_1_e19980901-010000-000_19981001-000000-000.outs...
-  199809: 100 snapshots  199809: 200 snapshots  199809: 300 snapshots  199809: 400 snapshots  199809: 500 snapshots  199809: 600 snapshots  199809: 700 snapshots  199809: 720 snapshots
-Processing z=0_var_1_e19981001-010000-000_19981101-000000-000.outs...
-  199810: 100 snapshots  199810: 200 snapshots  199810: 300 snapshots  199810: 400 snapshots  199810: 500 snapshots  199810: 600 snapshots  199810: 700 snapshots  199810: 744 snapshots
-Processing z=0_var_1_e19981101-010000-000_19981201-000000-000.outs...
-  199811: 100 snapshots  199811: 200 snapshots  199811: 300 snapshots  199811: 400 snapshots  199811: 500 snapshots  199811: 600 snapshots  199811: 700 snapshots  199811: 720 snapshots
-Processing z=0_var_1_e19981201-010000-000_19990101-000000-000.outs...
-  199812: 100 snapshots  199812: 200 snapshots  199812: 300 snapshots  199812: 400 snapshots  199812: 500 snapshots  199812: 600 snapshots  199812: 700 snapshots  199812: 744 snapshots
-Processing z=0_var_1_e19990101-010000-000_19990201-000000-000.outs...
-  199901: 100 snapshots  199901: 200 snapshots  199901: 300 snapshots  199901: 400 snapshots  199901: 500 snapshots  199901: 600 snapshots  199901: 700 snapshots  199901: 744 snapshots
-Processing z=0_var_1_e19990201-010000-000_19990301-000000-000.outs...
-  199902: 100 snapshots  199902: 200 snapshots  199902: 300 snapshots  199902: 400 snapshots  199902: 500 snapshots  199902: 600 snapshots  199902: 672 snapshots
-Processing z=0_var_1_e19990301-010000-000_19990401-000000-000.outs...
-  199903: 100 snapshots  199903: 200 snapshots  199903: 300 snapshots  199903: 400 snapshots  199903: 500 snapshots  199903: 600 snapshots  199903: 700 snapshots  199903: 744 snapshots
-Processing z=0_var_1_e19990401-010000-000_19990501-000000-000.outs...
-  199904: 100 snapshots  199904: 200 snapshots  199904: 300 snapshots  199904: 400 snapshots  199904: 500 snapshots  199904: 600 snapshots  199904: 700 snapshots  199904: 720 snapshots
-Processing z=0_var_1_e19990501-010000-000_19990601-000000-000.outs...
-  199905: 100 snapshots  199905: 200 snapshots  199905: 300 snapshots  199905: 400 snapshots  199905: 500 snapshots  199905: 600 snapshots  199905: 700 snapshots  199905: 744 snapshots
-Processing z=0_var_1_e19990601-010000-000_19990701-000000-000.outs...
-  199906: 100 snapshots  199906: 200 snapshots  199906: 300 snapshots  199906: 400 snapshots  199906: 500 snapshots  199906: 600 snapshots  199906: 700 snapshots  199906: 720 snapshots
-Processing z=0_var_1_e19990701-010000-000_19990801-000000-000.outs...
-  199907: 100 snapshots  199907: 200 snapshots  199907: 300 snapshots  199907: 400 snapshots  199907: 500 snapshots  199907: 600 snapshots  199907: 700 snapshots  199907: 744 snapshots
-Processing z=0_var_1_e19990801-010000-000_19990901-000000-000.outs...
-  199908: 100 snapshots  199908: 200 snapshots  199908: 300 snapshots  199908: 400 snapshots  199908: 500 snapshots  199908: 600 snapshots  199908: 700 snapshots  199908: 744 snapshots
-Processing z=0_var_1_e19990901-010000-000_19991001-000000-000.outs...
-  199909: 100 snapshots  199909: 200 snapshots  199909: 300 snapshots  199909: 400 snapshots  199909: 500 snapshots  199909: 600 snapshots  199909: 700 snapshots  199909: 720 snapshots
-Processing z=0_var_1_e19991001-010000-000_19991101-000000-000.outs...
-  199910: 100 snapshots  199910: 200 snapshots  199910: 300 snapshots  199910: 400 snapshots  199910: 500 snapshots  199910: 600 snapshots  199910: 700 snapshots  199910: 744 snapshots
-Processing z=0_var_1_e19991101-010000-000_19991201-000000-000.outs...
-  199911: 100 snapshots  199911: 200 snapshots  199911: 300 snapshots  199911: 400 snapshots  199911: 500 snapshots  199911: 600 snapshots  199911: 700 snapshots  199911: 720 snapshots
-Processing z=0_var_1_e19991201-010000-000_20000101-000000-000.outs...
-  199912: 100 snapshots  199912: 200 snapshots  199912: 300 snapshots  199912: 400 snapshots  199912: 500 snapshots  199912: 600 snapshots  199912: 700 snapshots  199912: 744 snapshots
-Processing z=0_var_1_e20000101-010000-000_20000201-000000-000.outs...
-  200001: 100 snapshots  200001: 200 snapshots  200001: 300 snapshots  200001: 400 snapshots  200001: 500 snapshots  200001: 600 snapshots  200001: 700 snapshots  200001: 744 snapshots
-Processing z=0_var_1_e20000201-010000-000_20000301-000000-000.outs...
-  200002: 100 snapshots  200002: 200 snapshots  200002: 300 snapshots  200002: 400 snapshots  200002: 500 snapshots  200002: 600 snapshots  200002: 696 snapshots
-Processing z=0_var_1_e20000301-010000-000_20000401-000000-000.outs...
-  200003: 100 snapshots  200003: 200 snapshots  200003: 300 snapshots  200003: 400 snapshots  200003: 500 snapshots  200003: 600 snapshots  200003: 700 snapshots  200003: 744 snapshots
-Processing z=0_var_1_e20000401-010000-000_20000501-000000-000.outs...
-  200004: 100 snapshots  200004: 200 snapshots  200004: 300 snapshots  200004: 400 snapshots  200004: 500 snapshots  200004: 600 snapshots  200004: 700 snapshots  200004: 720 snapshots
-Processing z=0_var_1_e20000501-010000-000_20000601-000000-000.outs...
-  200005: 100 snapshots  200005: 200 snapshots  200005: 300 snapshots  200005: 400 snapshots  200005: 500 snapshots  200005: 600 snapshots  200005: 700 snapshots  200005: 744 snapshots
-Processing z=0_var_1_e20000601-010000-000_20000701-000000-000.outs...
-  200006: 100 snapshots  200006: 200 snapshots  200006: 300 snapshots  200006: 400 snapshots  200006: 500 snapshots  200006: 600 snapshots  200006: 700 snapshots  200006: 720 snapshots
-Processing z=0_var_1_e20000701-010000-000_20000801-000000-000.outs...
-  200007: 100 snapshots  200007: 200 snapshots  200007: 300 snapshots  200007: 400 snapshots  200007: 500 snapshots  200007: 600 snapshots  200007: 700 snapshots  200007: 744 snapshots
-Processing z=0_var_1_e20000801-010000-000_20000901-000000-000.outs...
-  200008: 100 snapshots  200008: 200 snapshots  200008: 300 snapshots  200008: 400 snapshots  200008: 500 snapshots  200008: 600 snapshots  200008: 700 snapshots  200008: 744 snapshots
-Processing z=0_var_1_e20000901-010000-000_20001001-000000-000.outs...
-  200009: 100 snapshots  200009: 200 snapshots  200009: 300 snapshots  200009: 400 snapshots  200009: 500 snapshots  200009: 600 snapshots  200009: 700 snapshots  200009: 720 snapshots
-Processing z=0_var_1_e20001001-010000-000_20001101-000000-000.outs...
-  200010: 100 snapshots  200010: 200 snapshots  200010: 300 snapshots  200010: 400 snapshots  200010: 500 snapshots  200010: 600 snapshots  200010: 700 snapshots  200010: 744 snapshots
-Processing z=0_var_1_e20001101-010000-000_20001201-000000-000.outs...
-  200011: 100 snapshots  200011: 200 snapshots  200011: 300 snapshots  200011: 400 snapshots  200011: 500 snapshots  200011: 600 snapshots  200011: 700 snapshots  200011: 720 snapshots
-Processing z=0_var_1_e20001201-010000-000_20010101-000000-000.outs...
-  200012: 100 snapshots  200012: 200 snapshots  200012: 300 snapshots  200012: 400 snapshots  200012: 500 snapshots  200012: 600 snapshots  200012: 700 snapshots  200012: 744 snapshots
-Processing z=0_var_1_e20010101-010000-000_20010201-000000-000.outs...
-  200101: 100 snapshots  200101: 200 snapshots  200101: 300 snapshots  200101: 400 snapshots  200101: 500 snapshots  200101: 600 snapshots  200101: 700 snapshots  200101: 744 snapshots
-Processing z=0_var_1_e20010201-010000-000_20010301-000000-000.outs...
-  200102: 100 snapshots  200102: 200 snapshots  200102: 300 snapshots  200102: 400 snapshots  200102: 500 snapshots  200102: 600 snapshots  200102: 672 snapshots
-Processing z=0_var_1_e20010301-010000-000_20010401-000000-000.outs...
-  200103: 100 snapshots  200103: 200 snapshots  200103: 300 snapshots  200103: 400 snapshots  200103: 500 snapshots  200103: 600 snapshots  200103: 700 snapshots  200103: 744 snapshots
-Processing z=0_var_1_e20010401-010000-000_20010501-000000-000.outs...
-  200104: 100 snapshots  200104: 200 snapshots  200104: 300 snapshots  200104: 400 snapshots  200104: 500 snapshots  200104: 600 snapshots  200104: 700 snapshots  200104: 720 snapshots
-Processing z=0_var_1_e20010501-010000-000_20010601-000000-000.outs...
-  200105: 100 snapshots  200105: 200 snapshots  200105: 300 snapshots  200105: 400 snapshots  200105: 500 snapshots  200105: 600 snapshots  200105: 700 snapshots  200105: 744 snapshots
-Processing z=0_var_1_e20010601-010000-000_20010701-000000-000.outs...
-  200106: 100 snapshots  200106: 200 snapshots  200106: 300 snapshots  200106: 400 snapshots  200106: 500 snapshots  200106: 600 snapshots  200106: 700 snapshots  200106: 720 snapshots
-Processing z=0_var_1_e20010701-010000-000_20010801-000000-000.outs...
-  200107: 100 snapshots  200107: 200 snapshots  200107: 300 snapshots  200107: 400 snapshots  200107: 500 snapshots  200107: 600 snapshots  200107: 700 snapshots  200107: 744 snapshots
-Processing z=0_var_1_e20010801-010000-000_20010901-000000-000.outs...
-  200108: 100 snapshots  200108: 200 snapshots  200108: 300 snapshots  200108: 400 snapshots  200108: 500 snapshots  200108: 600 snapshots  200108: 700 snapshots  200108: 744 snapshots
-Processing z=0_var_1_e20010901-010000-000_20011001-000000-000.outs...
-  200109: 100 snapshots  200109: 200 snapshots  200109: 300 snapshots  200109: 400 snapshots  200109: 500 snapshots  200109: 600 snapshots  200109: 700 snapshots  200109: 720 snapshots
-Processing z=0_var_1_e20011001-010000-000_20011101-000000-000.outs...
-  200110: 100 snapshots  200110: 200 snapshots  200110: 300 snapshots  200110: 400 snapshots  200110: 500 snapshots  200110: 600 snapshots  200110: 700 snapshots  200110: 744 snapshots
-Processing z=0_var_1_e20011101-010000-000_20011201-000000-000.outs...
-  200111: 100 snapshots  200111: 200 snapshots  200111: 300 snapshots  200111: 400 snapshots  200111: 500 snapshots  200111: 600 snapshots  200111: 700 snapshots  200111: 720 snapshots
-Processing z=0_var_1_e20011201-010000-000_20020101-000000-000.outs...
-  200112: 100 snapshots  200112: 200 snapshots  200112: 300 snapshots  200112: 400 snapshots  200112: 500 snapshots  200112: 600 snapshots  200112: 700 snapshots  200112: 744 snapshots
-Processing z=0_var_1_e20020101-010000-000_20020201-000000-000.outs...
-  200201: 100 snapshots  200201: 200 snapshots  200201: 300 snapshots  200201: 400 snapshots  200201: 500 snapshots  200201: 600 snapshots  200201: 700 snapshots  200201: 744 snapshots
-Processing z=0_var_1_e20020201-010000-000_20020301-000000-000.outs...
-  200202: 100 snapshots  200202: 200 snapshots  200202: 300 snapshots  200202: 400 snapshots  200202: 500 snapshots  200202: 600 snapshots  200202: 672 snapshots
-Processing z=0_var_1_e20020301-010000-000_20020401-000000-000.outs...
-  200203: 100 snapshots  200203: 200 snapshots  200203: 300 snapshots  200203: 400 snapshots  200203: 500 snapshots  200203: 600 snapshots  200203: 700 snapshots  200203: 744 snapshots
-Processing z=0_var_1_e20020401-010000-000_20020501-000000-000.outs...
-  200204: 100 snapshots  200204: 200 snapshots  200204: 300 snapshots  200204: 400 snapshots  200204: 500 snapshots  200204: 600 snapshots  200204: 700 snapshots  200204: 720 snapshots
-Processing z=0_var_1_e20020501-010000-000_20020601-000000-000.outs...
-  200205: 100 snapshots  200205: 200 snapshots  200205: 300 snapshots  200205: 400 snapshots  200205: 500 snapshots  200205: 600 snapshots  200205: 700 snapshots  200205: 744 snapshots
-Processing z=0_var_1_e20020601-010000-000_20020701-000000-000.outs...
-  200206: 100 snapshots  200206: 200 snapshots  200206: 300 snapshots  200206: 400 snapshots  200206: 500 snapshots  200206: 600 snapshots  200206: 700 snapshots  200206: 720 snapshots
-Processing z=0_var_1_e20020701-010000-000_20020801-000000-000.outs...
-  200207: 100 snapshots  200207: 200 snapshots  200207: 300 snapshots  200207: 400 snapshots  200207: 500 snapshots  200207: 600 snapshots  200207: 700 snapshots  200207: 744 snapshots
-Processing z=0_var_1_e20020801-010000-000_20020901-000000-000.outs...
-  200208: 100 snapshots  200208: 200 snapshots  200208: 300 snapshots  200208: 400 snapshots  200208: 500 snapshots  200208: 600 snapshots  200208: 700 snapshots  200208: 744 snapshots
-Processing z=0_var_1_e20020901-010000-000_20021001-000000-000.outs...
-  200209: 100 snapshots  200209: 200 snapshots  200209: 300 snapshots  200209: 400 snapshots  200209: 500 snapshots  200209: 600 snapshots  200209: 700 snapshots  200209: 720 snapshots
-Processing z=0_var_1_e20021001-010000-000_20021101-000000-000.outs...
-  200210: 100 snapshots  200210: 200 snapshots  200210: 300 snapshots  200210: 400 snapshots  200210: 500 snapshots  200210: 600 snapshots  200210: 700 snapshots  200210: 744 snapshots
-Processing z=0_var_1_e20021101-010000-000_20021201-000000-000.outs...
-  200211: 100 snapshots  200211: 200 snapshots  200211: 300 snapshots  200211: 400 snapshots  200211: 500 snapshots  200211: 600 snapshots  200211: 700 snapshots  200211: 720 snapshots
-Processing z=0_var_1_e20021201-010000-000_20030101-000000-000.outs...
-  200212: 100 snapshots  200212: 200 snapshots  200212: 300 snapshots  200212: 400 snapshots  200212: 500 snapshots  200212: 600 snapshots  200212: 700 snapshots  200212: 744 snapshots
-Processing z=0_var_1_e20030101-010000-000_20030201-000000-000.outs...
-  200301: 100 snapshots  200301: 200 snapshots  200301: 300 snapshots  200301: 400 snapshots  200301: 500 snapshots  200301: 600 snapshots  200301: 700 snapshots  200301: 744 snapshots
-Processing z=0_var_1_e20030201-010000-000_20030301-000000-000.outs...
-  200302: 100 snapshots  200302: 200 snapshots  200302: 300 snapshots  200302: 400 snapshots  200302: 500 snapshots  200302: 600 snapshots  200302: 672 snapshots
-Processing z=0_var_1_e20030301-010000-000_20030401-000000-000.outs...
-  200303: 100 snapshots  200303: 200 snapshots  200303: 300 snapshots  200303: 400 snapshots  200303: 500 snapshots  200303: 600 snapshots  200303: 700 snapshots  200303: 744 snapshots
-Processing z=0_var_1_e20030401-010000-000_20030501-000000-000.outs...
-  200304: 100 snapshots  200304: 200 snapshots  200304: 300 snapshots  200304: 400 snapshots  200304: 500 snapshots  200304: 600 snapshots  200304: 700 snapshots  200304: 720 snapshots
-Processing z=0_var_1_e20030501-010000-000_20030601-000000-000.outs...
-  200305: 100 snapshots  200305: 200 snapshots  200305: 300 snapshots  200305: 400 snapshots  200305: 500 snapshots  200305: 600 snapshots  200305: 700 snapshots  200305: 744 snapshots
-Processing z=0_var_1_e20030601-010000-000_20030701-000000-000.outs...
-  200306: 100 snapshots  200306: 200 snapshots  200306: 300 snapshots  200306: 400 snapshots  200306: 500 snapshots  200306: 600 snapshots  200306: 700 snapshots  200306: 720 snapshots
-Processing z=0_var_1_e20030701-010000-000_20030801-000000-000.outs...
-  200307: 100 snapshots  200307: 200 snapshots  200307: 300 snapshots  200307: 400 snapshots  200307: 500 snapshots  200307: 600 snapshots  200307: 700 snapshots  200307: 744 snapshots
-Processing z=0_var_1_e20030801-010000-000_20030901-000000-000.outs...
-  200308: 100 snapshots  200308: 200 snapshots  200308: 300 snapshots  200308: 400 snapshots  200308: 500 snapshots  200308: 600 snapshots  200308: 700 snapshots  200308: 744 snapshots
-Processing z=0_var_1_e20030901-010000-000_20031001-000000-000.outs...
-  200309: 100 snapshots  200309: 200 snapshots  200309: 300 snapshots  200309: 400 snapshots  200309: 500 snapshots  200309: 600 snapshots  200309: 700 snapshots  200309: 720 snapshots
-Processing z=0_var_1_e20031001-010000-000_20031101-000000-000.outs...
-  200310: 100 snapshots  200310: 200 snapshots  200310: 300 snapshots  200310: 400 snapshots  200310: 500 snapshots  200310: 600 snapshots  200310: 700 snapshots  200310: 744 snapshots
-Processing z=0_var_1_e20031101-010000-000_20031201-000000-000.outs...
-  200311: 100 snapshots  200311: 200 snapshots  200311: 300 snapshots  200311: 400 snapshots  200311: 500 snapshots  200311: 600 snapshots  200311: 700 snapshots  200311: 720 snapshots
-Processing z=0_var_1_e20031201-010000-000_20040101-000000-000.outs...
-  200312: 100 snapshots  200312: 200 snapshots  200312: 300 snapshots  200312: 400 snapshots  200312: 500 snapshots  200312: 600 snapshots  200312: 700 snapshots  200312: 744 snapshots
-Processing z=0_var_1_e20040101-010000-000_20040201-000000-000.outs...
-  200401: 100 snapshots  200401: 200 snapshots  200401: 300 snapshots  200401: 400 snapshots  200401: 500 snapshots  200401: 600 snapshots  200401: 700 snapshots  200401: 744 snapshots
-Processing z=0_var_1_e20040201-010000-000_20040301-000000-000.outs...
-  200402: 100 snapshots  200402: 200 snapshots  200402: 300 snapshots  200402: 400 snapshots  200402: 500 snapshots  200402: 600 snapshots  200402: 696 snapshots
-Processing z=0_var_1_e20040301-010000-000_20040401-000000-000.outs...
-  200403: 100 snapshots  200403: 200 snapshots  200403: 300 snapshots  200403: 400 snapshots  200403: 500 snapshots  200403: 600 snapshots  200403: 700 snapshots  200403: 744 snapshots
-Processing z=0_var_1_e20040401-010000-000_20040501-000000-000.outs...
-  200404: 100 snapshots  200404: 200 snapshots  200404: 300 snapshots  200404: 400 snapshots  200404: 500 snapshots  200404: 600 snapshots  200404: 700 snapshots  200404: 720 snapshots
-Processing z=0_var_1_e20040501-010000-000_20040601-000000-000.outs...
-  200405: 100 snapshots  200405: 200 snapshots  200405: 300 snapshots  200405: 400 snapshots  200405: 500 snapshots  200405: 600 snapshots  200405: 700 snapshots  200405: 744 snapshots
-Processing z=0_var_1_e20040601-010000-000_20040701-000000-000.outs...
-  200406: 100 snapshots  200406: 200 snapshots  200406: 300 snapshots  200406: 400 snapshots  200406: 500 snapshots  200406: 600 snapshots  200406: 700 snapshots  200406: 720 snapshots
-Processing z=0_var_1_e20040701-010000-000_20040801-000000-000.outs...
-  200407: 100 snapshots  200407: 200 snapshots  200407: 300 snapshots  200407: 400 snapshots  200407: 500 snapshots  200407: 600 snapshots  200407: 700 snapshots  200407: 744 snapshots
-Processing z=0_var_1_e20040801-010000-000_20040901-000000-000.outs...
-  200408: 100 snapshots  200408: 200 snapshots  200408: 300 snapshots  200408: 400 snapshots  200408: 500 snapshots  200408: 600 snapshots  200408: 700 snapshots  200408: 744 snapshots
-Processing z=0_var_1_e20040901-010000-000_20041001-000000-000.outs...
-  200409: 100 snapshots  200409: 200 snapshots  200409: 300 snapshots  200409: 400 snapshots  200409: 500 snapshots  200409: 600 snapshots  200409: 700 snapshots  200409: 720 snapshots
-Processing z=0_var_1_e20041001-010000-000_20041101-000000-000.outs...
-  200410: 100 snapshots  200410: 200 snapshots  200410: 300 snapshots  200410: 400 snapshots  200410: 500 snapshots  200410: 600 snapshots  200410: 700 snapshots  200410: 744 snapshots
-Processing z=0_var_1_e20041101-010000-000_20041201-000000-000.outs...
-  200411: 100 snapshots  200411: 200 snapshots  200411: 300 snapshots  200411: 400 snapshots  200411: 500 snapshots  200411: 600 snapshots  200411: 700 snapshots  200411: 720 snapshots
-Processing z=0_var_1_e20041201-010000-000_20050101-000000-000.outs...
-  200412: 100 snapshots  200412: 200 snapshots  200412: 300 snapshots  200412: 400 snapshots  200412: 500 snapshots  200412: 600 snapshots  200412: 700 snapshots  200412: 744 snapshots
-Processing z=0_var_1_e20050101-010000-000_20050201-000000-000.outs...
-  200501: 100 snapshots  200501: 200 snapshots  200501: 300 snapshots  200501: 400 snapshots  200501: 500 snapshots  200501: 600 snapshots  200501: 700 snapshots  200501: 744 snapshots
-Processing z=0_var_1_e20050201-010000-000_20050301-000000-000.outs...
-  200502: 100 snapshots  200502: 200 snapshots  200502: 300 snapshots  200502: 400 snapshots  200502: 500 snapshots  200502: 600 snapshots  200502: 672 snapshots
-Processing z=0_var_1_e20050301-010000-000_20050401-000000-000.outs...
-  200503: 100 snapshots  200503: 200 snapshots  200503: 300 snapshots  200503: 400 snapshots  200503: 500 snapshots  200503: 600 snapshots  200503: 700 snapshots  200503: 744 snapshots
-Processing z=0_var_1_e20050401-010000-000_20050501-000000-000.outs...
-  200504: 100 snapshots  200504: 200 snapshots  200504: 300 snapshots  200504: 400 snapshots  200504: 500 snapshots  200504: 600 snapshots  200504: 700 snapshots  200504: 720 snapshots
-Processing z=0_var_1_e20050501-010000-000_20050601-000000-000.outs...
-  200505: 100 snapshots  200505: 200 snapshots  200505: 300 snapshots  200505: 400 snapshots  200505: 500 snapshots  200505: 600 snapshots  200505: 700 snapshots  200505: 744 snapshots
-Processing z=0_var_1_e20050601-010000-000_20050701-000000-000.outs...
-  200506: 100 snapshots  200506: 200 snapshots  200506: 300 snapshots  200506: 400 snapshots  200506: 500 snapshots  200506: 600 snapshots  200506: 700 snapshots  200506: 720 snapshots
-Processing z=0_var_1_e20050701-010000-000_20050801-000000-000.outs...
-  200507: 100 snapshots  200507: 200 snapshots  200507: 300 snapshots  200507: 400 snapshots  200507: 500 snapshots  200507: 600 snapshots  200507: 700 snapshots  200507: 744 snapshots
-Processing z=0_var_1_e20050801-010000-000_20050901-000000-000.outs...
-  200508: 100 snapshots  200508: 200 snapshots  200508: 300 snapshots  200508: 400 snapshots  200508: 500 snapshots  200508: 600 snapshots  200508: 700 snapshots  200508: 744 snapshots
-Processing z=0_var_1_e20050901-010000-000_20051001-000000-000.outs...
-  200509: 100 snapshots  200509: 200 snapshots  200509: 300 snapshots  200509: 400 snapshots  200509: 500 snapshots  200509: 600 snapshots  200509: 700 snapshots  200509: 720 snapshots
-Processing z=0_var_1_e20051001-010000-000_20051101-000000-000.outs...
-  200510: 100 snapshots  200510: 200 snapshots  200510: 300 snapshots  200510: 400 snapshots  200510: 500 snapshots  200510: 600 snapshots  200510: 700 snapshots  200510: 744 snapshots
-Processing z=0_var_1_e20051101-010000-000_20051201-000000-000.outs...
-  200511: 100 snapshots  200511: 200 snapshots  200511: 300 snapshots  200511: 400 snapshots  200511: 500 snapshots  200511: 600 snapshots  200511: 700 snapshots  200511: 720 snapshots
-Processing z=0_var_1_e20051201-010000-000_20060101-000000-000.outs...
-  200512: 100 snapshots  200512: 200 snapshots  200512: 300 snapshots  200512: 400 snapshots  200512: 500 snapshots  200512: 600 snapshots  200512: 700 snapshots  200512: 744 snapshots
-Processing z=0_var_1_e20060101-010000-000_20060201-000000-000.outs...
-  200601: 100 snapshots  200601: 200 snapshots  200601: 300 snapshots  200601: 400 snapshots  200601: 500 snapshots  200601: 600 snapshots  200601: 700 snapshots  200601: 744 snapshots
-Processing z=0_var_1_e20060201-010000-000_20060301-000000-000.outs...
-  200602: 100 snapshots  200602: 200 snapshots  200602: 300 snapshots  200602: 400 snapshots  200602: 500 snapshots  200602: 600 snapshots  200602: 672 snapshots
-Processing z=0_var_1_e20060301-010000-000_20060401-000000-000.outs...
-  200603: 100 snapshots  200603: 200 snapshots  200603: 300 snapshots  200603: 400 snapshots  200603: 500 snapshots  200603: 600 snapshots  200603: 700 snapshots  200603: 744 snapshots
-Processing z=0_var_1_e20060401-010000-000_20060501-000000-000.outs...
-  200604: 100 snapshots  200604: 200 snapshots  200604: 300 snapshots  200604: 400 snapshots  200604: 500 snapshots  200604: 600 snapshots  200604: 700 snapshots  200604: 720 snapshots
-Processing z=0_var_1_e20060501-010000-000_20060601-000000-000.outs...
-  200605: 100 snapshots  200605: 200 snapshots  200605: 300 snapshots  200605: 400 snapshots  200605: 500 snapshots  200605: 600 snapshots  200605: 700 snapshots  200605: 744 snapshots
-Processing z=0_var_1_e20060601-010000-000_20060701-000000-000.outs...
-  200606: 100 snapshots  200606: 200 snapshots  200606: 300 snapshots  200606: 400 snapshots  200606: 500 snapshots  200606: 600 snapshots  200606: 700 snapshots  200606: 720 snapshots
-Processing z=0_var_1_e20060701-010000-000_20060801-000000-000.outs...
-  200607: 100 snapshots  200607: 200 snapshots  200607: 300 snapshots  200607: 400 snapshots  200607: 500 snapshots  200607: 600 snapshots  200607: 700 snapshots  200607: 744 snapshots
-Processing z=0_var_1_e20060801-010000-000_20060901-000000-000.outs...
-  200608: 100 snapshots  200608: 200 snapshots  200608: 300 snapshots  200608: 400 snapshots  200608: 500 snapshots  200608: 600 snapshots  200608: 700 snapshots  200608: 744 snapshots
-Processing z=0_var_1_e20060901-010000-000_20061001-000000-000.outs...
-  200609: 100 snapshots  200609: 200 snapshots  200609: 300 snapshots  200609: 400 snapshots  200609: 500 snapshots  200609: 600 snapshots  200609: 700 snapshots  200609: 720 snapshots
-Processing z=0_var_1_e20061001-010000-000_20061101-000000-000.outs...
-  200610: 100 snapshots  200610: 200 snapshots  200610: 300 snapshots  200610: 400 snapshots  200610: 500 snapshots  200610: 600 snapshots  200610: 700 snapshots  200610: 744 snapshots
-Processing z=0_var_1_e20061101-010000-000_20061201-000000-000.outs...
-  200611: 100 snapshots  200611: 200 snapshots  200611: 300 snapshots  200611: 400 snapshots  200611: 500 snapshots  200611: 600 snapshots  200611: 700 snapshots  200611: 720 snapshots
-Processing z=0_var_1_e20061201-010000-000_20070101-000000-000.outs...
-  200612: 100 snapshots  200612: 200 snapshots  200612: 300 snapshots  200612: 400 snapshots  200612: 500 snapshots  200612: 600 snapshots  200612: 700 snapshots  200612: 744 snapshots
-Processing z=0_var_1_e20070101-010000-000_20070201-000000-000.outs...
-  200701: 100 snapshots  200701: 200 snapshots  200701: 300 snapshots  200701: 400 snapshots  200701: 500 snapshots  200701: 600 snapshots  200701: 700 snapshots  200701: 744 snapshots
-Processing z=0_var_1_e20070201-010000-000_20070301-000000-000.outs...
-  200702: 100 snapshots  200702: 200 snapshots  200702: 300 snapshots  200702: 400 snapshots  200702: 500 snapshots  200702: 600 snapshots  200702: 672 snapshots
-Processing z=0_var_1_e20070301-010000-000_20070401-000000-000.outs...
-  200703: 100 snapshots  200703: 200 snapshots  200703: 300 snapshots  200703: 400 snapshots  200703: 500 snapshots  200703: 600 snapshots  200703: 700 snapshots  200703: 744 snapshots
-Processing z=0_var_1_e20070401-010000-000_20070501-000000-000.outs...
-  200704: 100 snapshots  200704: 200 snapshots  200704: 300 snapshots  200704: 400 snapshots  200704: 500 snapshots  200704: 600 snapshots  200704: 700 snapshots  200704: 720 snapshots
-Processing z=0_var_1_e20070501-010000-000_20070601-000000-000.outs...
-  200705: 100 snapshots  200705: 200 snapshots  200705: 300 snapshots  200705: 400 snapshots  200705: 500 snapshots  200705: 600 snapshots  200705: 700 snapshots  200705: 744 snapshots
-Processing z=0_var_1_e20070601-010000-000_20070701-000000-000.outs...
-  200706: 100 snapshots  200706: 200 snapshots  200706: 300 snapshots  200706: 400 snapshots  200706: 500 snapshots  200706: 600 snapshots  200706: 700 snapshots  200706: 720 snapshots
-Processing z=0_var_1_e20070701-010000-000_20070801-000000-000.outs...
-  200707: 100 snapshots  200707: 200 snapshots  200707: 300 snapshots  200707: 400 snapshots  200707: 500 snapshots  200707: 600 snapshots  200707: 700 snapshots  200707: 744 snapshots
-Processing z=0_var_1_e20070801-010000-000_20070901-000000-000.outs...
-  200708: 100 snapshots  200708: 200 snapshots  200708: 300 snapshots  200708: 400 snapshots  200708: 500 snapshots  200708: 600 snapshots  200708: 700 snapshots  200708: 744 snapshots
-Processing z=0_var_1_e20070901-010000-000_20071001-000000-000.outs...
-  200709: 100 snapshots  200709: 200 snapshots  200709: 300 snapshots  200709: 400 snapshots  200709: 500 snapshots  200709: 600 snapshots  200709: 700 snapshots  200709: 720 snapshots
-Processing z=0_var_1_e20071001-010000-000_20071101-000000-000.outs...
-  200710: 100 snapshots  200710: 200 snapshots  200710: 300 snapshots  200710: 400 snapshots  200710: 500 snapshots  200710: 600 snapshots  200710: 700 snapshots  200710: 744 snapshots
-Processing z=0_var_1_e20071101-010000-000_20071201-000000-000.outs...
-  200711: 100 snapshots  200711: 200 snapshots  200711: 300 snapshots  200711: 400 snapshots  200711: 500 snapshots  200711: 600 snapshots  200711: 700 snapshots  200711: 720 snapshots
-Processing z=0_var_1_e20071201-010000-000_20080101-000000-000.outs...
-  200712: 100 snapshots  200712: 200 snapshots  200712: 300 snapshots  200712: 400 snapshots  200712: 500 snapshots  200712: 600 snapshots  200712: 700 snapshots  200712: 744 snapshots
-Processing z=0_var_1_e20080101-010000-000_20080201-000000-000.outs...
-  200801: 100 snapshots  200801: 200 snapshots  200801: 300 snapshots  200801: 400 snapshots  200801: 500 snapshots  200801: 600 snapshots  200801: 700 snapshots  200801: 744 snapshots
-Processing z=0_var_1_e20080201-010000-000_20080301-000000-000.outs...
-  200802: 100 snapshots  200802: 200 snapshots  200802: 300 snapshots  200802: 400 snapshots  200802: 500 snapshots  200802: 600 snapshots  200802: 696 snapshots
-Processing z=0_var_1_e20080301-010000-000_20080401-000000-000.outs...
-  200803: 100 snapshots  200803: 200 snapshots  200803: 300 snapshots  200803: 400 snapshots  200803: 500 snapshots  200803: 600 snapshots  200803: 700 snapshots  200803: 744 snapshots
-Processing z=0_var_1_e20080401-010000-000_20080501-000000-000.outs...
-  200804: 100 snapshots  200804: 200 snapshots  200804: 300 snapshots  200804: 400 snapshots  200804: 500 snapshots  200804: 600 snapshots  200804: 700 snapshots  200804: 720 snapshots
-Processing z=0_var_1_e20080501-010000-000_20080601-000000-000.outs...
-  200805: 100 snapshots  200805: 200 snapshots  200805: 300 snapshots  200805: 400 snapshots  200805: 500 snapshots  200805: 600 snapshots  200805: 700 snapshots  200805: 744 snapshots
-Processing z=0_var_1_e20080601-010000-000_20080701-000000-000.outs...
-  200806: 100 snapshots  200806: 200 snapshots  200806: 300 snapshots  200806: 400 snapshots  200806: 500 snapshots  200806: 600 snapshots  200806: 700 snapshots  200806: 720 snapshots
-Processing z=0_var_1_e20080701-010000-000_20080801-000000-000.outs...
-  200807: 100 snapshots  200807: 200 snapshots  200807: 300 snapshots  200807: 400 snapshots  200807: 500 snapshots  200807: 600 snapshots  200807: 700 snapshots  200807: 744 snapshots
-Processing z=0_var_1_e20080801-010000-000_20080901-000000-000.outs...
-  200808: 100 snapshots  200808: 200 snapshots  200808: 300 snapshots  200808: 400 snapshots  200808: 500 snapshots  200808: 600 snapshots  200808: 700 snapshots  200808: 744 snapshots
-Processing z=0_var_1_e20080901-010000-000_20081001-000000-000.outs...
-  200809: 100 snapshots  200809: 200 snapshots  200809: 300 snapshots  200809: 400 snapshots  200809: 500 snapshots  200809: 600 snapshots  200809: 700 snapshots  200809: 720 snapshots
-Processing z=0_var_1_e20081001-010000-000_20081101-000000-000.outs...
-  200810: 100 snapshots  200810: 200 snapshots  200810: 300 snapshots  200810: 400 snapshots  200810: 500 snapshots  200810: 600 snapshots  200810: 700 snapshots  200810: 744 snapshots
-Processing z=0_var_1_e20081101-010000-000_20081201-000000-000.outs...
-  200811: 100 snapshots  200811: 200 snapshots  200811: 300 snapshots  200811: 400 snapshots  200811: 500 snapshots  200811: 600 snapshots  200811: 700 snapshots  200811: 720 snapshots
-Processing z=0_var_1_e20081201-010000-000_20090101-000000-000.outs...
-  200812: 100 snapshots  200812: 200 snapshots  200812: 300 snapshots  200812: 400 snapshots  200812: 500 snapshots  200812: 600 snapshots  200812: 700 snapshots  200812: 744 snapshots
-Processing z=0_var_1_e20090101-010000-000_20090201-000000-000.outs...
-  200901: 100 snapshots  200901: 200 snapshots  200901: 300 snapshots  200901: 400 snapshots  200901: 500 snapshots  200901: 600 snapshots  200901: 700 snapshots  200901: 744 snapshots
-Processing z=0_var_1_e20090201-010000-000_20090301-000000-000.outs...
-  200902: 100 snapshots  200902: 200 snapshots  200902: 300 snapshots  200902: 400 snapshots  200902: 500 snapshots  200902: 600 snapshots  200902: 672 snapshots
-Processing z=0_var_1_e20090301-010000-000_20090401-000000-000.outs...
-  200903: 100 snapshots  200903: 200 snapshots  200903: 300 snapshots  200903: 400 snapshots  200903: 500 snapshots  200903: 600 snapshots  200903: 700 snapshots  200903: 744 snapshots
-Processing z=0_var_1_e20090401-010000-000_20090501-000000-000.outs...
-  200904: 100 snapshots  200904: 200 snapshots  200904: 300 snapshots  200904: 400 snapshots  200904: 500 snapshots  200904: 600 snapshots  200904: 700 snapshots  200904: 720 snapshots
-Processing z=0_var_1_e20090501-010000-000_20090601-000000-000.outs...
-  200905: 100 snapshots  200905: 200 snapshots  200905: 300 snapshots  200905: 400 snapshots  200905: 500 snapshots  200905: 600 snapshots  200905: 700 snapshots  200905: 744 snapshots
-Processing z=0_var_1_e20090601-010000-000_20090701-000000-000.outs...
-  200906: 100 snapshots  200906: 200 snapshots  200906: 300 snapshots  200906: 400 snapshots  200906: 500 snapshots  200906: 600 snapshots  200906: 700 snapshots  200906: 720 snapshots
-Processing z=0_var_1_e20090701-010000-000_20090801-000000-000.outs...
-  200907: 100 snapshots  200907: 200 snapshots  200907: 300 snapshots  200907: 400 snapshots  200907: 500 snapshots  200907: 600 snapshots  200907: 700 snapshots  200907: 744 snapshots
-Processing z=0_var_1_e20090801-010000-000_20090901-000000-000.outs...
-  200908: 100 snapshots  200908: 200 snapshots  200908: 300 snapshots  200908: 400 snapshots  200908: 500 snapshots  200908: 600 snapshots  200908: 700 snapshots  200908: 744 snapshots
-Processing z=0_var_1_e20090901-010000-000_20091001-000000-000.outs...
-  200909: 100 snapshots  200909: 200 snapshots  200909: 300 snapshots  200909: 400 snapshots  200909: 500 snapshots  200909: 600 snapshots  200909: 700 snapshots  200909: 720 snapshots
-Processing z=0_var_1_e20091001-010000-000_20091101-000000-000.outs...
-  200910: 100 snapshots  200910: 200 snapshots  200910: 300 snapshots  200910: 400 snapshots  200910: 500 snapshots  200910: 600 snapshots  200910: 700 snapshots  200910: 744 snapshots
-Processing z=0_var_1_e20091101-010000-000_20091201-000000-000.outs...
-  200911: 100 snapshots  200911: 200 snapshots  200911: 300 snapshots  200911: 400 snapshots  200911: 500 snapshots  200911: 600 snapshots  200911: 700 snapshots  200911: 720 snapshots
-Processing z=0_var_1_e20091201-010000-000_20100101-000000-000.outs...
-  200912: 100 snapshots  200912: 200 snapshots  200912: 300 snapshots  200912: 400 snapshots  200912: 500 snapshots  200912: 600 snapshots  200912: 700 snapshots  200912: 744 snapshots
-Processing z=0_var_1_e20100101-010000-000_20100201-000000-000.outs...
-  201001: 100 snapshots  201001: 200 snapshots  201001: 300 snapshots  201001: 400 snapshots  201001: 500 snapshots  201001: 600 snapshots  201001: 700 snapshots  201001: 744 snapshots
-Processing z=0_var_1_e20100201-010000-000_20100301-000000-000.outs...
-  201002: 100 snapshots  201002: 200 snapshots  201002: 300 snapshots  201002: 400 snapshots  201002: 500 snapshots  201002: 600 snapshots  201002: 672 snapshots
-Processing z=0_var_1_e20100301-010000-000_20100401-000000-000.outs...
-  201003: 100 snapshots  201003: 200 snapshots  201003: 300 snapshots  201003: 400 snapshots  201003: 500 snapshots  201003: 600 snapshots  201003: 700 snapshots  201003: 744 snapshots
-Processing z=0_var_1_e20100401-010000-000_20100501-000000-000.outs...
-  201004: 100 snapshots  201004: 200 snapshots  201004: 300 snapshots  201004: 400 snapshots  201004: 500 snapshots  201004: 600 snapshots  201004: 700 snapshots  201004: 720 snapshots
-Processing z=0_var_1_e20100501-010000-000_20100601-000000-000.outs...
-  201005: 100 snapshots  201005: 200 snapshots  201005: 300 snapshots  201005: 400 snapshots  201005: 500 snapshots  201005: 600 snapshots  201005: 700 snapshots  201005: 744 snapshots
-Processing z=0_var_1_e20100601-010000-000_20100701-000000-000.outs...
-  201006: 100 snapshots  201006: 200 snapshots  201006: 300 snapshots  201006: 400 snapshots  201006: 500 snapshots  201006: 600 snapshots  201006: 700 snapshots  201006: 720 snapshots
-Processing z=0_var_1_e20100701-010000-000_20100801-000000-000.outs...
-  201007: 100 snapshots  201007: 200 snapshots  201007: 300 snapshots  201007: 400 snapshots  201007: 500 snapshots  201007: 600 snapshots  201007: 700 snapshots  201007: 744 snapshots
-Processing z=0_var_1_e20100801-010000-000_20100901-000000-000.outs...
-  201008: 100 snapshots  201008: 200 snapshots  201008: 300 snapshots  201008: 400 snapshots  201008: 500 snapshots  201008: 600 snapshots  201008: 700 snapshots  201008: 744 snapshots
-Processing z=0_var_1_e20100901-010000-000_20101001-000000-000.outs...
-  201009: 100 snapshots  201009: 200 snapshots  201009: 300 snapshots  201009: 400 snapshots  201009: 500 snapshots  201009: 600 snapshots  201009: 700 snapshots  201009: 720 snapshots
-Processing z=0_var_1_e20101001-010000-000_20101101-000000-000.outs...
-  201010: 100 snapshots  201010: 200 snapshots  201010: 300 snapshots  201010: 400 snapshots  201010: 500 snapshots  201010: 600 snapshots  201010: 700 snapshots  201010: 744 snapshots
-Processing z=0_var_1_e20101101-010000-000_20101201-000000-000.outs...
-  201011: 100 snapshots  201011: 200 snapshots  201011: 300 snapshots  201011: 400 snapshots  201011: 500 snapshots  201011: 600 snapshots  201011: 700 snapshots  201011: 720 snapshots
-Processing z=0_var_1_e20101201-010000-000_20110101-000000-000.outs...
-  201012: 100 snapshots  201012: 200 snapshots  201012: 300 snapshots  201012: 400 snapshots  201012: 500 snapshots  201012: 600 snapshots  201012: 700 snapshots  201012: 744 snapshots
-Processing z=0_var_1_e20110101-010000-000_20110201-000000-000.outs...
-  201101: 100 snapshots  201101: 200 snapshots  201101: 300 snapshots  201101: 400 snapshots  201101: 500 snapshots  201101: 600 snapshots  201101: 700 snapshots  201101: 744 snapshots
-Processing z=0_var_1_e20110201-010000-000_20110301-000000-000.outs...
-  201102: 100 snapshots  201102: 200 snapshots  201102: 300 snapshots  201102: 400 snapshots  201102: 500 snapshots  201102: 600 snapshots  201102: 672 snapshots
-Processing z=0_var_1_e20110301-010000-000_20110401-000000-000.outs...
-  201103: 100 snapshots  201103: 200 snapshots  201103: 300 snapshots  201103: 400 snapshots  201103: 500 snapshots  201103: 600 snapshots  201103: 700 snapshots  201103: 744 snapshots
-Processing z=0_var_1_e20110401-010000-000_20110501-000000-000.outs...
-  201104: 100 snapshots  201104: 200 snapshots  201104: 300 snapshots  201104: 400 snapshots  201104: 500 snapshots  201104: 600 snapshots  201104: 700 snapshots  201104: 720 snapshots
-Processing z=0_var_1_e20110501-010000-000_20110601-000000-000.outs...
-  201105: 100 snapshots  201105: 200 snapshots  201105: 300 snapshots  201105: 400 snapshots  201105: 500 snapshots  201105: 600 snapshots  201105: 700 snapshots  201105: 744 snapshots
-Processing z=0_var_1_e20110601-010000-000_20110701-000000-000.outs...
-  201106: 100 snapshots  201106: 200 snapshots  201106: 300 snapshots  201106: 400 snapshots  201106: 500 snapshots  201106: 600 snapshots  201106: 700 snapshots  201106: 720 snapshots
-Processing z=0_var_1_e20110701-010000-000_20110801-000000-000.outs...
-  201107: 100 snapshots  201107: 200 snapshots  201107: 300 snapshots  201107: 400 snapshots  201107: 500 snapshots  201107: 600 snapshots  201107: 700 snapshots  201107: 744 snapshots
-Processing z=0_var_1_e20110801-010000-000_20110901-000000-000.outs...
-  201108: 100 snapshots  201108: 200 snapshots  201108: 300 snapshots  201108: 400 snapshots  201108: 500 snapshots  201108: 600 snapshots  201108: 700 snapshots  201108: 744 snapshots
-Processing z=0_var_1_e20110901-010000-000_20111001-000000-000.outs...
-  201109: 100 snapshots  201109: 200 snapshots  201109: 300 snapshots  201109: 400 snapshots  201109: 500 snapshots  201109: 600 snapshots  201109: 700 snapshots  201109: 720 snapshots
-Processing z=0_var_1_e20111001-010000-000_20111101-000000-000.outs...
-  201110: 100 snapshots  201110: 200 snapshots  201110: 300 snapshots  201110: 400 snapshots  201110: 500 snapshots  201110: 600 snapshots  201110: 700 snapshots  201110: 744 snapshots
-Processing z=0_var_1_e20111101-010000-000_20111201-000000-000.outs...
-  201111: 100 snapshots  201111: 200 snapshots  201111: 300 snapshots  201111: 400 snapshots  201111: 500 snapshots  201111: 600 snapshots  201111: 700 snapshots  201111: 720 snapshots
-Processing z=0_var_1_e20111201-010000-000_20120101-000000-000.outs...
-  201112: 100 snapshots  201112: 200 snapshots  201112: 300 snapshots  201112: 400 snapshots  201112: 500 snapshots  201112: 600 snapshots  201112: 700 snapshots  201112: 744 snapshots
-Processing z=0_var_1_e20120101-010000-000_20120201-000000-000.outs...
-  201201: 100 snapshots  201201: 200 snapshots  201201: 300 snapshots  201201: 400 snapshots  201201: 500 snapshots  201201: 600 snapshots  201201: 700 snapshots  201201: 744 snapshots
-Processing z=0_var_1_e20120201-010000-000_20120301-000000-000.outs...
-  201202: 100 snapshots  201202: 200 snapshots  201202: 300 snapshots  201202: 400 snapshots  201202: 500 snapshots  201202: 600 snapshots  201202: 696 snapshots
-Processing z=0_var_1_e20120301-010000-000_20120401-000000-000.outs...
-  201203: 100 snapshots  201203: 200 snapshots  201203: 300 snapshots  201203: 400 snapshots  201203: 500 snapshots  201203: 600 snapshots  201203: 700 snapshots  201203: 744 snapshots
-Processing z=0_var_1_e20120401-010000-000_20120501-000000-000.outs...
-  201204: 100 snapshots  201204: 200 snapshots  201204: 300 snapshots  201204: 400 snapshots  201204: 500 snapshots  201204: 600 snapshots  201204: 700 snapshots  201204: 720 snapshots
-Processing z=0_var_1_e20120501-010000-000_20120601-000000-000.outs...
-  201205: 100 snapshots  201205: 200 snapshots  201205: 300 snapshots  201205: 400 snapshots  201205: 500 snapshots  201205: 600 snapshots  201205: 700 snapshots  201205: 744 snapshots
-Processing z=0_var_1_e20120601-010000-000_20120701-000000-000.outs...
-  201206: 100 snapshots  201206: 200 snapshots  201206: 300 snapshots  201206: 400 snapshots  201206: 500 snapshots  201206: 600 snapshots  201206: 700 snapshots  201206: 720 snapshots
-Processing z=0_var_1_e20120701-010000-000_20120801-000000-000.outs...
-  201207: 100 snapshots  201207: 200 snapshots  201207: 300 snapshots  201207: 400 snapshots  201207: 500 snapshots  201207: 600 snapshots  201207: 700 snapshots  201207: 744 snapshots
-Processing z=0_var_1_e20120801-010000-000_20120901-000000-000.outs...
-  201208: 100 snapshots  201208: 200 snapshots  201208: 300 snapshots  201208: 400 snapshots  201208: 500 snapshots  201208: 600 snapshots  201208: 700 snapshots  201208: 744 snapshots
-Processing z=0_var_1_e20120901-010000-000_20121001-000000-000.outs...
-  201209: 100 snapshots  201209: 200 snapshots  201209: 300 snapshots  201209: 400 snapshots  201209: 500 snapshots  201209: 600 snapshots  201209: 700 snapshots  201209: 720 snapshots
-Processing z=0_var_1_e20121001-010000-000_20121101-000000-000.outs...
-  201210: 100 snapshots  201210: 200 snapshots  201210: 300 snapshots  201210: 400 snapshots  201210: 500 snapshots  201210: 600 snapshots  201210: 700 snapshots  201210: 744 snapshots
-Processing z=0_var_1_e20121101-010000-000_20121201-000000-000.outs...
-  201211: 100 snapshots  201211: 200 snapshots  201211: 300 snapshots  201211: 400 snapshots  201211: 500 snapshots  201211: 600 snapshots  201211: 700 snapshots  201211: 720 snapshots
-Processing z=0_var_1_e20121201-010000-000_20130101-000000-000.outs...
-  201212: 100 snapshots  201212: 200 snapshots  201212: 300 snapshots  201212: 400 snapshots  201212: 500 snapshots  201212: 600 snapshots  201212: 700 snapshots  201212: 744 snapshots
-Processing z=0_var_1_e20130101-010000-000_20130201-000000-000.outs...
-  201301: 100 snapshots  201301: 200 snapshots  201301: 300 snapshots  201301: 400 snapshots  201301: 500 snapshots  201301: 600 snapshots  201301: 700 snapshots  201301: 744 snapshots
-Processing z=0_var_1_e20130201-010000-000_20130301-000000-000.outs...
-  201302: 100 snapshots  201302: 200 snapshots  201302: 300 snapshots  201302: 400 snapshots  201302: 500 snapshots  201302: 600 snapshots  201302: 672 snapshots
-Processing z=0_var_1_e20130301-010000-000_20130401-000000-000.outs...
-  201303: 100 snapshots  201303: 200 snapshots  201303: 300 snapshots  201303: 400 snapshots  201303: 500 snapshots  201303: 600 snapshots  201303: 700 snapshots  201303: 744 snapshots
-Processing z=0_var_1_e20130401-010000-000_20130501-000000-000.outs...
-  201304: 100 snapshots  201304: 200 snapshots  201304: 300 snapshots  201304: 400 snapshots  201304: 500 snapshots  201304: 600 snapshots  201304: 700 snapshots  201304: 720 snapshots
-Processing z=0_var_1_e20130501-010000-000_20130601-000000-000.outs...
-  201305: 100 snapshots  201305: 200 snapshots  201305: 300 snapshots  201305: 400 snapshots  201305: 500 snapshots  201305: 600 snapshots  201305: 700 snapshots  201305: 744 snapshots
-Processing z=0_var_1_e20130601-010000-000_20130701-000000-000.outs...
-  201306: 100 snapshots  201306: 200 snapshots  201306: 300 snapshots  201306: 400 snapshots  201306: 500 snapshots  201306: 600 snapshots  201306: 700 snapshots  201306: 720 snapshots
-Processing z=0_var_1_e20130701-010000-000_20130801-000000-000.outs...
-  201307: 100 snapshots  201307: 200 snapshots  201307: 300 snapshots  201307: 400 snapshots  201307: 500 snapshots  201307: 600 snapshots  201307: 700 snapshots  201307: 744 snapshots
-Processing z=0_var_1_e20130801-010000-000_20130901-000000-000.outs...
-  201308: 100 snapshots  201308: 200 snapshots  201308: 300 snapshots  201308: 400 snapshots  201308: 500 snapshots  201308: 600 snapshots  201308: 700 snapshots  201308: 744 snapshots
-Processing z=0_var_1_e20130901-010000-000_20131001-000000-000.outs...
-  201309: 100 snapshots  201309: 200 snapshots  201309: 300 snapshots  201309: 400 snapshots  201309: 500 snapshots  201309: 600 snapshots  201309: 700 snapshots  201309: 720 snapshots
-Processing z=0_var_1_e20131001-010000-000_20131101-000000-000.outs...
-  201310: 100 snapshots  201310: 200 snapshots  201310: 300 snapshots  201310: 400 snapshots  201310: 500 snapshots  201310: 600 snapshots  201310: 700 snapshots  201310: 744 snapshots
-Processing z=0_var_1_e20131101-010000-000_20131201-000000-000.outs...
-  201311: 100 snapshots  201311: 200 snapshots  201311: 300 snapshots  201311: 400 snapshots  201311: 500 snapshots  201311: 600 snapshots  201311: 700 snapshots  201311: 720 snapshots
-Processing z=0_var_1_e20131201-010000-000_20140101-000000-000.outs...
-  201312: 100 snapshots  201312: 200 snapshots  201312: 300 snapshots  201312: 400 snapshots  201312: 500 snapshots  201312: 600 snapshots  201312: 700 snapshots  201312: 744 snapshots
-Processing z=0_var_1_e20140101-010000-000_20140201-000000-000.outs...
-  201401: 100 snapshots  201401: 200 snapshots  201401: 300 snapshots  201401: 400 snapshots  201401: 500 snapshots  201401: 600 snapshots  201401: 700 snapshots  201401: 744 snapshots
-Processing z=0_var_1_e20140201-010000-000_20140301-000000-000.outs...
-  201402: 100 snapshots  201402: 200 snapshots  201402: 300 snapshots  201402: 400 snapshots  201402: 500 snapshots  201402: 600 snapshots  201402: 672 snapshots
-Processing z=0_var_1_e20140301-010000-000_20140401-000000-000.outs...
-  201403: 100 snapshots  201403: 200 snapshots  201403: 300 snapshots  201403: 400 snapshots  201403: 500 snapshots  201403: 600 snapshots  201403: 700 snapshots  201403: 744 snapshots
-Processing z=0_var_1_e20140401-010000-000_20140501-000000-000.outs...
-  201404: 100 snapshots  201404: 200 snapshots  201404: 300 snapshots  201404: 400 snapshots  201404: 500 snapshots  201404: 600 snapshots  201404: 700 snapshots  201404: 720 snapshots
-Processing z=0_var_1_e20140501-010000-000_20140601-000000-000.outs...
-  201405: 100 snapshots  201405: 200 snapshots  201405: 300 snapshots  201405: 400 snapshots  201405: 500 snapshots  201405: 600 snapshots  201405: 700 snapshots  201405: 744 snapshots
-Processing z=0_var_1_e20140601-010000-000_20140701-000000-000.outs...
-  201406: 100 snapshots  201406: 200 snapshots  201406: 300 snapshots  201406: 400 snapshots  201406: 500 snapshots  201406: 600 snapshots  201406: 700 snapshots  201406: 720 snapshots
-Processing z=0_var_1_e20140701-010000-000_20140801-000000-000.outs...
-  201407: 100 snapshots  201407: 200 snapshots  201407: 300 snapshots  201407: 400 snapshots  201407: 500 snapshots  201407: 600 snapshots  201407: 700 snapshots  201407: 744 snapshots
-Processing z=0_var_1_e20140801-010000-000_20140901-000000-000.outs...
-  201408: 100 snapshots  201408: 200 snapshots  201408: 300 snapshots  201408: 400 snapshots  201408: 500 snapshots  201408: 600 snapshots  201408: 700 snapshots  201408: 744 snapshots
-Processing z=0_var_1_e20140901-010000-000_20141001-000000-000.outs...
-  201409: 100 snapshots  201409: 200 snapshots  201409: 300 snapshots  201409: 400 snapshots  201409: 500 snapshots  201409: 600 snapshots  201409: 700 snapshots  201409: 720 snapshots
-Processing z=0_var_1_e20141001-010000-000_20141101-000000-000.outs...
-  201410: 100 snapshots  201410: 200 snapshots  201410: 300 snapshots  201410: 400 snapshots  201410: 500 snapshots  201410: 600 snapshots  201410: 700 snapshots  201410: 744 snapshots
-Processing z=0_var_1_e20141101-010000-000_20141201-000000-000.outs...
-  201411: 100 snapshots  201411: 200 snapshots  201411: 300 snapshots  201411: 400 snapshots  201411: 500 snapshots  201411: 600 snapshots  201411: 700 snapshots  201411: 720 snapshots
-Processing z=0_var_1_e20141201-010000-000_20150101-000000-000.outs...
-  201412: 100 snapshots  201412: 200 snapshots  201412: 300 snapshots  201412: 400 snapshots  201412: 500 snapshots  201412: 600 snapshots  201412: 700 snapshots  201412: 744 snapshots
-Processing z=0_var_1_e20150101-010000-000_20150201-000000-000.outs...
-  201501: 100 snapshots  201501: 200 snapshots  201501: 300 snapshots  201501: 400 snapshots  201501: 500 snapshots  201501: 600 snapshots  201501: 700 snapshots  201501: 744 snapshots
-Processing z=0_var_1_e20150201-010000-000_20150301-000000-000.outs...
-  201502: 100 snapshots  201502: 200 snapshots  201502: 300 snapshots  201502: 400 snapshots  201502: 500 snapshots  201502: 600 snapshots  201502: 672 snapshots
-Processing z=0_var_1_e20150301-010000-000_20150401-000000-000.outs...
-  201503: 100 snapshots  201503: 200 snapshots  201503: 300 snapshots  201503: 400 snapshots  201503: 500 snapshots  201503: 600 snapshots  201503: 700 snapshots  201503: 744 snapshots
-Processing z=0_var_1_e20150401-010000-000_20150501-000000-000.outs...
-  201504: 100 snapshots  201504: 200 snapshots  201504: 300 snapshots  201504: 400 snapshots  201504: 500 snapshots  201504: 600 snapshots  201504: 700 snapshots  201504: 720 snapshots
-Processing z=0_var_1_e20150501-010000-000_20150601-000000-000.outs...
-  201505: 100 snapshots  201505: 200 snapshots  201505: 300 snapshots  201505: 400 snapshots  201505: 500 snapshots  201505: 600 snapshots  201505: 700 snapshots  201505: 744 snapshots
-Processing z=0_var_1_e20150601-010000-000_20150701-000000-000.outs...
-  201506: 100 snapshots  201506: 200 snapshots  201506: 300 snapshots  201506: 400 snapshots  201506: 500 snapshots  201506: 600 snapshots  201506: 700 snapshots  201506: 720 snapshots
-Processing z=0_var_1_e20150701-010000-000_20150801-000000-000.outs...
-  201507: 100 snapshots  201507: 200 snapshots  201507: 300 snapshots  201507: 400 snapshots  201507: 500 snapshots  201507: 600 snapshots  201507: 700 snapshots  201507: 744 snapshots
-Processing z=0_var_1_e20150801-010000-000_20150901-000000-000.outs...
-  201508: 100 snapshots  201508: 200 snapshots  201508: 300 snapshots  201508: 400 snapshots  201508: 500 snapshots  201508: 600 snapshots  201508: 700 snapshots  201508: 744 snapshots
-Processing z=0_var_1_e20150901-010000-000_20151001-000000-000.outs...
-  201509: 100 snapshots  201509: 200 snapshots  201509: 300 snapshots  201509: 400 snapshots  201509: 500 snapshots  201509: 600 snapshots  201509: 700 snapshots  201509: 720 snapshots
-Processing z=0_var_1_e20151001-010000-000_20151101-000000-000.outs...
-  201510: 100 snapshots  201510: 200 snapshots  201510: 300 snapshots  201510: 400 snapshots  201510: 500 snapshots  201510: 600 snapshots  201510: 700 snapshots  201510: 744 snapshots
-Processing z=0_var_1_e20151101-010000-000_20151201-000000-000.outs...
-  201511: 100 snapshots  201511: 200 snapshots  201511: 300 snapshots  201511: 400 snapshots  201511: 500 snapshots  201511: 600 snapshots  201511: 700 snapshots  201511: 720 snapshots
-Processing z=0_var_1_e20151201-010000-000_20160101-000000-000.outs...
-  201512: 100 snapshots  201512: 200 snapshots  201512: 300 snapshots  201512: 400 snapshots  201512: 500 snapshots  201512: 600 snapshots  201512: 700 snapshots  201512: 744 snapshots
-Processing z=0_var_1_e20160101-010000-000_20160201-000000-000.outs...
-  201601: 100 snapshots  201601: 200 snapshots  201601: 300 snapshots  201601: 400 snapshots  201601: 500 snapshots  201601: 600 snapshots  201601: 700 snapshots  201601: 744 snapshots
-Processing z=0_var_1_e20160201-010000-000_20160301-000000-000.outs...
-  201602: 100 snapshots  201602: 200 snapshots  201602: 300 snapshots  201602: 400 snapshots  201602: 500 snapshots  201602: 600 snapshots  201602: 696 snapshots
-Processing z=0_var_1_e20160301-010000-000_20160401-000000-000.outs...
-  201603: 100 snapshots  201603: 200 snapshots  201603: 300 snapshots  201603: 400 snapshots  201603: 500 snapshots  201603: 600 snapshots  201603: 700 snapshots  201603: 744 snapshots
-Processing z=0_var_1_e20160401-010000-000_20160501-000000-000.outs...
-  201604: 100 snapshots  201604: 200 snapshots  201604: 300 snapshots  201604: 400 snapshots  201604: 500 snapshots  201604: 600 snapshots  201604: 700 snapshots  201604: 720 snapshots
-Processing z=0_var_1_e20160501-010000-000_20160601-000000-000.outs...
-  201605: 100 snapshots  201605: 200 snapshots  201605: 300 snapshots  201605: 400 snapshots  201605: 500 snapshots  201605: 600 snapshots  201605: 700 snapshots  201605: 744 snapshots
-Processing z=0_var_1_e20160601-010000-000_20160701-000000-000.outs...
-  201606: 100 snapshots  201606: 200 snapshots  201606: 300 snapshots  201606: 400 snapshots  201606: 500 snapshots  201606: 600 snapshots  201606: 700 snapshots  201606: 720 snapshots
-Processing z=0_var_1_e20160701-010000-000_20160801-000000-000.outs...
-  201607: 100 snapshots  201607: 200 snapshots  201607: 300 snapshots  201607: 400 snapshots  201607: 500 snapshots  201607: 600 snapshots  201607: 700 snapshots  201607: 744 snapshots
-Processing z=0_var_1_e20160801-010000-000_20160901-000000-000.outs...
-  201608: 100 snapshots  201608: 200 snapshots  201608: 300 snapshots  201608: 400 snapshots  201608: 500 snapshots  201608: 600 snapshots  201608: 700 snapshots  201608: 744 snapshots
-Processing z=0_var_1_e20160901-010000-000_20161001-000000-000.outs...
-  201609: 100 snapshots  201609: 200 snapshots  201609: 300 snapshots  201609: 400 snapshots  201609: 500 snapshots  201609: 600 snapshots  201609: 700 snapshots  201609: 720 snapshots
-Processing z=0_var_1_e20161001-010000-000_20161101-000000-000.outs...
-  201610: 100 snapshots  201610: 200 snapshots  201610: 300 snapshots  201610: 400 snapshots  201610: 500 snapshots  201610: 600 snapshots  201610: 700 snapshots  201610: 744 snapshots
-Processing z=0_var_1_e20161101-010000-000_20161201-000000-000.outs...
-  201611: 100 snapshots  201611: 200 snapshots  201611: 300 snapshots  201611: 400 snapshots  201611: 500 snapshots  201611: 600 snapshots  201611: 700 snapshots  201611: 720 snapshots
-Processing z=0_var_1_e20161201-010000-000_20170101-000000-000.outs...
-  201612: 100 snapshots  201612: 200 snapshots  201612: 300 snapshots  201612: 400 snapshots  201612: 500 snapshots  201612: 600 snapshots  201612: 700 snapshots  201612: 744 snapshots
-Processing z=0_var_1_e20170101-010000-000_20170201-000000-000.outs...
-  201701: 100 snapshots  201701: 200 snapshots  201701: 300 snapshots  201701: 400 snapshots  201701: 500 snapshots  201701: 600 snapshots  201701: 700 snapshots  201701: 744 snapshots
-Processing z=0_var_1_e20170201-010000-000_20170301-000000-000.outs...
-  201702: 100 snapshots  201702: 200 snapshots  201702: 300 snapshots  201702: 400 snapshots  201702: 500 snapshots  201702: 600 snapshots  201702: 672 snapshots
-Processing z=0_var_1_e20170301-010000-000_20170401-000000-000.outs...
-  201703: 100 snapshots  201703: 200 snapshots  201703: 300 snapshots  201703: 400 snapshots  201703: 500 snapshots  201703: 600 snapshots  201703: 700 snapshots  201703: 744 snapshots
-Processing z=0_var_1_e20170401-010000-000_20170501-000000-000.outs...
-  201704: 100 snapshots  201704: 200 snapshots  201704: 300 snapshots  201704: 400 snapshots  201704: 500 snapshots  201704: 600 snapshots  201704: 700 snapshots  201704: 720 snapshots
-Processing z=0_var_1_e20170501-010000-000_20170601-000000-000.outs...
-  201705: 100 snapshots  201705: 200 snapshots  201705: 300 snapshots  201705: 400 snapshots  201705: 500 snapshots  201705: 600 snapshots  201705: 700 snapshots  201705: 744 snapshots
-Processing z=0_var_1_e20170601-010000-000_20170701-000000-000.outs...
-  201706: 100 snapshots  201706: 200 snapshots  201706: 300 snapshots  201706: 400 snapshots  201706: 500 snapshots  201706: 600 snapshots  201706: 700 snapshots  201706: 720 snapshots
-Processing z=0_var_1_e20170701-010000-000_20170801-000000-000.outs...
-  201707: 100 snapshots  201707: 200 snapshots  201707: 300 snapshots  201707: 400 snapshots  201707: 500 snapshots  201707: 600 snapshots  201707: 700 snapshots  201707: 744 snapshots
-Processing z=0_var_1_e20170801-010000-000_20170901-000000-000.outs...
-  201708: 100 snapshots  201708: 200 snapshots  201708: 300 snapshots  201708: 400 snapshots  201708: 500 snapshots  201708: 600 snapshots  201708: 700 snapshots  201708: 744 snapshots
-Processing z=0_var_1_e20170901-010000-000_20171001-000000-000.outs...
-  201709: 100 snapshots  201709: 200 snapshots  201709: 300 snapshots  201709: 400 snapshots  201709: 500 snapshots  201709: 600 snapshots  201709: 700 snapshots  201709: 720 snapshots
-Processing z=0_var_1_e20171001-010000-000_20171101-000000-000.outs...
-  201710: 100 snapshots  201710: 200 snapshots  201710: 300 snapshots  201710: 400 snapshots  201710: 500 snapshots  201710: 600 snapshots  201710: 700 snapshots  201710: 744 snapshots
-Processing z=0_var_1_e20171101-010000-000_20171201-000000-000.outs...
-  201711: 100 snapshots  201711: 200 snapshots  201711: 300 snapshots  201711: 400 snapshots  201711: 500 snapshots  201711: 600 snapshots  201711: 700 snapshots  201711: 720 snapshots
-Processing z=0_var_1_e20171201-010000-000_20180101-000000-000.outs...
-  201712: 100 snapshots  201712: 200 snapshots  201712: 300 snapshots  201712: 400 snapshots  201712: 500 snapshots  201712: 600 snapshots  201712: 700 snapshots  201712: 744 snapshots
-Processing z=0_var_1_e20180101-010000-000_20180201-000000-000.outs...
-  201801: 100 snapshots  201801: 200 snapshots  201801: 300 snapshots  201801: 400 snapshots  201801: 500 snapshots  201801: 600 snapshots  201801: 700 snapshots  201801: 744 snapshots
-Processing z=0_var_1_e20180201-010000-000_20180301-000000-000.outs...
-  201802: 100 snapshots  201802: 200 snapshots  201802: 300 snapshots  201802: 400 snapshots  201802: 500 snapshots  201802: 600 snapshots  201802: 672 snapshots
-Processing z=0_var_1_e20180301-010000-000_20180401-000000-000.outs...
-  201803: 100 snapshots  201803: 200 snapshots  201803: 300 snapshots  201803: 400 snapshots  201803: 500 snapshots  201803: 600 snapshots  201803: 700 snapshots  201803: 744 snapshots
-Processing z=0_var_1_e20180401-010000-000_20180501-000000-000.outs...
-  201804: 100 snapshots  201804: 200 snapshots  201804: 300 snapshots  201804: 400 snapshots  201804: 500 snapshots  201804: 600 snapshots  201804: 700 snapshots  201804: 720 snapshots
-Processing z=0_var_1_e20180501-010000-000_20180601-000000-000.outs...
-  201805: 100 snapshots  201805: 200 snapshots  201805: 300 snapshots  201805: 400 snapshots  201805: 500 snapshots  201805: 600 snapshots  201805: 700 snapshots  201805: 744 snapshots
-Processing z=0_var_1_e20180601-010000-000_20180701-000000-000.outs...
-  201806: 100 snapshots  201806: 200 snapshots  201806: 300 snapshots  201806: 400 snapshots  201806: 500 snapshots  201806: 600 snapshots  201806: 700 snapshots  201806: 720 snapshots
-Processing z=0_var_1_e20180701-010000-000_20180801-000000-000.outs...
-  201807: 100 snapshots  201807: 200 snapshots  201807: 300 snapshots  201807: 400 snapshots  201807: 500 snapshots  201807: 600 snapshots  201807: 700 snapshots  201807: 744 snapshots
-Processing z=0_var_1_e20180801-010000-000_20180901-000000-000.outs...
-  201808: 100 snapshots  201808: 200 snapshots  201808: 300 snapshots  201808: 400 snapshots  201808: 500 snapshots  201808: 600 snapshots  201808: 700 snapshots  201808: 744 snapshots
-Processing z=0_var_1_e20180901-010000-000_20181001-000000-000.outs...
-  201809: 100 snapshots  201809: 200 snapshots  201809: 300 snapshots  201809: 400 snapshots  201809: 500 snapshots  201809: 600 snapshots  201809: 700 snapshots  201809: 720 snapshots
-Processing z=0_var_1_e20181001-010000-000_20181101-000000-000.outs...
-  201810: 100 snapshots  201810: 200 snapshots  201810: 300 snapshots  201810: 400 snapshots  201810: 500 snapshots  201810: 600 snapshots  201810: 700 snapshots  201810: 744 snapshots
-Processing z=0_var_1_e20181101-010000-000_20181201-000000-000.outs...
-  201811: 100 snapshots  201811: 200 snapshots  201811: 300 snapshots  201811: 400 snapshots  201811: 500 snapshots  201811: 600 snapshots  201811: 700 snapshots  201811: 720 snapshots
-Processing z=0_var_1_e20181201-010000-000_20190101-000000-000.outs...
-  201812: 100 snapshots  201812: 200 snapshots  201812: 300 snapshots  201812: 400 snapshots  201812: 500 snapshots  201812: 600 snapshots  201812: 700 snapshots  201812: 744 snapshots
-Processing z=0_var_1_e20190101-010000-000_20190201-000000-000.outs...
-  201901: 100 snapshots  201901: 200 snapshots  201901: 300 snapshots  201901: 400 snapshots  201901: 500 snapshots  201901: 600 snapshots  201901: 700 snapshots  201901: 744 snapshots
-Processing z=0_var_1_e20190201-010000-000_20190301-000000-000.outs...
-  201902: 100 snapshots  201902: 200 snapshots  201902: 300 snapshots  201902: 400 snapshots  201902: 500 snapshots  201902: 600 snapshots  201902: 672 snapshots
-Processing z=0_var_1_e20190301-010000-000_20190401-000000-000.outs...
-  201903: 100 snapshots  201903: 200 snapshots  201903: 300 snapshots  201903: 400 snapshots  201903: 500 snapshots  201903: 600 snapshots  201903: 700 snapshots  201903: 744 snapshots
-Processing z=0_var_1_e20190401-010000-000_20190501-000000-000.outs...
-  201904: 100 snapshots  201904: 200 snapshots  201904: 300 snapshots  201904: 400 snapshots  201904: 500 snapshots  201904: 600 snapshots  201904: 700 snapshots  201904: 720 snapshots
-Processing z=0_var_1_e20190501-010000-000_20190601-000000-000.outs...
-  201905: 100 snapshots  201905: 200 snapshots  201905: 300 snapshots  201905: 400 snapshots  201905: 500 snapshots  201905: 600 snapshots  201905: 700 snapshots  201905: 744 snapshots
-Processing z=0_var_1_e20190601-010000-000_20190701-000000-000.outs...
-  201906: 100 snapshots  201906: 200 snapshots  201906: 300 snapshots  201906: 400 snapshots  201906: 500 snapshots  201906: 600 snapshots  201906: 700 snapshots  201906: 720 snapshots
-Processing z=0_var_1_e20190701-010000-000_20190801-000000-000.outs...
-  201907: 100 snapshots  201907: 200 snapshots  201907: 300 snapshots  201907: 400 snapshots  201907: 500 snapshots  201907: 600 snapshots  201907: 700 snapshots  201907: 744 snapshots
-Processing z=0_var_1_e20190801-010000-000_20190901-000000-000.outs...
-  201908: 100 snapshots  201908: 200 snapshots  201908: 300 snapshots  201908: 400 snapshots  201908: 500 snapshots  201908: 600 snapshots  201908: 700 snapshots  201908: 744 snapshots
-Processing z=0_var_1_e20190901-010000-000_20191001-000000-000.outs...
-  201909: 100 snapshots  201909: 200 snapshots  201909: 300 snapshots  201909: 400 snapshots  201909: 500 snapshots  201909: 600 snapshots  201909: 700 snapshots  201909: 720 snapshots
-Processing z=0_var_1_e20191001-010000-000_20191101-000000-000.outs...
-  201910: 100 snapshots  201910: 200 snapshots  201910: 300 snapshots  201910: 400 snapshots  201910: 500 snapshots  201910: 600 snapshots  201910: 700 snapshots  201910: 744 snapshots
-Processing z=0_var_1_e20191101-010000-000_20191201-000000-000.outs...
-  201911: 100 snapshots  201911: 200 snapshots  201911: 300 snapshots  201911: 400 snapshots  201911: 500 snapshots  201911: 600 snapshots  201911: 700 snapshots  201911: 720 snapshots
-Processing z=0_var_1_e20191201-010000-000_20200101-000000-000.outs...
-  201912: 100 snapshots  201912: 200 snapshots  201912: 300 snapshots  201912: 400 snapshots  201912: 500 snapshots  201912: 600 snapshots  201912: 700 snapshots  201912: 744 snapshots
-Processing z=0_var_1_e20200101-010000-000_20200201-000000-000.outs...
-  202001: 100 snapshots  202001: 200 snapshots  202001: 300 snapshots  202001: 400 snapshots  202001: 500 snapshots  202001: 600 snapshots  202001: 700 snapshots  202001: 744 snapshots
-Processing z=0_var_1_e20200201-010000-000_20200301-000000-000.outs...
-  202002: 100 snapshots  202002: 200 snapshots  202002: 300 snapshots  202002: 400 snapshots  202002: 500 snapshots  202002: 600 snapshots  202002: 696 snapshots
-Processing z=0_var_1_e20200301-010000-000_20200401-000000-000.outs...
-  202003: 100 snapshots  202003: 200 snapshots  202003: 300 snapshots  202003: 400 snapshots  202003: 500 snapshots  202003: 600 snapshots  202003: 700 snapshots  202003: 744 snapshots
-Processing z=0_var_1_e20200401-010000-000_20200501-000000-000.outs...
-  202004: 100 snapshots  202004: 200 snapshots  202004: 300 snapshots  202004: 400 snapshots  202004: 500 snapshots  202004: 600 snapshots  202004: 700 snapshots  202004: 720 snapshots
-Processing z=0_var_1_e20200501-010000-000_20200601-000000-000.outs...
-  202005: 100 snapshots  202005: 200 snapshots  202005: 300 snapshots  202005: 400 snapshots  202005: 500 snapshots  202005: 600 snapshots  202005: 700 snapshots  202005: 744 snapshots
-Processing z=0_var_1_e20200601-010000-000_20200701-000000-000.outs...
-  202006: 100 snapshots  202006: 200 snapshots  202006: 300 snapshots  202006: 400 snapshots  202006: 500 snapshots  202006: 600 snapshots  202006: 700 snapshots  202006: 720 snapshots
-Processing z=0_var_1_e20200701-010000-000_20200801-000000-000.outs...
-  202007: 100 snapshots  202007: 200 snapshots  202007: 300 snapshots  202007: 400 snapshots  202007: 500 snapshots  202007: 600 snapshots  202007: 700 snapshots  202007: 744 snapshots
-Processing z=0_var_1_e20200801-010000-000_20200901-000000-000.outs...
-  202008: 100 snapshots  202008: 200 snapshots  202008: 300 snapshots  202008: 400 snapshots  202008: 500 snapshots  202008: 600 snapshots  202008: 700 snapshots  202008: 744 snapshots
-Processing z=0_var_1_e20200901-010000-000_20201001-000000-000.outs...
-  202009: 100 snapshots  202009: 200 snapshots  202009: 300 snapshots  202009: 400 snapshots  202009: 500 snapshots  202009: 600 snapshots  202009: 700 snapshots  202009: 720 snapshots
-Processing z=0_var_1_e20201001-010000-000_20201101-000000-000.outs...
-  202010: 100 snapshots  202010: 200 snapshots  202010: 300 snapshots  202010: 400 snapshots  202010: 500 snapshots  202010: 600 snapshots  202010: 700 snapshots  202010: 744 snapshots
-Processing z=0_var_1_e20201101-010000-000_20201201-000000-000.outs...
-  202011: 100 snapshots  202011: 200 snapshots  202011: 300 snapshots  202011: 400 snapshots  202011: 500 snapshots  202011: 600 snapshots  202011: 700 snapshots  202011: 720 snapshots
-Processing z=0_var_1_e20201201-010000-000_20210101-000000-000.outs...
-  202012: 100 snapshots  202012: 200 snapshots  202012: 300 snapshots  202012: 400 snapshots  202012: 500 snapshots  202012: 600 snapshots  202012: 700 snapshots  202012: 744 snapshots
-Processing z=0_var_1_e20210101-010000-000_20210201-000000-000.outs...
-  202101: 100 snapshots  202101: 200 snapshots  202101: 300 snapshots  202101: 400 snapshots  202101: 500 snapshots  202101: 600 snapshots  202101: 700 snapshots  202101: 744 snapshots
-Processing z=0_var_1_e20210201-010000-000_20210301-000000-000.outs...
-  202102: 100 snapshots  202102: 200 snapshots  202102: 300 snapshots  202102: 400 snapshots  202102: 500 snapshots  202102: 600 snapshots  202102: 672 snapshots
-Processing z=0_var_1_e20210301-010000-000_20210401-000000-000.outs...
-  202103: 100 snapshots  202103: 200 snapshots  202103: 300 snapshots  202103: 400 snapshots  202103: 500 snapshots  202103: 600 snapshots  202103: 700 snapshots  202103: 744 snapshots
-Processing z=0_var_1_e20210401-010000-000_20210501-000000-000.outs...
-  202104: 100 snapshots  202104: 200 snapshots  202104: 300 snapshots  202104: 400 snapshots  202104: 500 snapshots  202104: 600 snapshots  202104: 700 snapshots  202104: 720 snapshots
-Processing z=0_var_1_e20210501-010000-000_20210601-000000-000.outs...
-  202105: 100 snapshots  202105: 200 snapshots  202105: 300 snapshots  202105: 400 snapshots  202105: 500 snapshots  202105: 600 snapshots  202105: 700 snapshots  202105: 744 snapshots
-Processing z=0_var_1_e20210601-010000-000_20210701-000000-000.outs...
-  202106: 100 snapshots  202106: 200 snapshots  202106: 300 snapshots  202106: 400 snapshots  202106: 500 snapshots  202106: 600 snapshots  202106: 700 snapshots  202106: 720 snapshots
-Processing z=0_var_1_e20210701-010000-000_20210801-000000-000.outs...
-  202107: 100 snapshots  202107: 200 snapshots  202107: 300 snapshots  202107: 400 snapshots  202107: 500 snapshots  202107: 600 snapshots  202107: 700 snapshots  202107: 744 snapshots
-Processing z=0_var_1_e20210801-010000-000_20210901-000000-000.outs...
-  202108: 100 snapshots  202108: 200 snapshots  202108: 300 snapshots  202108: 400 snapshots  202108: 500 snapshots  202108: 600 snapshots  202108: 700 snapshots  202108: 744 snapshots
-Processing z=0_var_1_e20210901-010000-000_20211001-000000-000.outs...
-  202109: 100 snapshots  202109: 200 snapshots  202109: 300 snapshots  202109: 400 snapshots  202109: 500 snapshots  202109: 600 snapshots  202109: 700 snapshots  202109: 720 snapshots
-Processing z=0_var_1_e20211001-010000-000_20211101-000000-000.outs...
-  202110: 100 snapshots  202110: 200 snapshots  202110: 300 snapshots  202110: 400 snapshots  202110: 500 snapshots  202110: 600 snapshots  202110: 700 snapshots  202110: 744 snapshots
-Processing z=0_var_1_e20211101-010000-000_20211201-000000-000.outs...
-  202111: 100 snapshots  202111: 200 snapshots  202111: 300 snapshots  202111: 400 snapshots  202111: 500 snapshots  202111: 600 snapshots  202111: 700 snapshots  202111: 720 snapshots
-Processing z=0_var_1_e20211201-010000-000_20220101-000000-000.outs...
-  202112: 100 snapshots  202112: 200 snapshots  202112: 300 snapshots  202112: 400 snapshots  202112: 500 snapshots  202112: 600 snapshots  202112: 700 snapshots  202112: 744 snapshots
-Processing z=0_var_1_e20220101-010000-000_20220201-000000-000.outs...
-  202201: 100 snapshots  202201: 200 snapshots  202201: 300 snapshots  202201: 400 snapshots  202201: 500 snapshots  202201: 600 snapshots  202201: 700 snapshots  202201: 744 snapshots
-Processing z=0_var_1_e20220201-010000-000_20220301-000000-000.outs...
-  202202: 100 snapshots  202202: 200 snapshots  202202: 300 snapshots  202202: 400 snapshots  202202: 500 snapshots  202202: 600 snapshots  202202: 672 snapshots
-Processing z=0_var_1_e20220301-010000-000_20220401-000000-000.outs...
-  202203: 100 snapshots  202203: 200 snapshots  202203: 300 snapshots  202203: 400 snapshots  202203: 500 snapshots  202203: 600 snapshots  202203: 700 snapshots  202203: 744 snapshots
-Processing z=0_var_1_e20220401-010000-000_20220501-000000-000.outs...
-  202204: 100 snapshots  202204: 200 snapshots  202204: 300 snapshots  202204: 400 snapshots  202204: 500 snapshots  202204: 600 snapshots  202204: 700 snapshots  202204: 720 snapshots
-Processing z=0_var_1_e20220501-010000-000_20220601-000000-000.outs...
-  202205: 100 snapshots  202205: 200 snapshots  202205: 300 snapshots  202205: 400 snapshots  202205: 500 snapshots  202205: 600 snapshots  202205: 700 snapshots  202205: 744 snapshots
-Processing z=0_var_1_e20220601-010000-000_20220701-000000-000.outs...
-  202206: 100 snapshots  202206: 200 snapshots  202206: 300 snapshots  202206: 400 snapshots  202206: 500 snapshots  202206: 600 snapshots  202206: 700 snapshots  202206: 720 snapshots
-Processing z=0_var_1_e20220701-010000-000_20220801-000000-000.outs...
-  202207: 100 snapshots  202207: 200 snapshots  202207: 300 snapshots  202207: 400 snapshots  202207: 500 snapshots  202207: 600 snapshots  202207: 700 snapshots  202207: 744 snapshots
-Processing z=0_var_1_e20220801-010000-000_20220901-000000-000.outs...
-  202208: 100 snapshots  202208: 200 snapshots  202208: 300 snapshots  202208: 400 snapshots  202208: 500 snapshots  202208: 600 snapshots  202208: 700 snapshots  202208: 744 snapshots
-Processing z=0_var_1_e20220901-010000-000_20221001-000000-000.outs...
-  202209: 100 snapshots  202209: 200 snapshots  202209: 300 snapshots  202209: 400 snapshots  202209: 500 snapshots  202209: 600 snapshots  202209: 700 snapshots  202209: 720 snapshots
-Processing z=0_var_1_e20221001-010000-000_20221101-000000-000.outs...
-  202210: 100 snapshots  202210: 200 snapshots  202210: 300 snapshots  202210: 400 snapshots  202210: 500 snapshots  202210: 600 snapshots  202210: 700 snapshots  202210: 744 snapshots
-Processing z=0_var_1_e20221101-010000-000_20221201-000000-000.outs...
-  202211: 100 snapshots  202211: 200 snapshots  202211: 300 snapshots  202211: 400 snapshots  202211: 500 snapshots  202211: 600 snapshots  202211: 700 snapshots  202211: 720 snapshots
-Processing z=0_var_1_e20221201-010000-000_20230101-000000-000.outs...
-  202212: 100 snapshots  202212: 200 snapshots  202212: 300 snapshots  202212: 400 snapshots  202212: 500 snapshots  202212: 600 snapshots  202212: 700 snapshots  202212: 744 snapshots
-Processing z=0_var_1_e20230101-010000-000_20230201-000000-000.outs...
-  202301: 100 snapshots  202301: 200 snapshots  202301: 300 snapshots  202301: 400 snapshots  202301: 500 snapshots  202301: 600 snapshots  202301: 700 snapshots  202301: 744 snapshots
-Processing z=0_var_1_e20230201-010000-000_20230301-000000-000.outs...
-  202302: 100 snapshots  202302: 200 snapshots  202302: 300 snapshots  202302: 400 snapshots  202302: 500 snapshots  202302: 600 snapshots  202302: 672 snapshots
-Processing z=0_var_1_e20230301-010000-000_20230401-000000-000.outs...
-  202303: 100 snapshots  202303: 200 snapshots  202303: 300 snapshots  202303: 400 snapshots  202303: 500 snapshots  202303: 600 snapshots  202303: 700 snapshots  202303: 744 snapshots
-Processing z=0_var_1_e20230401-010000-000_20230501-000000-000.outs...
-  202304: 100 snapshots  202304: 200 snapshots  202304: 300 snapshots  202304: 400 snapshots  202304: 500 snapshots  202304: 600 snapshots  202304: 700 snapshots  202304: 720 snapshots
-Processing z=0_var_1_e20230501-010000-000_20230601-000000-000.outs...
-  202305: 100 snapshots  202305: 200 snapshots  202305: 300 snapshots  202305: 400 snapshots  202305: 500 snapshots  202305: 600 snapshots  202305: 700 snapshots  202305: 744 snapshots
-Processing z=0_var_1_e20230601-010000-000_20230701-000000-000.outs...
-  202306: 100 snapshots  202306: 200 snapshots  202306: 300 snapshots  202306: 400 snapshots  202306: 500 snapshots  202306: 600 snapshots  202306: 700 snapshots  202306: 720 snapshots
-Processing z=0_var_1_e20230701-010000-000_20230801-000000-000.outs...
-  202307: 100 snapshots  202307: 200 snapshots  202307: 300 snapshots  202307: 400 snapshots  202307: 500 snapshots  202307: 600 snapshots  202307: 700 snapshots  202307: 744 snapshots
-Processing z=0_var_1_e20230801-010000-000_20230901-000000-000.outs...
-  202308: 100 snapshots  202308: 200 snapshots  202308: 300 snapshots  202308: 400 snapshots  202308: 500 snapshots  202308: 600 snapshots  202308: 700 snapshots  202308: 744 snapshots
-Processing z=0_var_1_e20230901-010000-000_20231001-000000-000.outs...
-  202309: 100 snapshots  202309: 200 snapshots  202309: 300 snapshots  202309: 400 snapshots  202309: 500 snapshots  202309: 600 snapshots  202309: 700 snapshots  202309: 720 snapshots
-Processing z=0_var_1_e20231001-010000-000_20231101-000000-000.outs...
-  202310: 100 snapshots  202310: 200 snapshots  202310: 300 snapshots  202310: 400 snapshots  202310: 500 snapshots  202310: 600 snapshots  202310: 700 snapshots  202310: 744 snapshots
-Processing z=0_var_1_e20231101-010000-000_20231201-000000-000.outs...
-  202311: 100 snapshots  202311: 200 snapshots  202311: 300 snapshots  202311: 400 snapshots  202311: 500 snapshots  202311: 600 snapshots  202311: 700 snapshots  202311: 720 snapshots
-Processing z=0_var_1_e20231201-010000-000_20240101-000000-000.outs...
-  202312: 100 snapshots  202312: 200 snapshots  202312: 300 snapshots  202312: 400 snapshots  202312: 500 snapshots  202312: 600 snapshots  202312: 700 snapshots  202312: 744 snapshots
-Processing z=0_var_1_e20240101-010000-000_20240201-000000-000.outs...
-  202401: 100 snapshots  202401: 200 snapshots  202401: 300 snapshots  202401: 400 snapshots  202401: 500 snapshots  202401: 600 snapshots  202401: 700 snapshots  202401: 744 snapshots
-Processing z=0_var_1_e20240201-010000-000_20240301-000000-000.outs...
-  202402: 100 snapshots  202402: 200 snapshots  202402: 300 snapshots  202402: 400 snapshots  202402: 500 snapshots  202402: 600 snapshots  202402: 696 snapshots
-Processing z=0_var_1_e20240301-010000-000_20240401-000000-000.outs...
-  202403: 100 snapshots  202403: 200 snapshots  202403: 300 snapshots  202403: 400 snapshots  202403: 500 snapshots  202403: 600 snapshots  202403: 700 snapshots  202403: 744 snapshots
-Processing z=0_var_1_e20240401-010000-000_20240501-000000-000.outs...
-  202404: 100 snapshots  202404: 200 snapshots  202404: 300 snapshots  202404: 400 snapshots  202404: 500 snapshots  202404: 600 snapshots  202404: 700 snapshots  202404: 720 snapshots
-Processing z=0_var_1_e20240501-010000-000_20240601-000000-000.outs...
-  202405: 100 snapshots  202405: 200 snapshots  202405: 300 snapshots  202405: 400 snapshots  202405: 500 snapshots  202405: 600 snapshots  202405: 700 snapshots  202405: 744 snapshots
-Processing z=0_var_1_e20240601-010000-000_20240701-000000-000.outs...
-  202406: 100 snapshots  202406: 200 snapshots  202406: 300 snapshots  202406: 400 snapshots  202406: 500 snapshots  202406: 600 snapshots  202406: 700 snapshots  202406: 720 snapshots
-Processing z=0_var_1_e20240701-010000-000_20240801-000000-000.outs...
-  202407: 100 snapshots  202407: 200 snapshots  202407: 300 snapshots  202407: 400 snapshots  202407: 500 snapshots  202407: 600 snapshots  202407: 700 snapshots  202407: 744 snapshots
-Processing z=0_var_1_e20240801-010000-000_20240901-000000-000.outs...
-  202408: 100 snapshots  202408: 200 snapshots  202408: 300 snapshots  202408: 400 snapshots  202408: 500 snapshots  202408: 600 snapshots  202408: 700 snapshots  202408: 744 snapshots
-Processing z=0_var_1_e20240901-010000-000_20241001-000000-000.outs...
-  202409: 100 snapshots  202409: 200 snapshots  202409: 300 snapshots  202409: 400 snapshots  202409: 500 snapshots  202409: 600 snapshots  202409: 700 snapshots  202409: 720 snapshots
-Processing z=0_var_1_e20241001-010000-000_20241101-000000-000.outs...
-  202410: 100 snapshots  202410: 200 snapshots  202410: 300 snapshots  202410: 400 snapshots  202410: 500 snapshots  202410: 600 snapshots  202410: 700 snapshots  202410: 744 snapshots
-Processing z=0_var_1_e20241101-010000-000_20241201-000000-000.outs...
-  202411: 100 snapshots  202411: 200 snapshots  202411: 300 snapshots  202411: 400 snapshots  202411: 500 snapshots  202411: 600 snapshots  202411: 700 snapshots  202411: 720 snapshots
-Processing z=0_var_1_e20241201-010000-000_20250101-000000-000.outs...
-  202412: 100 snapshots  202412: 200 snapshots  202412: 300 snapshots  202412: 400 snapshots  202412: 500 snapshots  202412: 600 snapshots  202412: 700 snapshots  202412: 744 snapshots
-Processing z=0_var_1_e20250101-010000-000_20250201-000000-000.outs...
-  202501: 100 snapshots  202501: 200 snapshots  202501: 300 snapshots  202501: 400 snapshots  202501: 500 snapshots  202501: 600 snapshots  202501: 700 snapshots  202501: 744 snapshots
-Processing z=0_var_1_e20250201-010000-000_20250301-000000-000.outs...
-  202502: 100 snapshots  202502: 200 snapshots  202502: 300 snapshots  202502: 400 snapshots  202502: 500 snapshots  202502: 600 snapshots  202502: 672 snapshots
-Processing z=0_var_1_e20250301-010000-000_20250401-000000-000.outs...
-  202503: 100 snapshots  202503: 200 snapshots  202503: 300 snapshots  202503: 400 snapshots  202503: 500 snapshots  202503: 600 snapshots  202503: 700 snapshots  202503: 744 snapshots
-Processing z=0_var_1_e20250401-010000-000_20250501-000000-000.outs...
-  202504: 100 snapshots  202504: 200 snapshots  202504: 300 snapshots  202504: 400 snapshots  202504: 500 snapshots  202504: 600 snapshots  202504: 700 snapshots  202504: 720 snapshots
-Processing z=0_var_1_e20250501-010000-000_20250601-000000-000.outs...
-  202505: 100 snapshots  202505: 200 snapshots  202505: 300 snapshots  202505: 400 snapshots  202505: 500 snapshots  202505: 600 snapshots  202505: 700 snapshots  202505: 744 snapshots
-Processing z=0_var_1_e20250601-010000-000_20250701-000000-000.outs...
-  202506: 100 snapshots  202506: 200 snapshots  202506: 300 snapshots  202506: 400 snapshots  202506: 500 snapshots  202506: 600 snapshots  202506: 700 snapshots  202506: 720 snapshots
-Processing z=0_var_1_e20250701-010000-000_20250801-000000-000.outs...
-  202507: 100 snapshots  202507: 200 snapshots  202507: 300 snapshots  202507: 400 snapshots  202507: 500 snapshots  202507: 600 snapshots  202507: 700 snapshots  202507: 744 snapshots
-Processing z=0_var_1_e20250801-010000-000_20250901-000000-000.outs...
-  202508: 100 snapshots  202508: 200 snapshots  202508: 300 snapshots  202508: 400 snapshots  202508: 500 snapshots  202508: 600 snapshots  202508: 700 snapshots  202508: 744 snapshots
-Processing z=0_var_1_e20250901-010000-000_20251001-000000-000.outs...
-  202509: 100 snapshots  202509: 200 snapshots  202509: 300 snapshots  202509: 400 snapshots  202509: 500 snapshots  202509: 600 snapshots  202509: 700 snapshots  202509: 720 snapshots
-Processing z=0_var_1_e20251001-010000-000_20251101-000000-000.outs...
-  202510: 100 snapshots  202510: 200 snapshots  202510: 300 snapshots  202510: 400 snapshots  202510: 500 snapshots  202510: 600 snapshots  202510: 700 snapshots  202510: 744 snapshots
-Processing z=0_var_1_e20251101-010000-000_20251201-000000-000.outs...
-  202511: 100 snapshots  202511: 200 snapshots  202511: 300 snapshots  202511: 400 snapshots  202511: 500 snapshots  202511: 600 snapshots  202511: 700 snapshots  202511: 720 snapshots
-Processing z=0_var_1_e20251201-010000-000_20260101-000000-000.outs...
-  202512: 100 snapshots  202512: 200 snapshots  202512: 300 snapshots  202512: 400 snapshots  202512: 500 snapshots  202512: 600 snapshots  202512: 700 snapshots  202512: 744 snapshots
-Done: 360 months, 262993 snapshots (coarse-only)
-Coarse (factor 4): 75x25 grid, 35.50 GB
-
-=== Built 360 month(s): 199601 199602 199603 199604 199605 199606 199607 199608 199609 199610 199611 199612 199701 199702 199703 199704 199705 199706 199707 199708 199709 199710 199711 199712 199801 199802 199803 199804 199805 199806 199807 199808 199809 199810 199811 199812 199901 199902 199903 199904 199905 199906 199907 199908 199909 199910 199911 199912 200001 200002 200003 200004 200005 200006 200007 200008 200009 200010 200011 200012 200101 200102 200103 200104 200105 200106 200107 200108 200109 200110 200111 200112 200201 200202 200203 200204 200205 200206 200207 200208 200209 200210 200211 200212 200301 200302 200303 200304 200305 200306 200307 200308 200309 200310 200311 200312 200401 200402 200403 200404 200405 200406 200407 200408 200409 200410 200411 200412 200501 200502 200503 200504 200505 200506 200507 200508 200509 200510 200511 200512 200601 200602 200603 200604 200605 200606 200607 200608 200609 200610 200611 200612 200701 200702 200703 200704 200705 200706 200707 200708 200709 200710 200711 200712 200801 200802 200803 200804 200805 200806 200807 200808 200809 200810 200811 200812 200901 200902 200903 200904 200905 200906 200907 200908 200909 200910 200911 200912 201001 201002 201003 201004 201005 201006 201007 201008 201009 201010 201011 201012 201101 201102 201103 201104 201105 201106 201107 201108 201109 201110 201111 201112 201201 201202 201203 201204 201205 201206 201207 201208 201209 201210 201211 201212 201301 201302 201303 201304 201305 201306 201307 201308 201309 201310 201311 201312 201401 201402 201403 201404 201405 201406 201407 201408 201409 201410 201411 201412 201501 201502 201503 201504 201505 201506 201507 201508 201509 201510 201511 201512 201601 201602 201603 201604 201605 201606 201607 201608 201609 201610 201611 201612 201701 201702 201703 201704 201705 201706 201707 201708 201709 201710 201711 201712 201801 201802 201803 201804 201805 201806 201807 201808 201809 201810 201811 201812 201901 201902 201903 201904 201905 201906 201907 201908 201909 201910 201911 201912 202001 202002 202003 202004 202005 202006 202007 202008 202009 202010 202011 202012 202101 202102 202103 202104 202105 202106 202107 202108 202109 202110 202111 202112 202201 202202 202203 202204 202205 202206 202207 202208 202209 202210 202211 202212 202301 202302 202303 202304 202305 202306 202307 202308 202309 202310 202311 202312 202401 202402 202403 202404 202405 202406 202407 202408 202409 202410 202411 202412 202501 202502 202503 202504 202505 202506 202507 202508 202509 202510 202511 202512 ===
-Everything the website needs is under: /data/tuija/cdimarco/MSWIM2D/website_data/MSWIM2D_Data_New
-  Output_flat/      raw .outs (hard links) — read by interpolate.php on herot
-  snapshots_coarse/ decimated grid + manifest — served for the field movie
-  Satellite_Data/   in-situ input CSVs
-
-herot serves it all via ONE symlink (no data copied — read over NFS):
-  ln -sfn /nfs/tuija/cdimarco/MSWIM2D/website_data/MSWIM2D_Data_New \
-          /homedata/MSWIM2D/MSWIM2D_Data_New
