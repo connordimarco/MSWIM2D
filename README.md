@@ -95,7 +95,8 @@ git clone https://github.com/SWMFsoftware/BATSRUS    # solver, in place
 ```
 
 The public website lives in its own repo; clone it into `MSWIM2D-Web/` if you
-are working on the site.
+are working on the site (work on branch `php` — herot's web root is a checkout
+of the same repo, so deploying site code is push + `git pull` there).
 
 **Python toolchains.** Three, by design:
 - **`mswim2d_env/`** — the processing venv for the **website build + trajectory
